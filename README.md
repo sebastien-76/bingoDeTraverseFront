@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+---
+title: Bingo de traverse
+publishDate: 2024-07-08 00:00:00
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+description: |
+  Front-end du projet de jeu de Bingo de traverse pour les chemins de traverse d'Arras.
+tags:
+  - React
+---
+
+# Bingo de traverse
 
 ## Available Scripts
 
