@@ -1,0 +1,19 @@
+.phrasesListe{
+    width: 80%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items:baseline;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.deletePhrase{
+    background-color: rgb(15, 15, 15);
+    color: white;
+    border-radius: 5px;
+    margin-inline: 10px; 
+    padding: 5px;
+    cursor: pointer;
+}
