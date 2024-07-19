@@ -63,7 +63,7 @@ export default function Salles() {
             <button className="actualiser" onClick={fetchData}>Actualiser</button>
 
             <div className="sallesListe">
-                {salles.map((salle) => (
+                {salles && salles.map((salle) => (
                     <li key={salle.id}>
                         <button className="deleteSalle" onClick={() => handleDeleteClick(salle)}>X</button>
                         {salle.name}
