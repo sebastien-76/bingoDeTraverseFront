@@ -3,13 +3,26 @@ import './phrases.css';
 
 export default function Phrases() {
     const [phrases, setPhrase] = useState([]);
-    const [newPhraseText, setNewPhraseText] = useState(""); // Utiliser un état pour le nom de la nouvelle salle
+    // Utiliser un état pour le nom de la nouvelle phrase
+    const [newPhraseText, setNewPhraseText] = useState("");
+    // state pour le modal
+    const [showModal, setShowModal] = useState(false);
+    // state pour la selection de la phrase à supprimer
+    const [selectedPhrase, setSelectedPhrase] = useState(null);
 
-    const fetchData = async () => {
+        const fetchData = async () => {
         const response = await fetch('http://localhost:3000/api/phrases');
         const dataPhrase = await response.json();
-        console.log(dataPhrase.data);
         setPhrase(dataPhrase.data);
+    }
+
+    const confirmDeletePhrase = async (phraseId) => {
+        await fetch(`http://localhost:3000/api/phrases/${phraseId}`, {
+            method: 'DELETE',
+        });
+        setShowModal(false);
+        setSelectedPhrase(null);
+        fetchData();
     }
 
     const deletePhrase = async (PhraseId) => {
@@ -30,8 +43,18 @@ export default function Phrases() {
             }),
         });
         fetchData();
-         // Réinitialiser l'input après l'ajout
+        // Réinitialiser l'input après l'ajout
         setNewPhraseText("");
+    }
+
+    const handleDeleteClick = (phrase) => {
+        setSelectedPhrase(phrase);
+        setShowModal(true);
+    }
+
+    const handleCancelDelete = () => {
+        setSelectedPhrase(null);
+        setShowModal(false);
     }
 
     useEffect(() => { fetchData() }, []);
@@ -43,9 +66,9 @@ export default function Phrases() {
             <button onClick={fetchData}>Actualiser</button>
 
             <div className="phrasesListe">
-                {phrases.map((phrase) => (
+                {phrases && phrases.map((phrase) => (
                     <li key={phrase.id}>
-                        <button className="deletePhrase" onClick={() => deletePhrase(phrase.id)}>X</button>
+                        <button className="deletePhrase" onClick={() => handleDeleteClick(phrase)}>X</button>
                         {phrase.text}
                     </li>
                 ))}
@@ -61,6 +84,17 @@ export default function Phrases() {
                 />
                 <button type="submit" onClick={addPhrase}>Ajouter</button>
             </div>
+
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Confirmation de suppression</h2>
+                        <p>Êtes-vous sûr de vouloir supprimer la salle {selectedPhrase.text} ?</p>
+                        <button className="choixSuppression" onClick={() => confirmDeletePhrase(selectedPhrase.id)}>Oui</button>
+                        <button className="choixSuppression" onClick={handleCancelDelete}>Non</button>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
