@@ -22,14 +22,15 @@ export default function Salles() {
         await fetch('http://localhost:3000/api/salles', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Ajout de l'en-tête Content-Type
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: newSalleName // Utilisation de l'état pour obtenir la valeur
+                name: newSalleName
             }),
         });
         fetchData();
-        setNewSalleName(""); // Réinitialiser l'input après l'ajout
+         // Réinitialiser l'input après l'ajout
+        setNewSalleName("");
     }
 
     useEffect(() => { fetchData() }, []);
@@ -54,8 +55,8 @@ export default function Salles() {
                 <input
                     placeholder="Nom de la salle"
                     type="text"
-                    value={newSalleName} // Lier l'input à l'état
-                    onChange={(e) => setNewSalleName(e.target.value)} // Mettre à jour l'état lors de la modification de l'input
+                    value={newSalleName}
+                    onChange={(e) => setNewSalleName(e.target.value)}
                 />
                 <button type="submit" onClick={addSalle}>Ajouter</button>
             </div>
