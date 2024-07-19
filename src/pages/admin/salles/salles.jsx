@@ -27,6 +27,8 @@ export default function Salles() {
     }
 
     const addSalle = async () => {
+        if (newSalleName) {
+        
         const response = await fetch('http://localhost:3000/api/salles', {
             method: 'POST',
             headers: {
@@ -42,6 +44,7 @@ export default function Salles() {
         } else {
             console.error('Erreur lors de l\'ajout de la salle');
         }
+    }
     }
 
     const handleDeleteClick = (salle) => {
