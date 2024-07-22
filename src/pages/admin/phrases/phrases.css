@@ -31,3 +31,12 @@
     text-align: left;
 
 }
+
+.visible {
+    color : red;
+    font-weight: bold;
+}
+
+.invisible {
+    display: none;
+}

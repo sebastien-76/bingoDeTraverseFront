@@ -13,6 +13,8 @@ export default function Phrases() {
     const [salles, setSalles] = useState([]);
     // state pour l'association de la salle à la phrase
     const [SalleId, setSalleId] = useState(null);
+    //
+    const [visibilite, setVisibilite] = useState("invisible");
 
 
     const fetchPhrases = async () => {
@@ -37,7 +39,7 @@ export default function Phrases() {
         fetchPhrases();
     }
 
-    const addPhrase = async () => {
+    const addPhraseValidee = async () => {
         await fetch('http://localhost:3000/api/phrases', {
             method: 'POST',
             headers: {
@@ -45,14 +47,21 @@ export default function Phrases() {
             },
             body: JSON.stringify({
                 text: newPhraseText,
-                SalleId : SalleId
+                SalleId: SalleId
             }),
-        });
+        })
         // Recharger les phrases
         fetchPhrases();
         // Réinitialiser l'input après l'ajout
         setNewPhraseText("");
+        setVisibilite("invisible");
     }
+
+    const addPhrase = () => {
+       (newPhraseText && SalleId) ? addPhraseValidee() : setVisibilite("visible");
+    }
+
+
 
     const handleDeleteClick = (phrase) => {
         setSelectedPhrase(phrase);
@@ -84,9 +93,9 @@ export default function Phrases() {
                     </li>
                 ))}
             </div>
-
             <div>
                 <h2>Ajouter une phrase</h2>
+                <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
                 <input
                     placeholder="Texte de la phrase"
                     type="text"
@@ -101,7 +110,7 @@ export default function Phrases() {
                                 name="salle"
                                 value={salle.id}
                                 onChange={(e) => setSalleId(e.target.value)}
-                                />
+                            />
                             <label>{salle.id} - {salle.name}</label>
                         </div>
                     )}
