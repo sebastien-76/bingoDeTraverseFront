@@ -9,12 +9,24 @@ export default function Phrases() {
     const [showModal, setShowModal] = useState(false);
     // state pour la selection de la phrase à supprimer
     const [selectedPhrase, setSelectedPhrase] = useState(null);
+    // state pour la liste des salles
+    const [salles, setSalles] = useState([]);
+    // state pour l'association de la salle à la phrase
+    const [SalleId, setSalleId] = useState(null);
 
-        const fetchData = async () => {
+
+    const fetchPhrases = async () => {
         const response = await fetch('http://localhost:3000/api/phrases');
         const dataPhrase = await response.json();
         setPhrase(dataPhrase.data);
     }
+
+    const fetchSalles = async () => {
+        const response = await fetch('http://localhost:3000/api/salles');
+        const dataSalles = await response.json();
+        setSalles(dataSalles.data);
+    }
+
 
     const confirmDeletePhrase = async (phraseId) => {
         await fetch(`http://localhost:3000/api/phrases/${phraseId}`, {
@@ -22,14 +34,7 @@ export default function Phrases() {
         });
         setShowModal(false);
         setSelectedPhrase(null);
-        fetchData();
-    }
-
-    const deletePhrase = async (PhraseId) => {
-        await fetch(`http://localhost:3000/api/phrases/${PhraseId}`, {
-            method: 'DELETE',
-        });
-        fetchData();
+        fetchPhrases();
     }
 
     const addPhrase = async () => {
@@ -39,10 +44,12 @@ export default function Phrases() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                text: newPhraseText
+                text: newPhraseText,
+                SalleId : SalleId
             }),
         });
-        fetchData();
+        // Recharger les phrases
+        fetchPhrases();
         // Réinitialiser l'input après l'ajout
         setNewPhraseText("");
     }
@@ -57,19 +64,23 @@ export default function Phrases() {
         setShowModal(false);
     }
 
-    useEffect(() => { fetchData() }, []);
+    useEffect(() => {
+        fetchPhrases();
+        fetchSalles();
+    }, []);
+
 
     return (
         <>
             <h1>Liste des phrases</h1>
 
-            <button onClick={fetchData}>Actualiser</button>
+            <button onClick={fetchPhrases}>Actualiser</button>
 
             <div className="phrasesListe">
                 {phrases && phrases.map((phrase) => (
                     <li key={phrase.id}>
                         <button className="deletePhrase" onClick={() => handleDeleteClick(phrase)}>X</button>
-                        {phrase.text}
+                        {phrase.text} - Salle associée : {phrase.SalleId}
                     </li>
                 ))}
             </div>
@@ -82,6 +93,19 @@ export default function Phrases() {
                     value={newPhraseText}
                     onChange={(e) => setNewPhraseText(e.target.value)}
                 />
+                <div className="salle">
+                    {salles.map((salle) =>
+                        <div key={salle.id} className="listeSalle">
+                            <input
+                                type="radio"
+                                name="salle"
+                                value={salle.id}
+                                onChange={(e) => setSalleId(e.target.value)}
+                                />
+                            <label>{salle.id} - {salle.name}</label>
+                        </div>
+                    )}
+                </div>
                 <button type="submit" onClick={addPhrase}>Ajouter</button>
             </div>
 

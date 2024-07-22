@@ -1,19 +1,33 @@
-.phrasesListe{
+.phrasesListe {
     width: 80%;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items:baseline;
+    align-items: baseline;
     margin: auto;
     margin-top: 20px;
 }
 
-.deletePhrase{
+.deletePhrase {
     background-color: rgb(15, 15, 15);
     color: white;
     border-radius: 5px;
-    margin-inline: 10px; 
+    margin-inline: 10px;
     padding: 5px;
     cursor: pointer;
+}
+
+.salle {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listeSalle {
+    width: 30%;
+    margin: 0.75rem auto;
+    text-align: left;
+
 }
