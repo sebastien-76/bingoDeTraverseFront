@@ -6,7 +6,6 @@ export default function Navbar({toggleMenu, menuBurger}) {
 
     return (
         <div className="navBar">
-            <img className="navBarLogo" src="../../images/cheminTraverse.png" alt="logo" />
 
             <h1 className="navBarH1">Bienvenue joueur</h1>
 
