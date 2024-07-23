@@ -1,0 +1,51 @@
+.navBar {
+    background-color: #2B2E34;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navBarLogo {
+    width: 100px;
+}
+
+.navBarH1 {
+    color: white;
+    font-size: 30px;
+    margin-block: auto;
+}
+
+.closeMenu {
+    cursor: pointer;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.menuBurger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-block: auto;
+    width: 80px;
+    height: 80px;
+}
+
+.OpenBurger {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+}
