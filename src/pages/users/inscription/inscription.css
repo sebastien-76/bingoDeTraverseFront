@@ -1,0 +1,19 @@
+.inscriptionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputInscription {
+width: 25vw;
+}
+
+.legendInscription {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.submitInscription {
+    margin-top: 1rem;
+}
