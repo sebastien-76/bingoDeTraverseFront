@@ -17,3 +17,7 @@ width: 25vw;
 .submitInscription {
     margin-top: 1rem;
 }
+
+.errorPwd, .errorEmail {
+    color: red;
+}

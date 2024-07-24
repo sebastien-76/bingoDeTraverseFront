@@ -14,6 +14,8 @@ const SignUp = () => {
     })
 
     const [salles, setSalles] = useState([]);
+    const [errorPwd, setErrorPwd] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
 
     const fetchSalles = async () => {
         const response = await fetch('http://localhost:3000/api/salles');
@@ -38,50 +40,67 @@ const SignUp = () => {
 
     const handleSubmitInscription = async (event) => {
         event.preventDefault();
+        setErrorPwd('');
         console.log(credentials);
-        await fetch('http://localhost:3000/api/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password,
-                lastname: credentials.lastname,
-                firstname: credentials.firstname,
-                pseudo: credentials.pseudo,
-                salles: credentials.salles
-            }),
-        })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-
-        setCredentials({
-            email: '',
-            password: '',
-            confirmationPassword: '',
-            lastname: '',
-            firstname: '',
-            pseudo: '',
-            salles: [],
-        })
-        document.getElementById("formInscription").reset()
-
+        if (credentials.password === credentials.confirmationPassword) {
+            try {
+                await fetch('http://localhost:3000/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: credentials.email,
+                        password: credentials.password,
+                        lastname: credentials.lastname,
+                        firstname: credentials.firstname,
+                        pseudo: credentials.pseudo,
+                        salles: credentials.salles
+                    }),
+                })
+                    .then(res => {
+                        if (res.status === 403) {
+                            setErrorEmail(`Cet email n'est pas autorisé à s'inscrire!`)
+                        } else {
+                            console.log(res);
+                        }
+                    })
+                    .catch(err => console.log(err));
+                setCredentials({
+                    email: '',
+                    password: '',
+                    confirmationPassword: '',
+                    lastname: '',
+                    firstname: '',
+                    pseudo: '',
+                    salles: [],
+                })
+                document.getElementById("formInscription").reset()
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        else {
+            setErrorPwd(`Les mots de passe ne sont pas identiques`);
+        }
     }
+
     return (
         <>
             <h1>Inscription</h1>
+            {errorPwd && <p className='errorPwd'>{errorPwd}</p>}
+            {errorEmail && <p className='errorEmail'>{errorEmail}</p>}
             <form onSubmit={handleSubmitInscription} id="formInscription" className='inscriptionForm'>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" className='inputInscription' />
+                <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" className='inputInscription' required />
                 <label htmlFor="password">Mot de passe</label>
-                <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' />
+                <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
-                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Entrez à nouveau votre mot de passe" className='inputInscription' />
+                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Entrez à nouveau votre mot de passe" className='inputInscription' required />
                 <label htmlFor="lastname">Nom</label>
-                <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom" value={credentials.lastname} onChange={onChange} className='inputInscription' />
+                <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom" value={credentials.lastname} onChange={onChange} className='inputInscription' required />
                 <label htmlFor="firstname">Prénom</label>
-                <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom" value={credentials.firstname} onChange={onChange} className='inputInscription' />
+                <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom" value={credentials.firstname} onChange={onChange} className='inputInscription' required />
                 <label htmlFor="pseudo">Pseudo</label>
                 <input type="text" name="pseudo" id="pseudo" placeholder="Entrez votre pseudo" value={credentials.pseudo} onChange={onChange} className='inputInscription' />
                 <div className='salles'>
