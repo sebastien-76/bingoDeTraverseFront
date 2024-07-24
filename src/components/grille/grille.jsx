@@ -71,7 +71,7 @@ export default function Grille() {
         <>
             {!lancementPartie ? 
             <div className='lancementPartie'>
-                <h2 className='lancementPartieH2'>Veut tu lancer la partie ?</h2>
+                <h2 className='lancementPartieH2'>Veux tu lancer la partie ?</h2>
                 <div className="choixLancementPartie">
                     <button onClick={confirmLancementPartie} className='buttonValidation'>Oui</button>
                 </div>
@@ -96,7 +96,8 @@ export default function Grille() {
                     {isModalOpen && (
                         <div className="modal">
                             <div className="modal-content">
-                                <p>Voulez-vous vraiment valider la case {caseGrille[selectedCaseIndex]} ?</p>
+                                <p>Voulez-vous vraiment valider la phrase : </p>
+                                <p style={{fontWeight: 'bold'}}>"{listePhrase[caseGrille[selectedCaseIndex] - 1].text}"</p>
                                 <button className='buttonValidation' onClick={confirmValidation}>Oui</button>
                                 <button className='buttonValidation' onClick={closeModal}>Non</button>
                             </div>
