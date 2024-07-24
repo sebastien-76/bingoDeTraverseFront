@@ -1,5 +1,5 @@
 .navBar {
-    background-color: #2B2E34;
+    background-color: var(--dark-grey);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
