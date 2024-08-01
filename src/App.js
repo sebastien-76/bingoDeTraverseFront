@@ -5,6 +5,7 @@ import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Connexion from './pages//users/connexion/connexion';
 import Inscription from './pages/users/inscription/inscription';
+import Accueil from './pages/users/accueil/accueil'
 
 import Salles from './pages/admin/salles/salles';
 import Phrases from './pages/admin/phrases/phrases';
@@ -29,6 +30,7 @@ function App() {
       <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu}/>
       <Router>
         <Routes>
+          <Route path='/' element={<Accueil/>}/>
           <Route path='/phrases' element={<Phrases/>}/>
           <Route path='/salles' element={<Salles/>}/>
           <Route path='/gamemaster' element={<Gamemaster/>}/>

@@ -1,0 +1,15 @@
+.titre_accueil {
+    margin: 15rem auto;
+    font-weight: bold;
+    font-size: 5rem;
+}
+
+.lien_accueil {
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-weight: bold;
+}
+
+.p_accueil {
+    font-size: 2rem;
+}
