@@ -1,7 +1,14 @@
 .titre_accueil {
-    margin: 15rem auto;
+    margin: 10rem auto;
     font-weight: bold;
-    font-size: 5rem;
+    font-size: 1.3em;
+    color: var(--dark-grey);
+    text-align: center;
+    line-height: 2em;
+    height: 5vh;
+}
+.titre_accueil span {
+    font-size: 1.6em;
 }
 
 .lien_accueil {
@@ -11,5 +18,5 @@
 }
 
 .p_accueil {
-    font-size: 2rem;
+    font-size: 1em;
 }
