@@ -10,6 +10,10 @@ const Connexion = () => {
                 <input type="email" id="email" name="email" required />
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required />
+                <div className="remember">
+                    <input type="checkbox" id="remember" name="remember" className="remember_input"/>
+                    <label htmlFor="remember">Se souvenir de moi</label>
+                </div>
                 <button type="submit">Se connecter</button>
             </form>
         </>
