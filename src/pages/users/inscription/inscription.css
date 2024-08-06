@@ -1,12 +1,16 @@
+.h1Inscription {
+    margin: 5rem auto;
+}
+
 .inscriptionForm {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 1.5rem;
 }
 
 .inputInscription {
-width: 25vw;
+width: 60%;
 }
 
 .legendInscription {
@@ -19,5 +23,5 @@ width: 25vw;
 }
 
 .errorPwd, .errorEmail {
-    color: red;
+    color: #FF0000;
 }

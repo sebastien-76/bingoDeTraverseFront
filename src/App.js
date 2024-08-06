@@ -35,7 +35,7 @@ function App() {
           <Route path='/salles' element={<Salles/>}/>
           <Route path='/gamemaster' element={<Gamemaster/>}/>
           <Route path='/game' element={<Game/>}/>
-          <Route path='/profil' element={<Profil/>}/>
+          <Route path='/profil/:id' element={<Profil/>}/>
           <Route path='/connexion' element={<Connexion/>}/>
           <Route path='/inscription' element={<Inscription/>}/>
         </Routes>

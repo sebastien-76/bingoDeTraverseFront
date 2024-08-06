@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './inscription.css';
 
 const SignUp = () => {
@@ -7,41 +8,21 @@ const SignUp = () => {
         email: '',
         password: '',
         confirmationPassword: '',
-        lastname: '',
-        firstname: '',
-        pseudo: '',
-        salles: [],
     })
 
-    const [salles, setSalles] = useState([]);
     const [errorPwd, setErrorPwd] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
 
-    const fetchSalles = async () => {
-        const response = await fetch('http://localhost:3000/api/salles');
-        const dataSalles = await response.json();
-        setSalles(dataSalles.data);
-    }
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchSalles();
-    }, [])
 
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
     }
 
-    const onChangeSalle = (event) => {
-        event.target.checked ?
-            setCredentials({ ...credentials, salles: [...credentials.salles, event.target.value] }) :
-            setCredentials({ ...credentials, salles: credentials.salles.filter(salle => salle !== event.target.value) })
-
-    }
-
     const handleSubmitInscription = async (event) => {
         event.preventDefault();
         setErrorPwd('');
-        console.log(credentials);
         if (credentials.password === credentials.confirmationPassword) {
             try {
                 await fetch('http://localhost:3000/api/users', {
@@ -52,17 +33,18 @@ const SignUp = () => {
                     body: JSON.stringify({
                         email: credentials.email,
                         password: credentials.password,
-                        lastname: credentials.lastname,
-                        firstname: credentials.firstname,
-                        pseudo: credentials.pseudo,
-                        salles: credentials.salles
-                    }),
+                        }),
                 })
                     .then(res => {
                         if (res.status === 403) {
-                            setErrorEmail(`Cet email n'est pas autorisé à s'inscrire!`)
+                            res.json()
+                                .then(res => setErrorEmail(res.message))
                         } else {
-                            console.log(res);
+                            res.json()
+                                .then(res => {
+                                    const uid = res.data.id
+                                    navigate(`/profil/${uid}`)
+                                })
                         }
                     })
                     .catch(err => console.log(err));
@@ -70,10 +52,6 @@ const SignUp = () => {
                     email: '',
                     password: '',
                     confirmationPassword: '',
-                    lastname: '',
-                    firstname: '',
-                    pseudo: '',
-                    salles: [],
                 })
                 document.getElementById("formInscription").reset()
             } catch (error) {
@@ -87,7 +65,7 @@ const SignUp = () => {
 
     return (
         <>
-            <h1>Inscription</h1>
+            <h1 className='h1Inscription'>Inscription</h1>
             {errorPwd && <p className='errorPwd'>{errorPwd}</p>}
             {errorEmail && <p className='errorEmail'>{errorEmail}</p>}
             <form onSubmit={handleSubmitInscription} id="formInscription" className='inscriptionForm'>
@@ -97,21 +75,6 @@ const SignUp = () => {
                 <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
                 <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Entrez à nouveau votre mot de passe" className='inputInscription' required />
-                <label htmlFor="lastname">Nom</label>
-                <input type="text" name="lastname" id="lastname" placeholder="Entrez votre nom" value={credentials.lastname} onChange={onChange} className='inputInscription' required />
-                <label htmlFor="firstname">Prénom</label>
-                <input type="text" name="firstname" id="firstname" placeholder="Entrez votre prénom" value={credentials.firstname} onChange={onChange} className='inputInscription' required />
-                <label htmlFor="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" placeholder="Entrez votre pseudo" value={credentials.pseudo} onChange={onChange} className='inputInscription' />
-                <div className='salles'>
-                    <legend className='legendInscription'>Salle où vous êtes formé(e)</legend>
-                    {salles.map((salle) => (
-                        <div key={salle.id}>
-                            <input type="checkbox" name="salle" id={salle.id} value={salle.id} onChange={onChangeSalle} />
-                            <label htmlFor={salle.id}>{salle.name}</label>
-                        </div>
-                    ))}
-                </div>
                 <input type="submit" value="S'inscrire" className='submitInscription' />
             </form>
         </>
