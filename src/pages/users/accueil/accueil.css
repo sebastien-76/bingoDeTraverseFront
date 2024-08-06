@@ -1,12 +1,18 @@
+.logo_accueil {
+    width: 30vw;
+    margin: 3rem auto;
+}
+
 .titre_accueil {
-    margin: 10rem auto;
+    margin: 0 auto;
+    padding-bottom: 3rem;
     font-weight: bold;
     font-size: 1.3em;
     color: var(--dark-grey);
     text-align: center;
     line-height: 2em;
-    height: 5vh;
 }
+
 .titre_accueil span {
     font-size: 1.6em;
 }
