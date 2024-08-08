@@ -2,36 +2,43 @@ import './grille.css';
 import React, { useState, useEffect } from 'react';
 
 export default function Grille() {
-    const [listePhrase, setListePhrase] = useState([]);
     const [selectedPhrases, setSelectedPhrases] = useState([]);
     const [caseGrille, setCaseGrille] = useState([]);
     const [valideCases, setValideCases] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
     const [lancementPartie, setLancementPartie] = useState(false);
+    const [grilleId, setGrilleId] = useState(null);
+
+    const userId = 2; // Remplacer par l'ID réel de l'utilisateur
 
     useEffect(() => {
-        fetchListePhrase();
+        fetchGrille();
     }, []);
 
-    const fetchListePhrase = async () => {
-        const response = await fetch('http://localhost:3000/api/phrases');
-        const dataPhrase = await response.json();
-        setListePhrase(dataPhrase.data);
-    }
+    const fetchGrille = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/grilles/user/${userId}`);
+            console.log(response.ok)
+            if (response.ok) {
+                setLancementPartie(true);
 
-    const generateListePhraseId = () => {
-        // Générer une liste aléatoire de 25 phrases
-        let shuffledPhrases = [...listePhrase].sort(() => Math.random() - 0.5).slice(0, 25);
-        // Trier les phrases par ordre croissant d'ID pour l'affichage
-        shuffledPhrases.sort((a, b) => a.id - b.id);
-        setSelectedPhrases(shuffledPhrases);
-        // Extraire les IDs
-        let ids = shuffledPhrases.map(phrase => phrase.id);
-        // Mélanger les IDs pour la grille
-        let shuffledIds = ids.sort(() => Math.random() - 0.5);
-        setCaseGrille(shuffledIds);
-        setValideCases(Array(25).fill(false));
+                // Changer la suite pour recuperer direct en BDD et non dans l'api:
+                
+                const dataGrille = await response.json();
+                const { grille } = dataGrille.data;
+                setGrilleId(grille.id);
+                const selectedPhraseIds = grille.case.map(c => c.phraseId);
+                setCaseGrille(selectedPhraseIds);
+                setValideCases(grille.validatedCases);
+                const responsePhrases = await fetch('http://localhost:3000/api/phrases');
+                const dataPhrases = await responsePhrases.json();
+                const selectedPhrases = dataPhrases.data.filter(p => selectedPhraseIds.includes(p.id)).sort((a, b) => a.id - b.id);
+                setSelectedPhrases(selectedPhrases);
+            }
+        } catch (error) {
+            console.error("Erreur lors de la récupération ou de la création de la grille :", error);
+        }
     }
 
     const openModal = (index) => {
@@ -46,18 +53,56 @@ export default function Grille() {
         setSelectedCaseIndex(null);
     }
 
-    const confirmValidation = () => {
-        const newValideCases = [...valideCases];
-        if (selectedCaseIndex !== null) {
-            newValideCases[selectedCaseIndex] = true;
-            setValideCases(newValideCases);
-        }
-        closeModal();
+    const confirmValidation = async () => {
+        const updatedCaseId = caseGrille[selectedCaseIndex]
+    if (grilleId === null) {
+        console.error('ID de la grille non défini');
+        return;
     }
 
-    const confirmLancementPartie = () => {
-        setLancementPartie(true);
-        generateListePhraseId();
+    const updatedValidatedCases = [...valideCases];
+    updatedValidatedCases[selectedCaseIndex] = true; // Mettre à jour le tableau des cases validées
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/grilles/${grilleId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) // Envoyer le tableau des cases validées
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setValideCases(data.data.validatedCases);
+        } else {
+            console.error('Erreur lors de la validation de la case');
+        }
+    } catch (error) {
+        console.error('Erreur de connexion:', error);
+    }
+
+    closeModal();
+}
+
+    const confirmLancementPartie = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/grilles/user/${userId}`, { method: 'POST' });
+            if (response.ok) {
+                const dataGrille = await response.json();
+                const { grille, selectedPhrases } = dataGrille.data;
+                setGrilleId(grille.id);
+                const selectedPhraseIds = grille.case.map(c => c.phraseId);
+                setCaseGrille(selectedPhraseIds);
+                setValideCases(grille.validatedCases);
+                setSelectedPhrases(selectedPhrases.sort((a, b) => a.id - b.id));
+                setLancementPartie(true);
+            } else {
+                console.error('Erreur lors du lancement de la partie');
+            }
+        } catch (error) {
+            console.error("Erreur lors de la récupération ou de la création de la grille :", error);
+        }
     }
 
     const handlePhraseClick = (phraseId) => {
@@ -71,7 +116,7 @@ export default function Grille() {
         <>
             {!lancementPartie ? 
             <div className='lancementPartie'>
-                <h2 className='lancementPartieH2'>Veux tu lancer la partie ?</h2>
+                <h2 className='lancementPartieH2'>Veux-tu lancer la partie ?</h2>
                 <div className="choixLancementPartie">
                     <button onClick={confirmLancementPartie} className='buttonValidation'>Oui</button>
                 </div>
@@ -87,7 +132,7 @@ export default function Grille() {
                 <div className='grille'>
                     {caseGrille.map((caseNumber, index) => 
                         <div
-                        key={caseNumber}
+                        key={index}
                         className={valideCases[index] ? 'caseGrille valide' : 'caseGrille'}
                         onClick={() => openModal(index)}>
                             {caseNumber}
@@ -96,8 +141,8 @@ export default function Grille() {
                     {isModalOpen && (
                         <div className="modal">
                             <div className="modal-content">
-                                <p>Voulez-vous vraiment valider la phrase : </p>
-                                <p style={{fontWeight: 'bold'}}>"{listePhrase[caseGrille[selectedCaseIndex] - 1].text}"</p>
+                                <p>Voulez-vous vraiment valider la phrase :</p>
+                                <p style={{fontWeight: 'bold'}}>"{selectedPhrases.find(p => p.id === caseGrille[selectedCaseIndex]).text}"</p>
                                 <button className='buttonValidation' onClick={confirmValidation}>Oui</button>
                                 <button className='buttonValidation' onClick={closeModal}>Non</button>
                             </div>
@@ -107,5 +152,5 @@ export default function Grille() {
             </div>
             }
         </>
-    )
+    );
 }
