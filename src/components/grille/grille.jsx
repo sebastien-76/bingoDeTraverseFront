@@ -10,6 +10,8 @@ export default function Grille() {
     const [lancementPartie, setLancementPartie] = useState(false);
     const [grilleId, setGrilleId] = useState(null);
 
+    const [finPartie, setFinPartie] = useState(false);
+
     // ID en brut du user pour les tests
     const userId = 2; 
 
@@ -78,6 +80,12 @@ export default function Grille() {
         if (response.ok) {
             const data = await response.json();
             setValideCases(data.data.validatedCases);
+            console.log(data.data.finished);
+
+            if (data.data.finished) {
+                setFinPartie(true);
+            }
+
         } else {
             console.error('Erreur lors de la validation de la case');
         }
@@ -86,10 +94,12 @@ export default function Grille() {
     }
 
     closeModal();
+    
 }
 
     // Lancement de la partie
     const confirmLancementPartie = async () => {
+        window.location.reload();
         try {
             const response = await fetch(`http://localhost:3000/api/grilles/user/${userId}`, { method: 'POST' });
             if (response.ok) {
@@ -125,7 +135,10 @@ export default function Grille() {
                     <button onClick={confirmLancementPartie} className='buttonValidation'>Oui</button>
                 </div>
             </div> :
+            
             <div>
+            {!finPartie ? 
+                <>
                 <div className='listePhrase'>
                     {selectedPhrases.map((phrase) => (
                         <div key={phrase.id} className='phraseItem'>
@@ -152,8 +165,17 @@ export default function Grille() {
                             </div>
                         </div>
                     )}
+                    
+                </div> </>:
+                <div className='finPartie'>
+                    <h2 className='finPartieH2'> BINGO ! </h2>
+                    <button onClick={confirmLancementPartie} className='buttonValidation'>Rejouer</button>
                 </div>
+                }
+                
             </div>
+            
+            
             }
         </>
     );

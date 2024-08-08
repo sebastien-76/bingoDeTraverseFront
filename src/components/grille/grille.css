@@ -100,3 +100,8 @@
     width: auto;
     margin-block: 30px;
 }
+
+.finPartie {
+    color: var(--middle-grey);
+    font-size: 30px;
+}
