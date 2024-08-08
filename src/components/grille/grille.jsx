@@ -10,23 +10,23 @@ export default function Grille() {
     const [lancementPartie, setLancementPartie] = useState(false);
     const [grilleId, setGrilleId] = useState(null);
 
-    const userId = 2; // Remplacer par l'ID réel de l'utilisateur
+    // ID en brut du user pour les tests
+    const userId = 2; 
 
     useEffect(() => {
         fetchGrille();
     }, []);
 
+    // Récupération de la grille dans la BDD
     const fetchGrille = async () => {
         try {
             const response = await fetch(`http://localhost:3000/api/grilles/user/${userId}`);
-            console.log(response.ok)
+            console.log(response)
             if (response.ok) {
                 setLancementPartie(true);
-
-                // Changer la suite pour recuperer direct en BDD et non dans l'api:
-                
                 const dataGrille = await response.json();
-                const { grille } = dataGrille.data;
+                const grille = dataGrille.data;
+                console.log(grille)
                 setGrilleId(grille.id);
                 const selectedPhraseIds = grille.case.map(c => c.phraseId);
                 setCaseGrille(selectedPhraseIds);
@@ -53,6 +53,7 @@ export default function Grille() {
         setSelectedCaseIndex(null);
     }
 
+    // Validation de la case
     const confirmValidation = async () => {
         const updatedCaseId = caseGrille[selectedCaseIndex]
     if (grilleId === null) {
@@ -60,8 +61,9 @@ export default function Grille() {
         return;
     }
 
+    // Mise à jour de tableau des cases validées
     const updatedValidatedCases = [...valideCases];
-    updatedValidatedCases[selectedCaseIndex] = true; // Mettre à jour le tableau des cases validées
+    updatedValidatedCases[selectedCaseIndex] = true; 
 
     try {
         const response = await fetch(`http://localhost:3000/api/grilles/${grilleId}`, {
@@ -69,7 +71,8 @@ export default function Grille() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) // Envoyer le tableau des cases validées
+            // Envoie du tableau des cases validées
+            body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) 
         });
 
         if (response.ok) {
@@ -85,6 +88,7 @@ export default function Grille() {
     closeModal();
 }
 
+    // Lancement de la partie
     const confirmLancementPartie = async () => {
         try {
             const response = await fetch(`http://localhost:3000/api/grilles/user/${userId}`, { method: 'POST' });
