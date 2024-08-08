@@ -23,5 +23,5 @@ width: 60%;
 }
 
 .errorPwd, .errorEmail {
-    color: #FF0000;
+    color: --red;
 }
