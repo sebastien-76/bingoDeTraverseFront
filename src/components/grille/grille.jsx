@@ -1,5 +1,6 @@
 import './grille.css';
 import React, { useState, useEffect } from 'react';
+import Bouton from '../boutons/bouton';
 
 export default function Grille() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -132,7 +133,7 @@ export default function Grille() {
             <div className='lancementPartie'>
                 <h2 className='lancementPartieH2'>Veux-tu lancer la partie ?</h2>
                 <div className="choixLancementPartie">
-                    <button onClick={confirmLancementPartie} className='buttonValidation'>Oui</button>
+                    <Bouton text="Oui" onClick={confirmLancementPartie}/>
                 </div>
             </div> :
             
@@ -169,7 +170,7 @@ export default function Grille() {
                 </div> </>:
                 <div className='finPartie'>
                     <h2 className='finPartieH2'> BINGO ! </h2>
-                    <button onClick={confirmLancementPartie} className='buttonValidation'>Rejouer</button>
+                    <Bouton text="Rejouer" onClick={confirmLancementPartie}/>
                 </div>
                 }
                 
