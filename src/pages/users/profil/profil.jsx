@@ -30,7 +30,6 @@ const Profile = () => {
         });
         fetchProfil(id.id);
         setOpenModalModif(false);
-        console.log(profil)
     }
 
     return (

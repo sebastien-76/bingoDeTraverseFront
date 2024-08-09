@@ -5,6 +5,7 @@ import {  recuperationItem, suppressionItem } from './localStorage';
 import { baseUrl } from './serviceAppel';
 
 
+
 export const connexionUtilisateur = async (credentials) => {
     const getReponse = await fetch(`${baseUrl}/connexion`, {
         method: 'POST',
@@ -29,6 +30,7 @@ export async function recupUtilisateur(id) {
 
 export function deconnexion() {
     suppressionItem('jetonUtilisateur');
+    window.location = "/";
 }
 
 export function validiteJeton(jeton) {

@@ -1,6 +1,6 @@
 import { useState, Children } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Footer from './components/footer/footer';
@@ -18,7 +18,7 @@ import Profil from './pages/users/profil/profil';
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import authContext from './hooks/useAuth';
-import { estIdentifie, recuperationId } from './services/Auth';
+import { estIdentifie, recuperationId, deconnexion } from './services/Auth';
 
 function App() {
 
@@ -28,12 +28,19 @@ function App() {
 
   const [adminVerified, setAdminVerified] = useState(true);
 
+
+
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);
     setOpenModal(!openModal);
   }
   const id = recuperationId();
   const lienProfil = `/profil/${id}`;
+
+  const handleDeconnexion = () => {
+    setEstConnecte(false);
+    deconnexion();
+ }
 
   return (
     <div className="App">
@@ -62,6 +69,7 @@ function App() {
           <a className='navLink' href="/">Accueil</a>
           <a className='navLink' href={lienProfil}>Profil</a>
           <a className='navLink' href="/game">Game</a>
+          <p className='navLink' onClick={handleDeconnexion}>Deconnexion</p>
 
           {adminVerified ? <div className='linksAdmin'>
             <div className="separator"></div>
