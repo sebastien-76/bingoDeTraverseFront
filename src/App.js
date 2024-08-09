@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
+import Footer from './components/footer/footer';
 import Connexion from './pages//users/connexion/connexion';
 import Inscription from './pages/users/inscription/inscription';
 import Accueil from './pages/users/accueil/accueil'
@@ -40,6 +41,8 @@ function App() {
           <Route path='/inscription' element={<Inscription/>}/>
         </Routes>
       </Router>
+
+      <Footer/>
 
       {openModal ? <div className="modalMenu">
         <img src="../../images/cheminTraverse.png" alt="" />

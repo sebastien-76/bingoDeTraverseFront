@@ -1,0 +1,41 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-grey);
+    color: white;
+    font-size: 13px;
+    padding-bottom: 10px;
+    position: absolute;
+    position:static;
+    bottom: 0;
+    margin-top: 50px;
+}
+
+.logoChemin {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+
+}
+
+.liens {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60%;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.liensReseaux {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+}
+
+.lienReseau {
+    width: 20px;
+}
