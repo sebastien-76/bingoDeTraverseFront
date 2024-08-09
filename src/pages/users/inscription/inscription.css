@@ -1,5 +1,5 @@
 .h1Inscription {
-    margin: 5rem auto;
+    margin: 2.5rem auto;
 }
 
 .inscriptionForm {
@@ -19,7 +19,18 @@ width: 60%;
 }
 
 .submitInscription {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    width: 50vw;
+    height: 6vh;
+    background-color: var(--dark-grey);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid var(--dark-grey);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .errorPwd, .errorEmail {

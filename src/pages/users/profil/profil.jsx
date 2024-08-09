@@ -38,7 +38,7 @@ const Profile = (props) => {
             <h1>Profil</h1>
             <form id="formProfil" className="formProfil">
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" name="email" defaultValue={profil.email} />
+                <input type="email" id="email" name="email" defaultValue={profil.email} />
                 <label htmlFor="lastname">Nom</label>
                 <input type="text" id="lastname" name="lastname" defaultValue={profil.lastname} />
                 <label htmlFor="firstname">Prénom</label>
