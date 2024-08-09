@@ -4,6 +4,7 @@ import './connexion.css';
 import { connexionUtilisateur, recuperationId } from "../../../services/Auth";
 import { sauvegardeItem } from "../../../services/localStorage";
 import authContext from "../../../hooks/useAuth";
+import RetourAccueil from "../../../components/retourAccueil/retourAccueil";
 
 const Connexion = () => {
     /* Etat des infos de connexion */
@@ -48,6 +49,7 @@ const Connexion = () => {
 
     return (
         <>
+            <RetourAccueil />
             <h1>Connexion</h1>
             {errorConnexion && <p className="error_connexion">{errorConnexion}</p>}
             <form id="form_connexion" onSubmit={handleSubmitConnexion} className="form_connexion">

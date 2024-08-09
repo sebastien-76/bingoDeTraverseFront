@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './inscription.css';
 import { baseUrl } from '../../../services/serviceAppel';
-import { Link } from 'react-router-dom';
+import RetourAccueil from '../../../components/retourAccueil/retourAccueil';
 
 const SignUp = () => {
 
@@ -70,6 +70,7 @@ const SignUp = () => {
 
     return (
         <>
+            <RetourAccueil />
             <h1 className='h1Inscription'>Inscription</h1>
             {errorPwd && <p className='errorPwd'>{errorPwd}</p>}
             {errorEmail && <p className='errorEmail'>{errorEmail}</p>}
