@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import './connexion.css';
 import { connexionUtilisateur, recuperationId } from "../../../services/Auth";
 import { sauvegardeItem } from "../../../services/localStorage";
+import authContext from "../../../hooks/useAuth";
 
 const Connexion = () => {
     /* Etat des infos de connexion */
@@ -14,6 +15,8 @@ const Connexion = () => {
     const [errorConnexion, setErrorConnexion] = useState('');
 
     const navigate = useNavigate();
+
+    const { setEstConnecte } = useContext(authContext);
 
     /* Mise a jour de l'etat des infos de connexion en fonction des entrées utilisateur  */
     const onChange = (event) => {
@@ -29,6 +32,7 @@ const Connexion = () => {
                 .then(res => {
                     if (res.token) {
                         sauvegardeItem('jetonUtilisateur', res.token)
+                        setEstConnecte(true)
                         const uid = recuperationId();
                         navigate(`/profil/${uid}`)
                         setErrorConnexion('')

@@ -42,3 +42,14 @@ export function recuperationId() {
     const jeton = recuperationItem('jetonUtilisateur');
     return jeton ? jwtDecode(jeton).userId : ('');
 }
+
+export function estIdentifie() {
+    const jeton = recuperationItem('jetonUtilisateur');
+    const resultat = jeton ? validiteJeton(jeton) : false;
+    if (resultat === false) {
+        suppressionItem('jetonUtilisateur');
+    }
+    return resultat;
+}
+
+

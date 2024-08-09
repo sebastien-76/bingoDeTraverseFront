@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './profil.css';
 
-const Profile = (props) => {
+const Profile = () => {
     const id = useParams();
     const [profil, setProfil] = useState([]);
     const [openModalModif, setOpenModalModif] = useState(false);
