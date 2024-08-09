@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <authContext.Provider value={{ estConnecte, setEstConnecte }}>
-        <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />
+        { (estConnecte) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
           <Routes>
             <Route path='/' element={<Accueil />} />
