@@ -84,7 +84,6 @@
     cursor: pointer;
     border: 1px solid var(--dark-grey);
     padding: 10px;
-    border-radius: 25px;
     width: 70px;
 }
 
