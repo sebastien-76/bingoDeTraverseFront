@@ -23,6 +23,25 @@
     font-weight: bold;
 }
 
+.btn_connexion {
+    margin-top: 2rem;
+    width: 50vw;
+    height: 6vh;
+    background-color: var(--dark-grey);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid var(--dark-grey);
+}
+
+.btn_connexion_link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 .p_accueil {
-    font-size: 1em;
+    margin-top: 2rem;
+    font-size: 0.75em;
 }
