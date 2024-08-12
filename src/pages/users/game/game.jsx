@@ -1,7 +1,7 @@
 import './game.css';
 import React, { useState, useEffect } from 'react';
 import Bouton from '../../../components/boutons/bouton';
-import {baseUrl} from '../../../services/serviceAppel';
+import { baseUrl } from '../../../services/serviceAppel';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -11,7 +11,6 @@ export default function Game() {
     const [selectedCaseIndex, setSelectedCaseIndex] = useState(null);
     const [lancementPartie, setLancementPartie] = useState(false);
     const [grilleId, setGrilleId] = useState(null);
-
     const [finPartie, setFinPartie] = useState(false);
 
     // ID en brut du user pour les tests
@@ -24,15 +23,16 @@ export default function Game() {
     // Récupération de la grille dans la BDD
     const fetchGrille = async () => {
         try {
-            const response = await fetch( baseUrl + `/grilles/user/${userId}`);
+            const response = await fetch(baseUrl + `/grilles/user/${userId}`);
             if (response.ok) {
                 setLancementPartie(true);
-                const dataGrille = await response.json();
+                const dataGrille = await response.json();                
                 const grille = dataGrille.data;
                 setGrilleId(grille.id);
                 const selectedPhraseIds = grille.case.map(c => c.phraseId);
                 setCaseGrille(selectedPhraseIds);
                 setValideCases(grille.validatedCases);
+
                 const responsePhrases = await fetch(baseUrl + '/phrases');
                 const dataPhrases = await responsePhrases.json();
                 const selectedPhrases = dataPhrases.data.filter(p => selectedPhraseIds.includes(p.id)).sort((a, b) => a.id - b.id);
@@ -57,50 +57,43 @@ export default function Game() {
 
     // Validation de la case
     const confirmValidation = async () => {
-        const updatedCaseId = caseGrille[selectedCaseIndex]
-    if (grilleId === null) {
-        console.error('ID de la grille non défini');
-        return;
-    }
-
-    // Mise à jour de tableau des cases validées
-    const updatedValidatedCases = [...valideCases];
-    updatedValidatedCases[selectedCaseIndex] = true; 
-
-    try {
-        const response = await fetch(baseUrl + `/grilles/${grilleId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Envoie du tableau des cases validées
-            body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) 
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            setValideCases(data.data.validatedCases);
-
-            // ajouter une className aux phrase validées
-            const phraseId = data.data.case[selectedCaseIndex].phraseId;
-            const phrase = document.getElementById(phraseId);
-            phrase.classList.add('selectedPhrase');
-
-
-            if (data.data.finished) {
-                setFinPartie(true);
-            }
-
-        } else {
-            console.error('Erreur lors de la validation de la case');
+        const updatedCaseId = caseGrille[selectedCaseIndex];
+        if (grilleId === null) {
+            console.error('ID de la grille non défini');
+            return;
         }
-    } catch (error) {
-        console.error('Erreur de connexion:', error);
-    }
 
-    closeModal();
-    
-}
+        // Mise à jour de tableau des cases validées
+        const updatedValidatedCases = [...valideCases];
+        updatedValidatedCases[selectedCaseIndex] = true; 
+
+        try {
+            const response = await fetch(baseUrl + `/grilles/${grilleId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // Envoie du tableau des cases validées
+                body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) 
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setValideCases(data.data.validatedCases);
+
+                if (data.data.finished) {
+                    setFinPartie(true);
+                }
+
+            } else {
+                console.error('Erreur lors de la validation de la case');
+            }
+        } catch (error) {
+            console.error('Erreur de connexion:', error);
+        }
+
+        closeModal();
+    }
 
     // Lancement de la partie
     const confirmLancementPartie = async () => {
@@ -146,8 +139,13 @@ export default function Game() {
                 <>
                 <div className='listePhrase'>
                     {selectedPhrases.map((phrase) => (
-                        <div id={phrase.id} key={phrase.id}>
-                            <p onClick={() => handlePhraseClick(phrase.id)}>{phrase.id} - {phrase.text}</p>
+                        <div key={phrase.id}>
+                            <p 
+                            id={phrase.id} 
+                            onClick={() => handlePhraseClick(phrase.id)}
+                            className={valideCases[caseGrille.indexOf(phrase.id)] ? 'selectedPhrase' : ''}>
+                                {phrase.id} - {phrase.text} 
+                            </p>
                         </div>
                     ))}
                 </div>
