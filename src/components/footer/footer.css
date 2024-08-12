@@ -5,10 +5,10 @@
     color: white;
     font-size: 13px;
     padding-bottom: 10px;
-    position: absolute;
-    position:static;
+    position: relative;
     bottom: 0;
     margin-top: 50px;
+    width: 100%;
 }
 
 .logoChemin {

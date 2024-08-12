@@ -59,8 +59,8 @@ function App() {
           </Routes>
         </Router>
       </authContext.Provider>
-
-      <Footer />
+      
+      {(!estConnecte) && <Footer />}
 
       {openModal ? <div className="modalMenu">
         <img src="../../images/cheminTraverse.png" alt="" />
