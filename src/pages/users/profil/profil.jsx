@@ -11,7 +11,7 @@ const Profile = () => {
     const [openModalModif, setOpenModalModif] = useState(false);
     const [openModalEmail, setOpenModalEmail] = useState(false);
     const [openModalLastName, setOpenModalLastName] = useState(false);
-    const [openModalFisrtName, setOpenModalFirstName] = useState(false);
+    const [openModalFirstName, setOpenModalFirstName] = useState(false);
     const [openModalPseudo, setOpenModalPseudo] = useState(false);
 
     const fetchProfil = async (id) => {
@@ -22,7 +22,7 @@ const Profile = () => {
 
     useEffect(() => {
         fetchProfil(id.id)
-    }, [id, openModalEmail, openModalLastName]);
+    }, [id, openModalEmail, openModalLastName, openModalFirstName, openModalPseudo]);
 
     const onChange = (event) => setProfil({ ...profil, [event.target.name]: event.target.value })
 
@@ -65,7 +65,7 @@ const Profile = () => {
             }
 
             {/* Modal de modification du prenom */}
-            {openModalFisrtName ?
+            {openModalFirstName ?
                 <OpenModal id="firstname" name="Prénom" type="text" uid={id.id} defaultValue={profil.firstname} setEtat={setOpenModalFirstName} majProfil={fetchProfil} /> :
                 null
             }
