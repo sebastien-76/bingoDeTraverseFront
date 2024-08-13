@@ -45,7 +45,6 @@ function App() {
     setAdminVerified(isAdmin());
   }, [estConnecte, pseudo, adminVerified])
 
-  console.log(value);
 
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);

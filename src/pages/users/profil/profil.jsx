@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './profil.css';
+import { baseUrl } from "../../../services/serviceAppel";
+import OpenModal from "../../../components/profil/openModal";
+import FormData from "../../../components/profil/formData";
 
 const Profile = () => {
     const id = useParams();
     const [profil, setProfil] = useState([]);
     const [openModalModif, setOpenModalModif] = useState(false);
+    const [openModalEmail, setOpenModalEmail] = useState(false);
+    const [openModalLastName, setOpenModalLastName] = useState(false);
+    const [openModalFisrtName, setOpenModalFirstName] = useState(false);
+    const [openModalPseudo, setOpenModalPseudo] = useState(false);
 
     const fetchProfil = async (id) => {
-        const response = await fetch(`http://localhost:3000/api/users/${id}`);
+        const response = await fetch(`${baseUrl}/users/${id}`);
         const dataProfil = await response.json();
         setProfil(dataProfil.data);
     }
 
     useEffect(() => {
         fetchProfil(id.id)
-    }, [id]);
+    }, [id, openModalEmail, openModalLastName]);
 
     const onChange = (event) => setProfil({ ...profil, [event.target.name]: event.target.value })
 
     const onSubmitModifProfile = async (event) => {
         event.preventDefault();
-        await fetch(`http://localhost:3000/api/users/${id.id}`, {
+        await fetch(`${baseUrl}/users/${id.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,44 +40,41 @@ const Profile = () => {
     }
 
     return (
+        /* Formulaire d'affichage du profil */
         <div className="profil">
             <h1>Profil</h1>
             <form id="formProfil" className="formProfil">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" defaultValue={profil.email} />
-                <label htmlFor="lastname">Nom</label>
-                <input type="text" id="lastname" name="lastname" defaultValue={profil.lastname} />
-                <label htmlFor="firstname">Prénom</label>
-                <input type="text" id="firstname" name="firstname" defaultValue={profil.firstname} />
-                <label htmlFor="pseudo">Pseudo</label>
-                <input type="text" id="pseudo" name="pseudo" defaultValue={profil.pseudo} />
-                { (profil.Salles && profil.Salles.length>0) ? <h3>Salles associées :</h3> : <p>Aucune salle associée</p>}
-                <ul>
-                    {profil.Salles && profil.Salles.map(salle =>
-                        <li key={salle.id} className="salleList">{salle.name}</li>)}
-                </ul>
+            <FormData id="email" name="Email" setEtat={setOpenModalEmail} value={profil.email} />
+            <FormData id="lastname" name="Nom" setEtat={setOpenModalLastName} value={profil.lastname} />
+            <FormData id="firstname" name="Prénom" setEtat={setOpenModalFirstName} value={profil.firstname} />
+            <FormData id="pseudo" name="Pseudo" setEtat={setOpenModalPseudo} value={profil.pseudo} />
             </form>
 
             <button onClick={() => setOpenModalModif(true)}>Modifier</button>
 
-            {openModalModif ? 
-                <form id="formProfilModif" onSubmit={onSubmitModifProfile}  className="formProfilModif">
-                <h2>Modifier les informations</h2>
-                <label htmlFor="email">Email</label>
-                <input type="text" id="email" name="email" defaultValue={profil.email} onChange={onChange} />
-                <label htmlFor="lastname">Nom</label>
-                <input type="text" id="lastname" name="lastname" defaultValue={profil.lastname} onChange={onChange} />
-                <label htmlFor="firstname">Prénom</label>
-                <input type="text" id="firstname" name="firstname" defaultValue={profil.firstname} onChange={onChange} />
-                <label htmlFor="pseudo">Pseudo</label>
-                <input type="text" id="pseudo" name="pseudo" defaultValue={profil.pseudo} onChange={onChange} />
-                <label htmlFor="password">Mot de passe</label>
-                <input type="text" id="password" name="password" defaultValue="" autoComplete="off" onChange={onChange} />
-                <input type="submit" id="submit" value="Valider" />
-                </form>
-                : null}
+            {/* Modal de modification du mail */}
+            {openModalEmail ?
+                <OpenModal id="email" name="Email" type="email" uid={id.id} defaultValue={profil.email} setEtat={setOpenModalEmail} /> :
+                null
+            }
 
+            {/* Modal de modification du nom */}
+            {openModalLastName ?
+                <OpenModal id="lastname" name="Nom" type="text" uid={id.id} defaultValue={profil.lastname} setEtat={setOpenModalLastName} majProfil={fetchProfil} /> :
+                null
+            }
 
+            {/* Modal de modification du prenom */}
+            {openModalFisrtName ?
+                <OpenModal id="firstname" name="Prénom" type="text" uid={id.id} defaultValue={profil.firstname} setEtat={setOpenModalFirstName} majProfil={fetchProfil} /> :
+                null
+            }
+
+            {/* Modal de modification du pseudo */}
+            {openModalPseudo ?
+                <OpenModal id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} /> :
+                null
+            }
         </div>
     )
 }

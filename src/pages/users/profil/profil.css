@@ -34,3 +34,14 @@
 .salleList {
     list-style: none;
 }
+
+.modification {
+    width: 7%;
+    cursor: pointer;
+}
+
+.divModif {
+    display : flex;
+    justify-content: space-between;
+
+}
