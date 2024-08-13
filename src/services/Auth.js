@@ -54,4 +54,16 @@ export function estIdentifie() {
     return resultat;
 }
 
+export function pseudoUtilisateur() {
+    const jeton = recuperationItem('jetonUtilisateur');
+    return jeton ? jwtDecode(jeton).pseudo : ('');
+}
+
+export function isAdmin() {
+    const jeton = recuperationItem('jetonUtilisateur');
+    const role = jeton ? jwtDecode(jeton).role : ('');
+    const roleAdmin = role ? role.includes('ADMIN') : false;
+    return roleAdmin;
+}
+
 

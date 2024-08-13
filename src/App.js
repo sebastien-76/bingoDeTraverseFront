@@ -1,4 +1,4 @@
-import { useState, Children } from 'react';
+import { useState, Children, useContext, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import React from 'react';
@@ -18,17 +18,34 @@ import Profil from './pages/users/profil/profil';
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import authContext from './hooks/useAuth';
-import { estIdentifie, recuperationId, deconnexion } from './services/Auth';
+import { estIdentifie, pseudoUtilisateur, isAdmin, recuperationId, deconnexion } from './services/Auth';
 
 function App() {
 
   const [menuBurger, setMenuBurger] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [estConnecte, setEstConnecte] = useState(estIdentifie());
+  const [pseudo, setPseudo] = useState('');
 
-  const [adminVerified, setAdminVerified] = useState(true);
 
+  const [adminVerified, setAdminVerified] = useState(false);
 
+  const value = {
+    estConnecte,
+    setEstConnecte,
+    pseudo,
+    setPseudo,
+    adminVerified,
+    setAdminVerified
+  }
+
+  useEffect( () => {
+    setEstConnecte(estIdentifie());
+    setPseudo(pseudoUtilisateur());
+    setAdminVerified(isAdmin());
+  }, [estConnecte, pseudo, adminVerified])
+
+  console.log(value);
 
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);
@@ -44,7 +61,7 @@ function App() {
 
   return (
     <div className="App">
-      <authContext.Provider value={{ estConnecte, setEstConnecte }}>
+      <authContext.Provider value={value}>
         { (estConnecte) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
           <Routes>
