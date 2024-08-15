@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './salles.css';
+import { baseUrl } from "../../../services/serviceAppel";
 
 export default function Salles() {
     // state pour la liste des salles
@@ -12,13 +13,13 @@ export default function Salles() {
     const [selectedSalle, setSelectedSalle] = useState(null);
 
     const fetchData = async () => {
-        const response = await fetch('http://localhost:3000/api/salles');
+        const response = await fetch(baseUrl + '/salles');
         const dataSalle = await response.json();
         setSalle(dataSalle.data);
     }
 
     const confirmDeleteSalle = async (salleId) => {
-        await fetch(`http://localhost:3000/api/salles/${salleId}`, {
+        await fetch(baseUrl + `/salles/${salleId}`, {
             method: 'DELETE',
         });
         setShowModal(false);
@@ -29,7 +30,7 @@ export default function Salles() {
     const addSalle = async () => {
         if (newSalleName) {
         
-        const response = await fetch('http://localhost:3000/api/salles', {
+        const response = await fetch(baseUrl + '/salles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

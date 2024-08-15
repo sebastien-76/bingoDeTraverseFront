@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './phrases.css';
+import {baseUrl} from '../../../services/serviceAppel';
 
 export default function Phrases() {
     const [phrases, setPhrase] = useState([]);
@@ -18,20 +19,20 @@ export default function Phrases() {
 
 
     const fetchPhrases = async () => {
-        const response = await fetch('http://localhost:3000/api/phrases');
+        const response = await fetch(baseUrl + '/phrases');
         const dataPhrase = await response.json();
         setPhrase(dataPhrase.data);
     }
 
     const fetchSalles = async () => {
-        const response = await fetch('http://localhost:3000/api/salles');
+        const response = await fetch(baseUrl + '/salles');
         const dataSalles = await response.json();
         setSalles(dataSalles.data);
     }
 
 
     const confirmDeletePhrase = async (phraseId) => {
-        await fetch(`http://localhost:3000/api/phrases/${phraseId}`, {
+        await fetch(baseUrl + `/phrases/${phraseId}`, {
             method: 'DELETE',
         });
         setShowModal(false);
@@ -40,7 +41,7 @@ export default function Phrases() {
     }
 
     const addPhraseValidee = async () => {
-        await fetch('http://localhost:3000/api/phrases', {
+        await fetch(baseUrl + '/phrases', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
