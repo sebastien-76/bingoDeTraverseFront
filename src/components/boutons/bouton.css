@@ -1,12 +1,10 @@
 .bouton {
     height: 6vh;
-    width: 50vw;
     background-color: var(--dark-grey);
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid var(--dark-grey);
     color: white;
-    font-weight: bold;
     font-size: 1.2rem;
 }

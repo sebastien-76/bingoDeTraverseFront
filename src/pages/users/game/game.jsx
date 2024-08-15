@@ -130,7 +130,7 @@ export default function Game() {
             <div className='lancementPartie'>
                 <h2 className='lancementPartieH2'>Veux-tu lancer la partie ?</h2>
                 <div className="choixLancementPartie">
-                    <Bouton text="Oui" onClick={confirmLancementPartie}/>
+                    <Bouton style={{width: '100px'}} text="Oui" onClick={confirmLancementPartie}/>
                 </div>
             </div> :
             
