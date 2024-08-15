@@ -60,7 +60,7 @@ function App() {
  }
 
   return (
-    <div className="App">
+    <div style={{ marginTop: estConnecte ? '140px' : '0px' }} className="App">
       <authContext.Provider value={value}>
         { (estConnecte) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
