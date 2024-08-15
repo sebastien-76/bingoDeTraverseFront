@@ -1,82 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import './profil.css';
-import { baseUrl } from "../../../services/serviceAppel";
-import OpenModal from "../../../components/profil/openModal";
-import FormData from "../../../components/profil/formData";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
+import { baseUrl } from '../../../services/serviceAppel';
+import Bouton from '../../../components/boutons/bouton';
 
-const Profile = () => {
+const Profil = () => {
     const id = useParams();
-    const [profil, setProfil] = useState([]);
-    const [openModalModif, setOpenModalModif] = useState(false);
-    const [openModalEmail, setOpenModalEmail] = useState(false);
-    const [openModalLastName, setOpenModalLastName] = useState(false);
-    const [openModalFirstName, setOpenModalFirstName] = useState(false);
-    const [openModalPseudo, setOpenModalPseudo] = useState(false);
 
-    const fetchProfil = async (id) => {
+    const navigate = useNavigate();
+
+    const [profil, setProfil] = useState([]);
+
+    const fetchUser = async (id) => {
         const response = await fetch(`${baseUrl}/users/${id}`);
-        const dataProfil = await response.json();
-        setProfil(dataProfil.data);
+        const dataUser = await response.json();
+        setProfil(dataUser.data);
     }
 
     useEffect(() => {
-        fetchProfil(id.id)
-    }, [id, openModalEmail, openModalLastName, openModalFirstName, openModalPseudo]);
+        setProfil(fetchUser(id.id));
+    }, [id]);
 
-    const onChange = (event) => setProfil({ ...profil, [event.target.name]: event.target.value })
+    const dateDebut = new Date(profil.createdAt);
+    const salles = profil.Salles
 
-    const onSubmitModifProfile = async (event) => {
-        event.preventDefault();
-        await fetch(`${baseUrl}/users/${id.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(profil)
-        });
-        fetchProfil(id.id);
-        setOpenModalModif(false);
+    const onClickModifProfil = () => {
+        navigate (`/modification-profil/${id.id}`);
     }
 
+
     return (
-        /* Formulaire d'affichage du profil */
-        <div className="profil">
+        <>
             <h1>Profil</h1>
-            <form id="formProfil" className="formProfil">
-            <FormData id="email" name="Email" setEtat={setOpenModalEmail} value={profil.email} />
-            <FormData id="lastname" name="Nom" setEtat={setOpenModalLastName} value={profil.lastname} />
-            <FormData id="firstname" name="Prénom" setEtat={setOpenModalFirstName} value={profil.firstname} />
-            <FormData id="pseudo" name="Pseudo" setEtat={setOpenModalPseudo} value={profil.pseudo} />
-            </form>
 
-            <button onClick={() => setOpenModalModif(true)}>Modifier</button>
+            <p> Email : {profil.email}</p>
+            <p> Pseudo :  {profil.pseudo}</p>
+            <p> Bingo(s) gagné(s) : {profil.points}</p>
+            <p> Joue depuis le : {dateDebut.toLocaleDateString('fr-FR')}</p>
+            <p> Salles : </p>
+            <ul>
+                {salles && salles.map((salle) => (
+                    <li key={salle.id} className='salleList'>{salle.name}</li>
+                ))}
+            </ul>
 
-            {/* Modal de modification du mail */}
-            {openModalEmail ?
-                <OpenModal id="email" name="Email" type="email" uid={id.id} defaultValue={profil.email} setEtat={setOpenModalEmail} /> :
-                null
-            }
+            <Bouton onClick={onClickModifProfil} text="Modifier mon profil" />
 
-            {/* Modal de modification du nom */}
-            {openModalLastName ?
-                <OpenModal id="lastname" name="Nom" type="text" uid={id.id} defaultValue={profil.lastname} setEtat={setOpenModalLastName} majProfil={fetchProfil} /> :
-                null
-            }
 
-            {/* Modal de modification du prenom */}
-            {openModalFirstName ?
-                <OpenModal id="firstname" name="Prénom" type="text" uid={id.id} defaultValue={profil.firstname} setEtat={setOpenModalFirstName} majProfil={fetchProfil} /> :
-                null
-            }
-
-            {/* Modal de modification du pseudo */}
-            {openModalPseudo ?
-                <OpenModal id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} /> :
-                null
-            }
-        </div>
+        </>
     )
 }
 
-export default Profile
+export default Profil

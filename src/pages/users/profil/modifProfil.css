@@ -1,0 +1,47 @@
+.profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.formProfil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50vw;
+}
+
+.formProfilModif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-grey);
+    border-radius: 25px;
+    border: 2px solid var(--dark-grey);
+    gap: 10px;
+    padding: 10px;
+}
+
+.salleList {
+    list-style: none;
+}
+
+.modification {
+    width: 7%;
+    cursor: pointer;
+}
+
+.divModif {
+    display : flex;
+    justify-content: space-between;
+
+}
