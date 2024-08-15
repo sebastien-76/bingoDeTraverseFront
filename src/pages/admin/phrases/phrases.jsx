@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './phrases.css';
 import {baseUrl} from '../../../services/serviceAppel';
+import Bouton from '../../../components/boutons/bouton';
 
 export default function Phrases() {
     const [phrases, setPhrase] = useState([]);
@@ -84,12 +85,12 @@ export default function Phrases() {
         <>
             <h1>Liste des phrases</h1>
 
-            <button onClick={fetchPhrases}>Actualiser</button>
+            <Bouton text="Actualiser" onClick={fetchPhrases}/>
 
             <div className="phrasesListe">
                 {phrases && phrases.map((phrase) => (
                     <li key={phrase.id}>
-                        <button className="deletePhrase" onClick={() => handleDeleteClick(phrase)}>X</button>
+                        <Bouton style={{marginRight: "10px", width: "35px"}} text="X" onClick={() => handleDeleteClick(phrase)}/>
                         {phrase.text} - Salle associée : {phrase.SalleId}
                     </li>
                 ))}
@@ -116,7 +117,7 @@ export default function Phrases() {
                         </div>
                     )}
                 </div>
-                <button type="submit" onClick={addPhrase}>Ajouter</button>
+                <Bouton style={{marginBlock: "20px", width: "100px"}} text="Ajouter" onClick={addPhrase} />
             </div>
 
             {showModal && (
@@ -124,8 +125,8 @@ export default function Phrases() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer la salle {selectedPhrase.text} ?</p>
-                        <button className="choixSuppression" onClick={() => confirmDeletePhrase(selectedPhrase.id)}>Oui</button>
-                        <button className="choixSuppression" onClick={handleCancelDelete}>Non</button>
+                        <Bouton style={{width: "60px"}} text="oui" onClick={() => confirmDeletePhrase(selectedPhrase.id)} />
+                        <Bouton style={{width: "60px"}} text="non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}

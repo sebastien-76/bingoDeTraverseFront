@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './gamemasters.css';
 import { baseUrl } from "../../../services/serviceAppel";
+import Bouton from "../../../components/boutons/bouton";
 
 export default function Gamemasters() {
     // state pour la liste des gamemasters
@@ -64,12 +65,12 @@ export default function Gamemasters() {
         <>
             <h1>Liste des gamemasters</h1>
 
-            <button className="actualiser" onClick={fetchGamemasters}>Actualiser</button>
+            <Bouton text="Actualiser" onClick={fetchGamemasters} />
 
             <div className="sallesListe">
                 {gamemasters && gamemasters.map((gamemaster) => (
                     <li key={gamemaster.id}>
-                        <button className="deleteSalle" onClick={() => handleDeleteClick(gamemaster)}>X</button>
+                        <Bouton style={{ marginRight: '10px' }} text="X" onClick={() => handleDeleteClick(gamemaster)} />
                         {gamemaster.email}
                     </li>
                 ))}
@@ -79,12 +80,12 @@ export default function Gamemasters() {
                 <h2>Ajouter un gamemaster</h2>
                 <input
                     className="salleInput"
-                    placeholder="Nom du gamemaster"
+                    placeholder="Email du gamemaster"
                     type="text"
                     value={newGamemaster}
                     onChange={(e) => setNewGamemaster(e.target.value)}
                 />
-                <button className="salleButton" type="submit" onClick={addGamemaster}>Ajouter</button>
+                <Bouton text="Ajouter" onClick={addGamemaster} />
             </div>
 
             {showModal && (
@@ -92,8 +93,8 @@ export default function Gamemasters() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer le gamemaster {selectedGamemaster.email} ?</p>
-                        <button className="choixSuppression" onClick={() => confirmDeleteGamemaster(selectedGamemaster.id)}>Oui</button>
-                        <button className="choixSuppression" onClick={handleCancelDelete}>Non</button>
+                        <Bouton style={{width: "60px"}} text="Oui" onClick={() => confirmDeleteGamemaster(selectedGamemaster.id)} />
+                        <Bouton style={{width: "60px"}} text="Non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}

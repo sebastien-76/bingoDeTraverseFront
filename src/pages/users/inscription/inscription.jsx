@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './inscription.css';
 import { baseUrl } from '../../../services/serviceAppel';
 import RetourAccueil from '../../../components/retourAccueil/retourAccueil';
+import Bouton from '../../../components/boutons/bouton';
 
 const SignUp = () => {
 
@@ -83,7 +84,7 @@ const SignUp = () => {
                 <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
                 <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Entrez à nouveau votre mot de passe" className='inputInscription' required />
-                <input type="submit" value="S'inscrire" className='submitInscription' />
+                <Bouton style={{ marginTop: '20px' }} text="S'inscrire" onClick={handleSubmitInscription} />
             </form>
         </>
     )

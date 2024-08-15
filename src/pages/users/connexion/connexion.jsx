@@ -5,6 +5,7 @@ import { connexionUtilisateur, recuperationId } from "../../../services/Auth";
 import { sauvegardeItem } from "../../../services/localStorage";
 import authContext from "../../../hooks/useAuth";
 import RetourAccueil from "../../../components/retourAccueil/retourAccueil";
+import Bouton from "../../../components/boutons/bouton";
 
 const Connexion = () => {
     /* Etat des infos de connexion */
@@ -61,7 +62,7 @@ const Connexion = () => {
                     <input type="checkbox" id="remember" name="remember" className="remember_input" />
                     <label htmlFor="remember">Se souvenir de moi</label>
                 </div>
-                <button type="submit">Se connecter</button>
+                <Bouton text="Se connecter" onClick={handleSubmitConnexion} />
             </form>
         </>
     )
