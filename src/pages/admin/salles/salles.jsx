@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './salles.css';
 import { baseUrl } from "../../../services/serviceAppel";
+import Bouton from "../../../components/boutons/bouton";
 
 export default function Salles() {
     // state pour la liste des salles
@@ -64,12 +65,12 @@ export default function Salles() {
         <>
             <h1>Liste des salles</h1>
 
-            <button className="actualiser" onClick={fetchData}>Actualiser</button>
+            <Bouton text="Actualiser" onClick={fetchData} />
 
             <div className="sallesListe">
                 {salles && salles.map((salle) => (
                     <li key={salle.id}>
-                        <button className="deleteSalle" onClick={() => handleDeleteClick(salle)}>X</button>
+                        <Bouton style={{ marginRight: '10px' }} text="X" onClick={() => handleDeleteClick(salle)} />
                         {salle.name}
                     </li>
                 ))}
@@ -84,7 +85,7 @@ export default function Salles() {
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
                 />
-                <button className="salleButton" type="submit" onClick={addSalle}>Ajouter</button>
+                <Bouton text="Ajouter" onClick={addSalle} />
             </div>
 
             {showModal && (
@@ -92,8 +93,8 @@ export default function Salles() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer la salle {selectedSalle.name} ?</p>
-                        <button className="choixSuppression" onClick={() => confirmDeleteSalle(selectedSalle.id)}>Oui</button>
-                        <button className="choixSuppression" onClick={handleCancelDelete}>Non</button>
+                        <Bouton style={{width: "60px"}} text="Oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />
+                        <Bouton style={{width: "60px"}} text="Non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}
