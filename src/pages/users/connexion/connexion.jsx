@@ -36,11 +36,12 @@ const Connexion = () => {
                         sauvegardeItem('jetonUtilisateur', res.token)
                         setIsLogged(true)
                         const uid = recuperationId();
-                        navigate(`/profil/${uid}`)
+                        navigate(`/game`)
                         setErrorConnexion('')
                     }
                     else {
-                        setErrorConnexion(res.message)
+                        const message = res.message ? res.message : res
+                        setErrorConnexion(message)
                     }
                 })
         } catch (error) {
