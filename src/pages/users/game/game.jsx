@@ -2,6 +2,7 @@ import './game.css';
 import React, { useState, useEffect } from 'react';
 import Bouton from '../../../components/boutons/bouton';
 import { baseUrl } from '../../../services/serviceAppel';
+import { recuperationId } from '../../../services/Auth';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -13,8 +14,8 @@ export default function Game() {
     const [grilleId, setGrilleId] = useState(null);
     const [finPartie, setFinPartie] = useState(false);
 
-    // ID en brut du user pour les tests
-    const userId = 2; 
+    // ID de l'utilisateur
+    const userId = recuperationId();
 
     useEffect(() => {
         fetchGrille();
