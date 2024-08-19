@@ -4,6 +4,7 @@ import './modifProfil.css';
 import { baseUrl } from "../../../services/serviceAppel";
 import OpenModal from "../../../components/profil/openModal";
 import FormData from "../../../components/profil/formData";
+import { recuperationId } from '../../../services/Auth';
 
 const ModifProfil = () => {
     const id = useParams();
@@ -13,6 +14,7 @@ const ModifProfil = () => {
     const [openModalLastName, setOpenModalLastName] = useState(false);
     const [openModalFirstName, setOpenModalFirstName] = useState(false);
     const [openModalPseudo, setOpenModalPseudo] = useState(false);
+    const uid = recuperationId();
 
     const fetchProfil = async (id) => {
         const response = await fetch(`${baseUrl}/users/${id}`);
@@ -39,6 +41,7 @@ const ModifProfil = () => {
         setOpenModalModif(false);
     }
 
+    if (id.id == uid) {
     return (
         /* Formulaire d'affichage du profil */
         <div className="profil">
@@ -76,7 +79,10 @@ const ModifProfil = () => {
                 null
             }
         </div>
-    )
+    ) }
+    else {
+        window.location = `/modification-profil/${uid}`;
+    }
 }
 
 export default ModifProfil
