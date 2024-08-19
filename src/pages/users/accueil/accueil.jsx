@@ -6,13 +6,13 @@ import authContext from "../../../hooks/useAuth";
 
 const Accueil = () => {
 
-    const { estConnecte } = useContext(authContext);
+    const { isLogged } = useContext(authContext);
 
     return (
         <>
             <img src="../../../images/cheminTraverse.png" alt="logo chemin de tarverse" className="logo_accueil" />
             <h1 className="titre_accueil">Bienvenue sur le <br /><span>Bingo de traverse!</span></h1>
-            {(!estConnecte) &&
+            {(!isLogged) &&
                 <div>
                     < button className="btn_connexion"><Link to="/connexion" className="btn_connexion_link">Connexion</Link></button >
                     <p className="p_accueil">Pas encore inscrit, c'est par <Link to="/inscription" className="lien_accueil">ici</Link></p>
