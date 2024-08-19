@@ -19,32 +19,35 @@ import Profil from './pages/users/profil/profil';
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import authContext from './hooks/useAuth';
-import { estIdentifie, pseudoUtilisateur, isAdmin, recuperationId, deconnexion } from './services/Auth';
+import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
 
 function App() {
 
   const [menuBurger, setMenuBurger] = useState(true);
   const [openModal, setOpenModal] = useState(false);
-  const [estConnecte, setEstConnecte] = useState(estIdentifie());
-  const [pseudo, setPseudo] = useState('');
 
+  const [isLogged, setIsLogged] = useState(estIdentifie());
 
-  const [adminVerified, setAdminVerified] = useState(false);
+  const [pseudo, setPseudo] = useState(pseudoUtilisateur());
 
-  const value = {
-    estConnecte,
-    setEstConnecte,
-    pseudo,
-    setPseudo,
-    adminVerified,
-    setAdminVerified
-  }
+  const [isAdmin, setIsAdmin] = useState(roleAdmin());
 
   useEffect( () => {
-    setEstConnecte(estIdentifie());
+    setIsLogged(estIdentifie());
     setPseudo(pseudoUtilisateur());
-    setAdminVerified(isAdmin());
-  }, [estConnecte, pseudo, adminVerified])
+    setIsAdmin(roleAdmin());
+  }, [isLogged, pseudo, isAdmin])
+
+
+  const value = {
+    isLogged,
+    setIsLogged,
+    pseudo,
+    setPseudo,
+    isAdmin,
+    setIsAdmin
+  }
+
 
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);
@@ -52,17 +55,16 @@ function App() {
   }
   const id = recuperationId();
   const lienProfil = `/profil/${id}`;
-  const lienModifProfil = `/modification-profil/${id}`;
 
   const handleDeconnexion = () => {
-    setEstConnecte(false);
+    setIsLogged(false);
     deconnexion();
  }
 
   return (
-    <div style={{ marginTop: estConnecte ? '140px' : '0px' }} className="App">
+    <div style={{ marginTop: isLogged ? '140px' : '0px' }} className="App">
       <authContext.Provider value={value}>
-        { (estConnecte) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
+        { (isLogged) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
           <Routes>
             <Route path='/' element={<Accueil />} />
@@ -78,7 +80,7 @@ function App() {
         </Router>
       </authContext.Provider>
       
-      {(!estConnecte) && <Footer />}
+      {(!isLogged) && <Footer />}
 
       {openModal ? <div className="modalMenu">
         <img src="../../images/cheminTraverse.png" alt="" />
@@ -89,7 +91,7 @@ function App() {
           <a className='navLink' href="/game">Game</a>
           <p className='navLink' onClick={handleDeconnexion}>Deconnexion</p>
 
-          {adminVerified ? <div className='linksAdmin'>
+          {isAdmin ? <div className='linksAdmin'>
             <div className="separator"></div>
             <h2 className='adminH2'>Pages Admin :</h2>
             <a className='navLink' href="/phrases">Phrases</a>

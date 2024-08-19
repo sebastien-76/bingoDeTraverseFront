@@ -18,7 +18,7 @@ const Connexion = () => {
 
     const navigate = useNavigate();
 
-    const { setEstConnecte } = useContext(authContext);
+    const { setIsLogged } = useContext(authContext);
 
     /* Mise a jour de l'etat des infos de connexion en fonction des entrées utilisateur  */
     const onChange = (event) => {
@@ -34,7 +34,7 @@ const Connexion = () => {
                 .then(res => {
                     if (res.token) {
                         sauvegardeItem('jetonUtilisateur', res.token)
-                        setEstConnecte(true)
+                        setIsLogged(true)
                         const uid = recuperationId();
                         navigate(`/profil/${uid}`)
                         setErrorConnexion('')

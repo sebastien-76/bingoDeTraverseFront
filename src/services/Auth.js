@@ -59,7 +59,7 @@ export function pseudoUtilisateur() {
     return jeton ? jwtDecode(jeton).pseudo : ('');
 }
 
-export function isAdmin() {
+export function roleAdmin() {
     const jeton = recuperationItem('jetonUtilisateur');
     const role = jeton ? jwtDecode(jeton).role : ('');
     const roleAdmin = role ? role.includes('ADMIN') : false;

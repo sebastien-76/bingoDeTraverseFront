@@ -5,10 +5,10 @@ import { useContext } from "react";
 
 
 const RouteSecurisee = ({ composant }) => {
-    const { estConnecte } = useContext(authContext);
+    const { isLogged } = useContext(authContext);
     
     return (
-        estConnecte ? composant : <Navigate to="/connexion" />
+        isLogged ? composant : <Navigate to="/connexion" />
     )
 }
 
