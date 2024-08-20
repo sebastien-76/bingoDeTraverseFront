@@ -6,6 +6,8 @@ const authContext = createContext({
     pseudo:'',
     setPseudo: () => {},
     isAdmin: false,
-    setIsAdmin: () => {}});
+    setIsAdmin: () => {},
+});
+
 
 export default authContext

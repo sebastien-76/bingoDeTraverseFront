@@ -1,10 +1,6 @@
-
-/* import { useState } from 'react'; */
 import { jwtDecode } from 'jwt-decode';
 import {  recuperationItem, suppressionItem } from './localStorage';
 import { baseUrl } from './serviceAppel';
-
-
 
 export const connexionUtilisateur = async (credentials) => {
     const getReponse = await fetch(`${baseUrl}/connexion`, {
@@ -29,6 +25,7 @@ export async function recupUtilisateur(id) {
 }
 
 export function deconnexion() {
+    suppressionItem('rememberMe')
     suppressionItem('jetonUtilisateur');
     window.location = "/";
 }

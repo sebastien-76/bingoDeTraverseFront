@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import './connexion.css';
-import { connexionUtilisateur, recuperationId } from "../../../services/Auth";
-import { sauvegardeItem } from "../../../services/localStorage";
+import { connexionUtilisateur } from "../../../services/Auth";
+import { sauvegardeItem, suppressionItem } from "../../../services/localStorage";
 import authContext from "../../../hooks/useAuth";
 import RetourAccueil from "../../../components/retourAccueil/retourAccueil";
 import Bouton from "../../../components/boutons/bouton";
@@ -13,16 +13,23 @@ const Connexion = () => {
         email: '',
         password: '',
     })
+    const [rememberChecked, setRememberChecked] = useState(false);
 
     const [errorConnexion, setErrorConnexion] = useState('');
 
     const navigate = useNavigate();
 
-    const { setIsLogged } = useContext(authContext);
+    const { setIsLogged, setPersistence } = useContext(authContext);
 
     /* Mise a jour de l'etat des infos de connexion en fonction des entrées utilisateur  */
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
+    }
+
+    const onChangeRemember = (event) => {
+        console.log(event.target.checked)
+        setRememberChecked(event.target.checked)
+        event.target.checked ? sauvegardeItem('rememberMe', true) : suppressionItem('rememberMe')
     }
 
     const handleSubmitConnexion = async (event) => {
@@ -35,9 +42,9 @@ const Connexion = () => {
                     if (res.token) {
                         sauvegardeItem('jetonUtilisateur', res.token)
                         setIsLogged(true)
-                        const uid = recuperationId();
                         navigate(`/game`)
                         setErrorConnexion('')
+                        rememberChecked && setPersistence(rememberChecked)
                     }
                     else {
                         const message = res.message ? res.message : res
@@ -60,7 +67,7 @@ const Connexion = () => {
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" id="password" name="password" value={credentials.password} autoComplete="off" onChange={onChange} required />
                 <div className="remember">
-                    <input type="checkbox" id="remember" name="remember" className="remember_input" />
+                    <input type="checkbox" id="remember" name="remember" className="remember_input" value={rememberChecked} onChange={onChangeRemember} />
                     <label htmlFor="remember">Se souvenir de moi</label>
                 </div>
                 <Bouton text="Se connecter" onClick={handleSubmitConnexion} />

@@ -1,6 +1,6 @@
-import { useState, Children, useContext, useEffect } from 'react';
+import { useState, Children, useEffect, useContext } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Footer from './components/footer/footer';
@@ -18,6 +18,8 @@ import Profil from './pages/users/profil/profil';
 
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
+import { recuperationItem } from './services/localStorage';
+
 import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
 
@@ -32,7 +34,10 @@ function App() {
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
 
-  useEffect( () => {
+  const { persistence } = useContext(authContext);
+
+
+  useEffect(() => {
     setIsLogged(estIdentifie());
     setPseudo(pseudoUtilisateur());
     setIsAdmin(roleAdmin());
@@ -45,7 +50,16 @@ function App() {
     pseudo,
     setPseudo,
     isAdmin,
-    setIsAdmin
+    setIsAdmin,
+    persistence
+  }
+
+  window.onbeforeunload = () => {
+    const rememberMe = recuperationItem('rememberMe');
+    if (!rememberMe) {
+      deconnexion();
+    }
+
   }
 
 
@@ -59,12 +73,12 @@ function App() {
   const handleDeconnexion = () => {
     setIsLogged(false);
     deconnexion();
- }
+  }
 
   return (
     <div style={{ marginTop: isLogged ? '140px' : '0px' }} className="App">
       <authContext.Provider value={value}>
-        { (isLogged) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
+        {(isLogged) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
           <Routes>
             <Route path='/' element={<Accueil />} />
@@ -72,14 +86,14 @@ function App() {
             <Route path='/salles' element={<Salles />} />
             <Route path='/gamemaster' element={<Gamemaster />} />
             <Route path='/game' element={<RouteSecurisee composant={<Game />} />} />
-            <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />  
+            <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
             <Route path='/modification-profil/:id' element={<RouteSecurisee composant={<ModifProfil id={Children} />} />} />
             <Route path='/connexion' element={<Connexion />} />
             <Route path='/inscription' element={<Inscription />} />
           </Routes>
         </Router>
       </authContext.Provider>
-      
+
       {(!isLogged) && <Footer />}
 
       {openModal ? <div className="modalMenu">
