@@ -20,7 +20,6 @@ import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import { recuperationItem } from './services/localStorage';
 
-import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
 
 function App() {
@@ -33,8 +32,6 @@ function App() {
   const [pseudo, setPseudo] = useState(pseudoUtilisateur());
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
-
-  const { persistence } = useContext(authContext);
 
 
   useEffect(() => {
@@ -54,14 +51,6 @@ function App() {
     persistence
   }
 
-  window.onbeforeunload = () => {
-    const rememberMe = recuperationItem('rememberMe');
-    if (!rememberMe) {
-      deconnexion();
-    }
-
-  }
-
 
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);
@@ -74,6 +63,7 @@ function App() {
     setIsLogged(false);
     deconnexion();
   }
+
 
   return (
     <div style={{ marginTop: isLogged ? '140px' : '0px' }} className="App">

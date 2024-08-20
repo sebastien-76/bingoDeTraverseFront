@@ -13,7 +13,6 @@ const Connexion = () => {
         email: '',
         password: '',
     })
-    const [rememberChecked, setRememberChecked] = useState(false);
 
     const [errorConnexion, setErrorConnexion] = useState('');
 
@@ -26,11 +25,6 @@ const Connexion = () => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
     }
 
-    const onChangeRemember = (event) => {
-        console.log(event.target.checked)
-        setRememberChecked(event.target.checked)
-        event.target.checked ? sauvegardeItem('rememberMe', true) : suppressionItem('rememberMe')
-    }
 
     const handleSubmitConnexion = async (event) => {
         event.preventDefault();
@@ -44,7 +38,6 @@ const Connexion = () => {
                         setIsLogged(true)
                         navigate(`/game`)
                         setErrorConnexion('')
-                        rememberChecked && setPersistence(rememberChecked)
                     }
                     else {
                         const message = res.message ? res.message : res
@@ -66,10 +59,6 @@ const Connexion = () => {
                 <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} required />
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" id="password" name="password" value={credentials.password} autoComplete="off" onChange={onChange} required />
-                <div className="remember">
-                    <input type="checkbox" id="remember" name="remember" className="remember_input" value={rememberChecked} onChange={onChangeRemember} />
-                    <label htmlFor="remember">Se souvenir de moi</label>
-                </div>
                 <Bouton text="Se connecter" onClick={handleSubmitConnexion} />
             </form>
         </>
