@@ -54,13 +54,13 @@ function App() {
     persistence
   }
 
-  window.onbeforeunload = () => {
+ /*  window.onbeforeunload = () => {
     const rememberMe = recuperationItem('rememberMe');
     if (!rememberMe) {
       deconnexion();
     }
 
-  }
+  } */
 
 
   const toggleMenu = () => {
