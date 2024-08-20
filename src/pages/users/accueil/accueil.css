@@ -23,18 +23,12 @@
     font-weight: bold;
 }
 
-.expliquation_accueil {
+.explication_accueil {
     font-size: 1em;
     color: var(--dark-grey);
     width: 70%;
     margin: 0 auto;
     text-align: left;
-}
-
-.h2_accueil {
-    color: var(--dark-grey);
-    font-size: 1.2em;
-    text-decoration: underline;
 }
 
 .btn_connexion {
