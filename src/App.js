@@ -87,13 +87,13 @@ function App() {
       {(!isLogged) && <Footer />}
 
       {openModal ? <div className="modalMenu">
-        <img src="../../images/cheminTraverse.png" alt="" />
+        <img className="logoCheminNav" src="../../images/cheminTraverse.png" alt="" />
         <div className="navLinks">
 
           <a className='navLink' href="/">Accueil</a>
           <a className='navLink' href={lienProfil}>Profil</a>
-          <a className='navLink' href="/game">Game</a>
-          <p className='navLink' onClick={handleDeconnexion}>Deconnexion</p>
+          <a className='navLink' href="/game">Bingo</a>
+          <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
 
           {isAdmin ? <div className='linksAdmin'>
             <div className="separator"></div>
