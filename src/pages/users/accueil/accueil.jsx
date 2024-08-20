@@ -23,7 +23,7 @@ const Accueil = () => {
             {(!isLogged) ?
             <>
                 <div>
-                    <p className="expliquation_accueil">
+                    <p className="explication_accueil">
                         Seul les <b>gamemasters</b> du 
                         <b> Chemin de traverse</b> à <b>Arras </b>
                         sont autorisés à acceder au jeu. <br />
