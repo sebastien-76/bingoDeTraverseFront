@@ -1,0 +1,14 @@
+.infos {
+    text-align: justify;
+    padding-left: 5em;
+    margin : 0;
+    font-weight: bold;
+}
+
+.donnees {
+    text-align: justify;
+    padding-left: 5.5em;
+    margin : 0.2em 0 0.7em 0;
+    font-size: 0.9em;
+}
+

@@ -23,16 +23,21 @@ const OpenModal = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) =>
         setProfil({ ...profil, [event.target.name]: event.target.value })
     }
 
+
     return (
-        <form onSubmit={onSubmitModifProfile} className="formProfilModif">
-            <h2>Modifier le profil</h2>
-            <label htmlFor={id}>{name} : </label>
-            <input type={type} name={id} id={id} defaultValue={defaultValue} onChange={onChange} />
-            <div className="modalModif">
-                <Bouton type="submit" onClick={() => setEtat(false)} text="Annuler" width="10%" />
-                <Bouton type="submit" text="Modifier" width="10%" />
-            </div>
-        </form>
+        <div className='modal'>
+            <form onSubmit={onSubmitModifProfile} className="modal-content">
+
+                <h2>Modifier le <span>{name}</span></h2>
+                {/*  <label htmlFor={id}> {name} : </label> */}
+                <input type={type} name={id} id={id} defaultValue={defaultValue} onChange={onChange} />
+                <div className="modalModif">
+                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto' }} />
+                    <Bouton type="submit" onClick={() => setEtat(false)} text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto' }} />
+                </div>
+
+            </form>
+        </div>
     )
 }
 
