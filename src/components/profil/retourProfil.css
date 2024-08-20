@@ -1,0 +1,6 @@
+.retour_profil {
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-size: 0.8em;
+    margin-left: 50vw;
+}

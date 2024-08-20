@@ -4,6 +4,7 @@ import './modifProfil.css';
 import { baseUrl } from "../../../services/serviceAppel";
 import OpenModal from "../../../components/profil/openModal";
 import FormData from "../../../components/profil/formData";
+import RetourProfil from "../../../components/profil/retourProfil";
 import { recuperationId } from '../../../services/Auth';
 
 const ModifProfil = () => {
@@ -45,9 +46,9 @@ const ModifProfil = () => {
     return (
         /* Formulaire d'affichage du profil */
         <div className="profil">
+            <RetourProfil />
             <h1>Modification du profil</h1>
             <form id="formProfil" className="formProfil">
-            <FormData id="email" name="Email" setEtat={setOpenModalEmail} value={profil.email} />
             <FormData id="lastname" name="Nom" setEtat={setOpenModalLastName} value={profil.lastname} />
             <FormData id="firstname" name="Prénom" setEtat={setOpenModalFirstName} value={profil.firstname} />
             <FormData id="pseudo" name="Pseudo" setEtat={setOpenModalPseudo} value={profil.pseudo} />

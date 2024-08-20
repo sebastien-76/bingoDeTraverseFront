@@ -35,13 +35,20 @@
     list-style: none;
 }
 
+.labelModif {
+    font-weight: bold;
+    text-align: justify;
+}
+
 .modification {
-    width: 7%;
+    width:10%;
+    height: 15%;
     cursor: pointer;
 }
 
 .divModif {
     display : flex;
     justify-content: space-between;
+    align-items: center;
 
 }
