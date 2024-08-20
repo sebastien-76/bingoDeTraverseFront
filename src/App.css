@@ -17,11 +17,25 @@
   align-items: center;
 }
 
+.logoCheminNav {
+  position: absolute;
+  top: 30px;
+  height: 20vh;
+}
+
 .navLink {
   text-decoration: none;
   color: white;
-  font-size: 25px;
+  font-size: 1.2em;
   margin-bottom: 10px;
+}
+
+.deconnexion {
+  color: var(--red);
+  font-size: 1.3em;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 40px;
 }
 
 .navLinks {
@@ -30,12 +44,14 @@
   align-items: baseline;
   height: 60%;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20vh;
   padding-left: 10px;
+  margin-left: 10px;
 }
 
 .separator {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   width: 90%;
   height: 2px;
   background-color: white;
@@ -50,5 +66,7 @@
 
 .adminH2 {
   color: white;
-  font-size: 30px;
+  font-size: 25px;
+  font-weight: 500;
+  text-decoration: underline;
 }
