@@ -5,7 +5,7 @@
 
 .titre_accueil {
     margin: 0 auto;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     font-weight: bold;
     font-size: 1.3em;
     color: var(--dark-grey);
@@ -13,7 +13,7 @@
     line-height: 2em;
 }
 
-.titre_accueil span {
+.span_accueil {
     font-size: 1.6em;
 }
 
@@ -21,6 +21,20 @@
     text-decoration: none;
     color: var(--dark-grey);
     font-weight: bold;
+}
+
+.expliquation_accueil {
+    font-size: 1em;
+    color: var(--dark-grey);
+    width: 70%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.h2_accueil {
+    color: var(--dark-grey);
+    font-size: 1.2em;
+    text-decoration: underline;
 }
 
 .btn_connexion {
