@@ -21,7 +21,7 @@ export const connexionUtilisateur = async (credentials) => {
 }
 
 export function inscriptionUtilisateur(credentials) {
-    return fetch('${baseUrl}/utilisateurs', credentials)
+    return fetch(`${baseUrl}/utilisateurs`, credentials)
 }
 
 export async function recupUtilisateur(id) {
