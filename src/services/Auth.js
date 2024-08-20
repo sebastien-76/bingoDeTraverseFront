@@ -47,6 +47,7 @@ export function estIdentifie() {
     const resultat = jeton ? validiteJeton(jeton) : false;
     if (resultat === false) {
         suppressionItem('jetonUtilisateur');
+        suppressionItem('rememberMe');
     }
     return resultat;
 }
