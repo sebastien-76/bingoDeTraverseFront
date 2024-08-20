@@ -10,8 +10,6 @@ import { recuperationId } from '../../../services/Auth';
 const ModifProfil = () => {
     const id = useParams();
     const [profil, setProfil] = useState([]);
-    const [openModalModif, setOpenModalModif] = useState(false);
-    const [openModalEmail, setOpenModalEmail] = useState(false);
     const [openModalLastName, setOpenModalLastName] = useState(false);
     const [openModalFirstName, setOpenModalFirstName] = useState(false);
     const [openModalPseudo, setOpenModalPseudo] = useState(false);
@@ -25,42 +23,23 @@ const ModifProfil = () => {
 
     useEffect(() => {
         fetchProfil(id.id)
-    }, [id, openModalEmail, openModalLastName, openModalFirstName, openModalPseudo]);
+    }, [id, openModalLastName, openModalFirstName, openModalPseudo]);
 
     const onChange = (event) => setProfil({ ...profil, [event.target.name]: event.target.value })
 
-    const onSubmitModifProfile = async (event) => {
-        event.preventDefault();
-        await fetch(`${baseUrl}/users/${id.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(profil)
-        });
-        fetchProfil(id.id);
-        setOpenModalModif(false);
-    }
 
     if (id.id == uid) {
     return (
         /* Formulaire d'affichage du profil */
         <div className="profil">
             <RetourProfil />
-            <h1>Modification du profil</h1>
+            <h1>Modification des infos</h1>
             <form id="formProfil" className="formProfil">
             <FormData id="lastname" name="Nom" setEtat={setOpenModalLastName} value={profil.lastname} />
             <FormData id="firstname" name="Prénom" setEtat={setOpenModalFirstName} value={profil.firstname} />
             <FormData id="pseudo" name="Pseudo" setEtat={setOpenModalPseudo} value={profil.pseudo} />
             </form>
 
-            <button onClick={() => setOpenModalModif(true)}>Modifier</button>
-
-            {/* Modal de modification du mail */}
-            {openModalEmail ?
-                <OpenModal id="email" name="Email" type="email" uid={id.id} defaultValue={profil.email} setEtat={setOpenModalEmail} /> :
-                null
-            }
 
             {/* Modal de modification du nom */}
             {openModalLastName ?
