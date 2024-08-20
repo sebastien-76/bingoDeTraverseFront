@@ -20,6 +20,7 @@ import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import { recuperationItem } from './services/localStorage';
 
+import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
 
 function App() {
@@ -48,7 +49,6 @@ function App() {
     setPseudo,
     isAdmin,
     setIsAdmin,
-    persistence
   }
 
 
