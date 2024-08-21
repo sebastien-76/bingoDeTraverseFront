@@ -119,7 +119,7 @@ const Profil = () => {
                             <p className="retour_profil" onClick={retourProfil}>Retour au profil</p>
                             <h2>Salles à ajouter</h2>
                             <ul>
-                                {listeSallesAjout.map((salle) => (
+                                {listeSallesAjout && listeSallesAjout.map((salle) => (
                                     <li key={salle.id} className='salleList'>
                                         <input type="checkbox" id={salle.id} onChange={onCheckSalles} />{salle.name}
                                     </li>
