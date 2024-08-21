@@ -1,3 +1,17 @@
+/* fleche de scroll en bas a droite de l'ecran */
+.fleche {
+    position: fixed;
+    bottom: 0;
+    right: 5px;
+    cursor: pointer;
+}
+
+.fleche img {
+    width: 50px;
+    border-radius: 5px;
+    background-color: rgba(89, 243, 243, 0.164);
+}
+
 .choixLancementPartie {
     display: flex;
     justify-content: space-around;
@@ -29,12 +43,37 @@
     margin-bottom: 30px;
 }
 
+.listeSalles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+    align-items: baseline;
+    margin-inline: 10px;
+    font-size: 0.8rem;
+}
+
+.listeSalles a {
+    color: var(--dark-grey);
+}
+
+.salleNom {
+    scroll-margin-top: 130px;
+    color: var(--dark-grey);
+    margin-top: 2rem;
+    text-align: center;
+}
+
 .listePhrase {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: baseline;
     margin-left: 50px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 10px;
+    margin-bottom: 30px;
 }
 
 .selectedPhrase {
@@ -50,7 +89,12 @@
     border: 4px solid var(--light-grey);
     border-radius: 10px;
     color: black;
-    margin-block: 50px;
+    z-index: 10;
+    background-color: white;
+    position: absolute;
+    width: 90%;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .caseGrille {
@@ -63,6 +107,7 @@
     font-size: 1.5rem;
     height: 50px;
     transition: 0.3s;
+    
 }
 
 .valide {
