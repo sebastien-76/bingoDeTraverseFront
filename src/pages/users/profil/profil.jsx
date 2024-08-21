@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { baseUrl } from '../../../services/serviceAppel';
 import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
-import RetourProfil from '../../../components/profil/retourProfil';
+
 
 const Profil = () => {
     const id = useParams();
@@ -17,7 +17,8 @@ const Profil = () => {
     const [sallesUser, setSallesUser] = useState([]);
     const [listeSallesAjout, setListeSallesAjout] = useState([]);
     const [sallesAAjouter, setSallesAAjouter] = useState([]);
-    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenModalAvatar, setIsOpenModalAvatar] = useState(false);
+    const [isOpenModalSalles, setIsOpenModalSalles] = useState(false);
 
     //Récupération du user
     const fetchUser = async (id) => {
@@ -36,13 +37,15 @@ const Profil = () => {
     //Mise à jour du user en fonction de l'id
     useEffect(() => {
         fetchUser(id.id);
-    }, [sallesAAjouter]);
+    }, [id.id, sallesAAjouter]);
 
 
     useEffect(() => {
         fetchSalles();
         setSallesUser(profil.Salles);
     }, [profil]);
+
+    console.log(profil)
 
     const dateDebut = new Date(profil.createdAt);
 
@@ -58,12 +61,30 @@ const Profil = () => {
         navigate(`/modification-profil/${id.id}`);
     }
 
-    //Mise à jour des salles
-    const onChangeSalle = (event) => {
-        setIsOpenModal(true);
+    const onChangeAvatar = () => {
+        setIsOpenModalAvatar(true);
     }
 
-    const onAjoutSalles = () => {
+    const ajoutAvatar = () => {
+        const fileImput = document.getElementById('avatar');
+        const avatar = fileImput.files[0];
+        const formData = new FormData();
+        formData.append('avatar', avatar);
+
+        fetch(`${baseUrl}/users/${id.id}`, {
+            method: 'PUT',
+            body: formData
+        })
+        setIsOpenModalAvatar(false);
+    }
+
+
+    //Mise à jour des salles
+    const onChangeSalle = (event) => {
+        setIsOpenModalSalles(true);
+    }
+
+    const ajoutSalles = () => {
         fetch(`${baseUrl}/users/${id.id}`, {
             method: 'PUT',
             headers: {
@@ -73,12 +94,13 @@ const Profil = () => {
                 Salles: [...sallesAAjouter]
             }),
         });
-        setIsOpenModal(false);
+        setIsOpenModalSalles(false);
         setSallesAAjouter([]);
     }
 
     const retourProfil = () => {
-        setIsOpenModal(false);
+        setIsOpenModalSalles(false);
+        setIsOpenModalAvatar(false);
     }
 
     const onCheckSalles = (event) => {
@@ -92,6 +114,10 @@ const Profil = () => {
         return (
             <>
                 <h1>Profil</h1>
+                <div className='imageProfil'>
+                    <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
+                </div>
+
                 <p className='infos'> Email :</p>
                 <p className='donnees'> {profil.email}</p>
                 <p className='infos'> Nom :</p>
@@ -113,7 +139,19 @@ const Profil = () => {
                 </ul>
                 <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
 
-                {isOpenModal && (
+                {isOpenModalAvatar && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <p className="retour_profil" onClick={retourProfil}>Retour au profil</p>
+                            <h2>Modifier mon avatar</h2>
+                            <input type="file" id="avatar" name="avatar" />
+                            <Bouton onClick={ajoutAvatar} text="Ajouter" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
+                        </div>
+                    </div>
+                )
+                }
+
+                {isOpenModalSalles && (
                     <div className="modal">
                         <div className="modal-content">
                             <p className="retour_profil" onClick={retourProfil}>Retour au profil</p>
@@ -125,10 +163,11 @@ const Profil = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <Bouton onClick={onAjoutSalles} text="Valider" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
+                            <Bouton onClick={ajoutSalles} text="Valider" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
                         </div>
                     </div>
                 )}
+
             </>
         )
     } else {
