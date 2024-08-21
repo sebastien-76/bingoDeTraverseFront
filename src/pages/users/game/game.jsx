@@ -164,7 +164,7 @@ export default function Game() {
                     </ul>
                 </p>
                 <div className="choixLancementPartie">
-                    <Bouton style={{width: '200px'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
+                    <Bouton style={{width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
                 </div>
             </div> :
             
@@ -215,8 +215,8 @@ export default function Game() {
                             <div className="modal-content">
                                 <p>Voulez-vous vraiment valider la phrase :</p>
                                 <p style={{fontWeight: 'bold'}}>"{selectedPhrases.find(p => p.id === caseGrille[selectedCaseIndex]).text}"</p>
-                                <button className='buttonValidation' onClick={confirmValidation}>Oui</button>
-                                <button className='buttonValidation' onClick={closeModal}>Non</button>
+                                <Bouton style={{width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)'}} text="Oui" onClick={confirmValidation} />
+                                <Bouton style={{width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)'}} text="Non" onClick={closeModal}/>
                             </div>
                         </div>
                     )}
@@ -232,7 +232,7 @@ export default function Game() {
                     </div>
                     <div className='rejouer'>
                         <p><b>Si tu veux les défier à nouveau, c'est par ici :</b></p>
-                        <Bouton text="Rejouer" onClick={confirmLancementPartie}/>
+                        <Bouton style={{width: '150px',marginTop: '10px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Rejouer" onClick={confirmLancementPartie}/>
                     </div>
                 </div>
             }
