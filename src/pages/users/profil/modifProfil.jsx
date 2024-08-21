@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './modifProfil.css';
 import { baseUrl } from "../../../services/serviceAppel";
-import OpenModal from "../../../components/profil/openModal";
+import OpenModalProfil from "../../../components/profil/openModal";
 import FormData from "../../../components/profil/formData";
 import RetourProfil from "../../../components/profil/retourProfil";
 import { recuperationId } from '../../../services/Auth';
@@ -43,19 +43,19 @@ const ModifProfil = () => {
 
             {/* Modal de modification du nom */}
             {openModalLastName ?
-                <OpenModal id="lastname" name="Nom" type="text" uid={id.id} defaultValue={profil.lastname} setEtat={setOpenModalLastName} majProfil={fetchProfil} /> :
+                <OpenModalProfil id="lastname" name="Nom" type="text" uid={id.id} defaultValue={profil.lastname} setEtat={setOpenModalLastName} majProfil={fetchProfil} /> :
                 null
             }
 
             {/* Modal de modification du prenom */}
             {openModalFirstName ?
-                <OpenModal id="firstname" name="Prénom" type="text" uid={id.id} defaultValue={profil.firstname} setEtat={setOpenModalFirstName} majProfil={fetchProfil} /> :
+                <OpenModalProfil id="firstname" name="Prénom" type="text" uid={id.id} defaultValue={profil.firstname} setEtat={setOpenModalFirstName} majProfil={fetchProfil} /> :
                 null
             }
 
             {/* Modal de modification du pseudo */}
             {openModalPseudo ?
-                <OpenModal id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} /> :
+                <OpenModalProfil id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} /> :
                 null
             }
         </div>

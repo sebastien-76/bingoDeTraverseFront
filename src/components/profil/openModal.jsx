@@ -3,7 +3,7 @@ import './openModal.css'
 import { baseUrl } from '../../services/serviceAppel';
 import Bouton from '../boutons/bouton';
 
-const OpenModal = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) => {
+const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) => {
 
     const [profil, setProfil] = useState({});
 
@@ -41,4 +41,4 @@ const OpenModal = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) =>
     )
 }
 
-export default OpenModal
+export default OpenModalProfil
