@@ -6,13 +6,6 @@
     cursor: pointer;
 }
 
-.fleche img {
-    width: 50px;
-    border-radius: 5px;
-    background-color: var(--blue-pastel);
-    border: 1px solid var(--blue-pastel);
-}
-
 .choixLancementPartie {
     display: flex;
     justify-content: space-around;
@@ -61,7 +54,7 @@
     height: 4vh;
 }
 
-.salleNom {
+.salleNomGame {
     scroll-margin-top: 140px;
     color: var(--dark-grey);
     background-color: var(--orange-pastel);

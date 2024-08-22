@@ -1,0 +1,31 @@
+.gamemasterInput {
+    width: 80%;
+    height: 2.5vh;
+    margin-bottom: 1.2rem;
+    border: 0.5px solid var(--dark-grey);
+    padding: 2px;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.gamemasterAG {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80vw;
+    background-color: var(--purple-pastel);
+    border-radius: 10px;
+    border: 1px solid var(--purple-pastel);
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.gamemastersListe {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}

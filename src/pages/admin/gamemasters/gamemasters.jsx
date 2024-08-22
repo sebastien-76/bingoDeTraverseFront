@@ -63,29 +63,30 @@ export default function Gamemasters() {
 
     return (
         <>
-            <h1>Liste des gamemasters</h1>
-
-            <Bouton text="Actualiser" onClick={fetchGamemasters} />
-
-            <div className="sallesListe">
-                {gamemasters && gamemasters.map((gamemaster) => (
-                    <li key={gamemaster.id}>
-                        <Bouton style={{ marginRight: '10px' }} text="X" onClick={() => handleDeleteClick(gamemaster)} />
-                        {gamemaster.email}
-                    </li>
-                ))}
-            </div>
 
             <div>
                 <h2>Ajouter un gamemaster</h2>
                 <input
-                    className="salleInput"
+                    className="gamemasterInput"
                     placeholder="Email du gamemaster"
                     type="text"
                     value={newGamemaster}
                     onChange={(e) => setNewGamemaster(e.target.value)}
                 />
-                <Bouton text="Ajouter" onClick={addGamemaster} />
+                <Bouton text="Ajouter" style={{marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={addGamemaster} />
+            </div>
+
+            <h1>Liste des gamemasters</h1>
+
+            <Bouton text="Actualiser" style={{marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={fetchGamemasters} />
+
+            <div className="gamemastersListe">
+                {gamemasters && gamemasters.map((gamemaster) => (
+                    <div className="gamemasterAG" key={gamemaster.id}>
+                        {gamemaster.email}
+                        <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(gamemaster)} />
+                    </div>
+                ))}
             </div>
 
             {showModal && (
@@ -93,8 +94,9 @@ export default function Gamemasters() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer le gamemaster {selectedGamemaster.email} ?</p>
-                        <Bouton style={{width: "60px"}} text="Oui" onClick={() => confirmDeleteGamemaster(selectedGamemaster.id)} />
-                        <Bouton style={{width: "60px"}} text="Non" onClick={handleCancelDelete} />
+                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteGamemaster(selectedGamemaster.id)} />
+                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)"}} text="non" onClick={handleCancelDelete} />
+                        
                     </div>
                 </div>
             )}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Bouton from '../../../components/boutons/bouton';
 import { baseUrl } from '../../../services/serviceAppel';
 import { recuperationId } from '../../../services/Auth';
+import FlecheScroll from '../../../components/flecheScroll/flecheScroll';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -145,10 +146,6 @@ export default function Game() {
         }
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     return (
         <>
             {!lancementPartie ? 
@@ -172,9 +169,7 @@ export default function Game() {
             {!finPartie ? 
                 <>
                 {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
-                <div onClick={scrollToTop} className='fleche'>
-                    <img src='../../../images/fleche.png' alt="fleche" />
-                </div>
+                <FlecheScroll />
 
                 <div className='listeSalles'>
                     {nomSallesUser.map((salle) => (
@@ -187,7 +182,7 @@ export default function Game() {
                 <div className='listePhrase'>
                     {Object.keys(groupedPhrases).map((salleName) => (
                         <div key={salleName} >
-                            <h3 className='salleNom' id={salleName}>{salleName}</h3>
+                            <h3 className='salleNomGame' id={salleName}>{salleName}</h3>
                             {groupedPhrases[salleName].map((phrase) => (
                                 <p 
                                     key={phrase.id} 
