@@ -45,16 +45,11 @@ const Profil = () => {
         setSallesUser(profil.Salles);
     }, [profil]);
 
-    console.log(profil)
-
     const dateDebut = new Date(profil.createdAt);
-
 
     useEffect(() => {
         setListeSallesAjout(salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id)));
     }, [salles, sallesUser]);
-
-
 
     //Navigation vers la page de modification du profil
     const onClickModifProfil = () => {
@@ -77,7 +72,6 @@ const Profil = () => {
         })
         setIsOpenModalAvatar(false);
     }
-
 
     //Mise à jour des salles
     const onChangeSalle = (event) => {
@@ -108,7 +102,6 @@ const Profil = () => {
             setSallesAAjouter([...sallesAAjouter, ...event.target.id]);
         }
     }
-
 
     if (id.id == uid) {
         return (

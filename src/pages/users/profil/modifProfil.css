@@ -27,7 +27,7 @@
 .labelModif {
     font-weight: bold;
     text-align: justify;
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 
 .modification {
@@ -47,5 +47,20 @@
     margin: 0.3em 0 1em 0;
 }
 
+.divModifPassword {
+    display : flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.9em;
+}
 
+.infosPassword {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: baseline;
+}
 
+.errorPassword {
+    color: var(--red);
+}
