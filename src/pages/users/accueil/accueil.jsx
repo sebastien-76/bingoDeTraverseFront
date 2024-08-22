@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import './accueil.css';
+import Bouton from "../../../components/boutons/bouton";
 
 import authContext from "../../../hooks/useAuth";
 
 const Accueil = () => {
 
     const { isLogged } = useContext(authContext);
+
+    // Bouton connexion
+    const toConnexion = () => {
+        window.location.href = "/connexion";
+    }
 
     return (
         <>
@@ -33,7 +39,7 @@ const Accueil = () => {
                 </div>
             
                 <div>
-                    < button className="btn_connexion"><Link to="/connexion" className="btn_connexion_link">Connexion</Link></button >
+                    <Bouton style={{width: '160px', height: '6vh', backgroundColor: 'var(--blue-pastel)', marginTop: '40px', border: '2px solid var(--blue-pastel)'}} text="Connexion" onClick={toConnexion}/>
                     <p className="p_accueil">Pas encore inscrit, c'est par <Link to="/inscription" className="lien_accueil">ici</Link></p>
                 </div>
             </>

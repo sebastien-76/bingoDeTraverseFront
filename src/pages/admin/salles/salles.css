@@ -20,15 +20,26 @@ body {
     border: 1px solid var(--dark-grey);
 }
 
-.sallesListe{
-    width: 80%;
-    list-style-type: none;
+.sallesListeAS{
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items:baseline;
-    margin: auto;
-    margin-top: 20px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.sallesAS{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1rem;
+    width: 80vw;
+    background-color: var(--purple-pastel);
+    border-radius: 10px;
+    border: 1px solid var(--purple-pastel);
+    margin-bottom: 20px;
 }
 
 .deleteSalle{
@@ -50,14 +61,13 @@ body {
 }
 
 .salleInput {
-    background-color: rgb(253, 252, 252);
-    color: black;
+    width: 80%;
+    height: 2.5vh;
+    margin-bottom: 1.2rem;
+    border: 0.5px solid var(--dark-grey);
+    padding: 2px;
+    padding-left: 5px;
     border-radius: 5px;
-    margin-inline: 10px; 
-    padding: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    border: 1px solid var(--dark-grey);
 }
 
 .salleButton {

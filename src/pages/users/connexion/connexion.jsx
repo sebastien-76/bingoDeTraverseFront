@@ -56,11 +56,11 @@ const Connexion = () => {
             {errorConnexion && <p className="error_connexion">{errorConnexion}</p>}
             <form id="form_connexion" onSubmit={handleSubmitConnexion} className="form_connexion">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} required />
+                <input type="email" id="email" name="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" required />
                 <label htmlFor="password">Mot de passe</label>
-                <input type="password" id="password" name="password" value={credentials.password} autoComplete="off" onChange={onChange} required />
-                <Bouton text="Se connecter" onClick={handleSubmitConnexion} />
+                <input type="password" id="password" name="password" value={credentials.password} placeholder="Entrez votre mot de passe" autoComplete="off" onChange={onChange} required />
             </form>
+                <Bouton text="Se connecter" style={{ marginTop: '2rem', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} onClick={handleSubmitConnexion} />
         </>
     )
 }

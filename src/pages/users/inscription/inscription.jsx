@@ -83,9 +83,9 @@ const SignUp = () => {
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
-                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Entrez à nouveau votre mot de passe" className='inputInscription' required />
-                <Bouton style={{ marginTop: '20px' }} text="S'inscrire" onClick={handleSubmitInscription} />
+                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" className='inputInscription' required />
             </form>
+                <Bouton style={{ width: '150px', marginTop: '20px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} text="S'inscrire" onClick={handleSubmitInscription} />
         </>
     )
 }

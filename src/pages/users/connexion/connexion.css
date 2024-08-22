@@ -1,26 +1,30 @@
 .form_connexion {
-    margin: 15vh auto;
+    margin: 5vh auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
-    gap: 1.5rem;
-    width: 60vw;
-    background-color: var(--light-grey);
+    gap: 1rem;
+    padding: 1rem;
+    padding-block: 2rem;
     border-radius: 10px;
-    border: 1px solid var(--dark-grey);
-    box-shadow: 0px 0px 10px 0px var(--dark-grey);
-    font-size: 1.3rem;
-    padding: 20px;
+    border: 2px solid var(--purple-pastel);
+    background-color: var(--purple-pastel);
+    width: 70%;
 }
 
-.remember {
-    font-size: 0.9rem; 
+.form_connexion label {
+    font-size: 20px;
 }
 
-.remember_input {
-    margin-right: 1rem;
+.form_connexion input {
+    width: 80%;
+    height: 2.5vh;
+    margin-bottom: 1.2rem;
+    border: 0.5px solid var(--dark-grey);
+    padding: 2px;
+    padding-left: 5px;
+    border-radius: 5px;
 }
 
 .error_connexion {

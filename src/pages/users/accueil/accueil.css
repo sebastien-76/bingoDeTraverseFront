@@ -11,6 +11,7 @@
     color: var(--dark-grey);
     text-align: center;
     line-height: 2em;
+    margin-bottom: 3rem;
 }
 
 .span_accueil {
@@ -29,6 +30,7 @@
     width: 70%;
     margin: 0 auto;
     text-align: left;
+    margin-bottom: 2rem;
 }
 
 .btn_connexion {
@@ -50,6 +52,6 @@
 }
 
 .p_accueil {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     font-size: 0.75em;
 }

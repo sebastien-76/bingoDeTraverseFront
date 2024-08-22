@@ -66,9 +66,10 @@ function App() {
 
 
   return (
-    <div style={{ marginTop: isLogged ? '140px' : '0px' }} className="App">
+    <div className="App">
       <authContext.Provider value={value}>
-        {(isLogged) && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
+      <main className={isLogged ? 'mainApp' : ''} >
+      {isLogged && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
         <Router>
           <Routes>
             <Route path='/' element={<Accueil />} />
@@ -82,32 +83,29 @@ function App() {
             <Route path='/inscription' element={<Inscription />} />
           </Routes>
         </Router>
+        </main>
+          {!isLogged && <Footer className="footerApp" />}
+          {openModal && (
+            <div className="modalMenu">
+              <img className="logoCheminNav" src="../../images/cheminTraverse.png" alt="" />
+              <div className="navLinks">
+                <a className='navLink' href="/">Accueil</a>
+                <a className='navLink' href={lienProfil}>Profil</a>
+                <a className='navLink' href="/game">Bingo</a>
+                <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
+                {isAdmin && (
+                  <div className='linksAdmin'>
+                    <div className="separator"></div>
+                    <h2 className='adminH2'>Pages Admin :</h2>
+                    <a className='navLink' href="/phrases">Phrases</a>
+                    <a className='navLink' href="/salles">Salles</a>
+                    <a className='navLink' href="/gamemaster">Gamemasters</a>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
       </authContext.Provider>
-
-      {(!isLogged) && <Footer />}
-
-      {openModal ? <div className="modalMenu">
-        <img className="logoCheminNav" src="../../images/cheminTraverse.png" alt="" />
-        <div className="navLinks">
-
-          <a className='navLink' href="/">Accueil</a>
-          <a className='navLink' href={lienProfil}>Profil</a>
-          <a className='navLink' href="/game">Bingo</a>
-          <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
-
-          {isAdmin ? <div className='linksAdmin'>
-            <div className="separator"></div>
-            <h2 className='adminH2'>Pages Admin :</h2>
-            <a className='navLink' href="/phrases">Phrases</a>
-            <a className='navLink' href="/salles">Salles</a>
-            <a className='navLink' href="/gamemaster">Gamemasters</a>
-          </div>
-            : null}
-        </div>
-      </div> :
-        null
-      }
-
     </div>
   );
 }

@@ -63,18 +63,6 @@ export default function Salles() {
 
     return (
         <>
-            <h1>Liste des salles</h1>
-
-            <Bouton text="Actualiser" onClick={fetchData} />
-
-            <div className="sallesListe">
-                {salles && salles.map((salle) => (
-                    <li key={salle.id}>
-                        <Bouton style={{ marginRight: '10px' }} text="X" onClick={() => handleDeleteClick(salle)} />
-                        {salle.name}
-                    </li>
-                ))}
-            </div>
 
             <div>
                 <h2>Ajouter une salle</h2>
@@ -85,7 +73,22 @@ export default function Salles() {
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
                 />
-                <Bouton text="Ajouter" onClick={addSalle} />
+                <Bouton text="Ajouter" style={{marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={addSalle} />
+            </div>
+
+            <h1>Liste des salles</h1>
+
+            <Bouton text="Actualiser" style={{marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={fetchData} />
+
+            <div className="sallesListeAS">
+                {salles && salles.map((salle) => (
+                    <div className="sallesAS" key={salle.id}>
+                        <p> {salle.name} </p>
+
+                        <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(salle)} />
+                        
+                    </div>
+                ))}
             </div>
 
             {showModal && (
@@ -93,8 +96,8 @@ export default function Salles() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer la salle {selectedSalle.name} ?</p>
-                        <Bouton style={{width: "60px"}} text="Oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />
-                        <Bouton style={{width: "60px"}} text="Non" onClick={handleCancelDelete} />
+                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />
+                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)"}} text="non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}

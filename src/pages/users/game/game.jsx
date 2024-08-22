@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Bouton from '../../../components/boutons/bouton';
 import { baseUrl } from '../../../services/serviceAppel';
 import { recuperationId } from '../../../services/Auth';
+import FlecheScroll from '../../../components/flecheScroll/flecheScroll';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -145,10 +146,6 @@ export default function Game() {
         }
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     return (
         <>
             {!lancementPartie ? 
@@ -164,7 +161,7 @@ export default function Game() {
                     </ul>
                 </p>
                 <div className="choixLancementPartie">
-                    <Bouton style={{width: '200px'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
+                    <Bouton style={{width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
                 </div>
             </div> :
             
@@ -172,9 +169,7 @@ export default function Game() {
             {!finPartie ? 
                 <>
                 {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
-                <div onClick={scrollToTop} className='fleche'>
-                    <img src='../../../images/fleche.png' alt="fleche" />
-                </div>
+                <FlecheScroll />
 
                 <div className='listeSalles'>
                     {nomSallesUser.map((salle) => (
@@ -187,7 +182,7 @@ export default function Game() {
                 <div className='listePhrase'>
                     {Object.keys(groupedPhrases).map((salleName) => (
                         <div key={salleName} >
-                            <h3 className='salleNom' id={salleName}>{salleName}</h3>
+                            <h3 className='salleNomGame' id={salleName}>{salleName}</h3>
                             {groupedPhrases[salleName].map((phrase) => (
                                 <p 
                                     key={phrase.id} 
@@ -215,8 +210,8 @@ export default function Game() {
                             <div className="modal-content">
                                 <p>Voulez-vous vraiment valider la phrase :</p>
                                 <p style={{fontWeight: 'bold'}}>"{selectedPhrases.find(p => p.id === caseGrille[selectedCaseIndex]).text}"</p>
-                                <button className='buttonValidation' onClick={confirmValidation}>Oui</button>
-                                <button className='buttonValidation' onClick={closeModal}>Non</button>
+                                <Bouton style={{width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)'}} text="Oui" onClick={confirmValidation} />
+                                <Bouton style={{width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)'}} text="Non" onClick={closeModal}/>
                             </div>
                         </div>
                     )}
@@ -232,7 +227,7 @@ export default function Game() {
                     </div>
                     <div className='rejouer'>
                         <p><b>Si tu veux les défier à nouveau, c'est par ici :</b></p>
-                        <Bouton text="Rejouer" onClick={confirmLancementPartie}/>
+                        <Bouton style={{width: '150px',marginTop: '10px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Rejouer" onClick={confirmLancementPartie}/>
                     </div>
                 </div>
             }
