@@ -1,14 +1,123 @@
 .infos {
-    text-align: justify;
-    padding-left: 5em;
+    width: 100%;
+    padding-left: 0.5em;
     margin : 0;
     font-weight: bold;
+    text-align: left;
 }
 
 .donnees {
     text-align: justify;
-    padding-left: 5.5em;
-    margin : 0.2em 0 0.7em 0;
+    margin : 0.2em 0 1em 0;
     font-size: 0.9em;
+}
+
+.infosProfil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    background-color: var(--purple-pastel);
+    margin-inline: 1rem;
+    border: 1px solid var(--purple-pastel);
+    border-radius: 10px;
+    padding-bottom: 1rem;
+}
+
+.infosDiv {
+    background-color: var(--purple-pastel);
+    border: 1px solid var(--purple-pastel);
+    border-radius: 10px;
+    height: 5rem;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.point {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.5em;
+    padding-left: 0;
+    width: 50%;
+    height: 3rem;
+}
+
+.win {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+}
+
+.nom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    margin-left: 1.5rem;
+}
+
+.nomDonnees, .prenomDonnees {
+    height: 50%;
+    margin : 0 auto;
+    display: flex;
+    align-items: center;
+    margin-left: 1.5rem;
+    padding-right: 0.5em
+}
+
+.prenom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    margin-right: 1.5rem;
+}
+
+.pseudo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-right: 0.5em ;
+    width: auto;
+    margin-left: 1.5rem;
+}
+
+.pseudoDonnees {
+    height: 50%;
+    margin : 0 auto;
+    display: flex;
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-right: 0.5em ;
+    width: auto;
+    margin-right: 1.5rem;
+}
+
+.dateDonnees {
+    height: 50%;
+    margin : 0 auto;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
 }
 

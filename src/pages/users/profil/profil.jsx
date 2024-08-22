@@ -111,26 +111,43 @@ const Profil = () => {
                     <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
                 </div>
 
-                <p className='infos'> Email :</p>
-                <p className='donnees'> {profil.email}</p>
-                <p className='infos'> Nom :</p>
-                <p className='donnees'> {profil.lastname}</p>
-                <p className='infos'> Prénom :</p>
-                <p className='donnees'> {profil.firstname}</p>
-                <p className='infos'> Pseudo :</p>
-                <p className='donnees'>  {profil.pseudo}</p>
-                <p className='infos'> Bingo(s) gagné(s) :</p>
-                <p className='donnees'> {profil.points}</p>
-                <p className='infos'> Joue depuis le :</p>
-                <p className='donnees'> {dateDebut.toLocaleDateString('fr-FR')}</p>
-                <Bouton onClick={onClickModifProfil} text="Modifier mes infos" style={{ margin: '1em 0 1.5em 0' }} />
+                <div className='infosProfil'>
+                    <div className='infosDiv win'>
+                    <p className='infos'> Bingo(s) gagné(s) :</p>
+                    <p className='donnees point'> {profil.points}</p>
+                    </div>
+                    <div className='infosDiv email'>
+                    <p className='infos'> Email :</p>
+                    <p className='donnees'> {profil.email}</p>
+                    </div>
+                    <div className='infosDiv nom'>
+                        <p className='infos'> Nom :</p>
+                        <p className='donnees nomDonnees'> {profil.lastname}</p>
+                    </div>
+                    <div className='infosDiv prenom'>
+                        <p className='infos'> Prénom :</p>
+                        <p className='donnees prenomDonnees'> {profil.firstname}</p>
+                    </div>
+                    <div className='infosDiv pseudo'>
+                        <p className='infos'> Pseudo :</p>
+                        <p className='donnees pseudoDonnees'>  {profil.pseudo}</p>
+                    </div>
+                    <div className='infosDiv date'>
+                        <p className='infos'> Joue depuis le :</p>
+                        <p className='donnees dateDonnees'> {dateDebut.toLocaleDateString('fr-FR')}</p>
+                    </div>
+                </div>
+                
+
+
+                <Bouton onClick={onClickModifProfil} text="Modifier mes infos" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} />
                 <p className='infos'> Salles :</p>
                 <ul>
                     {sallesUser && sallesUser.map((salle) => (
                         <li key={salle.id} className='salleList'>{salle.name}</li>
                     ))}
                 </ul>
-                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
+                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
 
                 {isOpenModalAvatar && (
                     <div className="modal">
