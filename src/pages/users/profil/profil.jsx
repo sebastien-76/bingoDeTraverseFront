@@ -37,8 +37,7 @@ const Profil = () => {
     //Mise à jour du user en fonction de l'id
     useEffect(() => {
         fetchUser(id.id);
-    }, [id.id, sallesAAjouter]);
-
+    }, [id.id, sallesAAjouter, isOpenModalAvatar]);
 
     useEffect(() => {
         fetchSalles();
@@ -48,8 +47,9 @@ const Profil = () => {
     const dateDebut = new Date(profil.createdAt);
 
     useEffect(() => {
-        setListeSallesAjout(salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id)));
-    }, [salles, sallesUser]);
+        const ajoutSalleData = salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id))
+        setListeSallesAjout(ajoutSalleData);
+    }, [sallesUser]);
 
     //Navigation vers la page de modification du profil
     const onClickModifProfil = () => {
