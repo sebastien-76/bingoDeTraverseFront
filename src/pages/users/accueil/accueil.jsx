@@ -82,7 +82,7 @@ const Accueil = () => {
                     </thead>
                     <tbody>
                         {rang.map((user, index) => (
-                            <tr key={index} className={index === 0 && user.point !== 0 ? "first-place" : ""}>
+                            <tr key={index} className={index === 0 && user.points > 0 ? "first-place" : ""}>
                                 <td >{index + 1}</td>
                                 <td className="tdFirst">{user.pseudo}</td>
                                 <td className="tdFirst">{user.points}</td>
