@@ -108,7 +108,12 @@ const Profil = () => {
             <>
                 <h1>Profil</h1>
                 <div className='imageProfil'>
+                {profil.imageProfilURL === null ? <p>Ajouter votre image de profil <span onClick={onChangeAvatar} className='spanImageProfil'>ici</span></p> :
+                    <div>
                     <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
+                    <p>Modifier votre image de profil <span onClick={onChangeAvatar} className='spanImageProfil'>ici</span></p>
+                    </div>
+                }
                 </div>
 
                 <div className='infosProfil'>
