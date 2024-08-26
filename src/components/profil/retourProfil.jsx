@@ -7,7 +7,10 @@ const RetourProfil = () => {
     const uid = recuperationId();
     const retourProfil = `/profil/${uid}`
     return (
-        <p><Link to={retourProfil} className="retour_profil">Retour au profil</Link></p>
+        <p className="retour_profils">
+            <img src="../../../../images/flecheGauche.png" alt="" />  
+            <Link to={retourProfil} className="retour">Retour au profil</Link>
+        </p>
     )
 }
 

@@ -25,14 +25,14 @@ const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil
 
 
     return (
-        <div className='modal'>
+        <div className='modal'> 
             <form onSubmit={onSubmitModifProfile} className="modal-content">
 
                 <h2>Modifier le <span>{name}</span></h2>
                 <input type={type} name={id} id={id} defaultValue={defaultValue} onChange={onChange} />
                 <div className="modalModif">
-                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto' }} />
-                    <Bouton type="submit" onClick={() => setEtat(false)} text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto' }} />
+                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} />
+                    <Bouton type="submit" onClick={() => setEtat(false)} text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} />
                 </div>
 
             </form>

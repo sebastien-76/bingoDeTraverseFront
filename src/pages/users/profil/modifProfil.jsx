@@ -75,12 +75,13 @@ const ModifProfil = () => {
             <div className="profil">
                 <RetourProfil />
                 <h1>Modification des infos</h1>
+
                 <form id="formProfil" className="formProfil">
                     <FormData id="lastname" name="Nom" setEtat={setOpenModalLastName} value={profil.lastname} />
                     <FormData id="firstname" name="Prénom" setEtat={setOpenModalFirstName} value={profil.firstname} />
                     <FormData id="pseudo" name="Pseudo" setEtat={setOpenModalPseudo} value={profil.pseudo} />
                     <div className="divModifPassword">
-                        <p className="labelModif">Mot de passe</p>
+                        <p className="labelModif">Mot de passe :</p>
                         <img src="/images/modification.png"
                             alt="icone de modification"
                             className="modification"

@@ -1,3 +1,7 @@
+.avatar {
+    max-width: 80%;
+}
+
 .infos {
     width: 100%;
     padding-left: 0.5em;
@@ -60,64 +64,75 @@
     width: 90%;
 }
 
-.nom {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    margin-left: 1.5rem;
-}
 
-.nomDonnees, .prenomDonnees {
+.nomDonnees, .prenomDonnees, .pseudoDonnees, .dateDonnees {
     height: 50%;
     margin : 0 auto;
     display: flex;
     align-items: center;
     margin-left: 1.5rem;
-    padding-right: 0.5em
 }
 
-.prenom {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    margin-right: 1.5rem;
-}
-
-.pseudo {
+.nom, .prenom, .pseudo, .date {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     padding-right: 0.5em ;
     width: auto;
-    margin-left: 1.5rem;
 }
 
-.pseudoDonnees {
-    height: 50%;
-    margin : 0 auto;
+.salleListProfil {
+    background-color: var(--purple-pastel);
+    margin-inline: 1rem;
+    border: 1px solid var(--purple-pastel);
+    border-radius: 10px;
+    padding-block: 1rem;
     display: flex;
-    align-items: center;
-    margin-left: 1.5rem;
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
 
-.date {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    padding-right: 0.5em ;
-    width: auto;
-    margin-right: 1.5rem;
-}
-
-.dateDonnees {
-    height: 50%;
-    margin : 0 auto;
-    display: flex;
-    align-items: center;
+.titreSalles {
+    margin: 0;
+    text-align: left;
     margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: 500;
 }
 
+.retour_profil {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.retour_profil img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+}
+
+.salleListModal {
+    list-style: none;
+    text-align: start;
+    margin: 0.5em 0 0.5em 0;
+}
+
+.salleList {
+    list-style: none;
+    text-align: justify;
+    padding-left: 2.5em;
+    margin: 0.5em 0;
+}
+
+.inputAvatar {
+    width: 80%;
+    height: 2.7vh;
+    margin-bottom: 1.2rem;
+    border: 0.5px solid var(--dark-grey);
+    padding: 2px;
+    padding-left: 5px;
+    border-radius: 5px;
+}

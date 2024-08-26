@@ -113,12 +113,12 @@ const Profil = () => {
 
                 <div className='infosProfil'>
                     <div className='infosDiv win'>
-                    <p className='infos'> Bingo(s) gagné(s) :</p>
-                    <p className='donnees point'> {profil.points}</p>
+                        <p className='infos'> Bingo(s) gagné(s) :</p>
+                        <p className='donnees point'> {profil.points}</p>
                     </div>
                     <div className='infosDiv email'>
-                    <p className='infos'> Email :</p>
-                    <p className='donnees'> {profil.email}</p>
+                        <p className='infos'> Email :</p>
+                        <p className='donnees'> {profil.email}</p>
                     </div>
                     <div className='infosDiv nom'>
                         <p className='infos'> Nom :</p>
@@ -141,21 +141,24 @@ const Profil = () => {
 
 
                 <Bouton onClick={onClickModifProfil} text="Modifier mes infos" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} />
-                <p className='infos'> Salles :</p>
-                <ul>
+                <p className='titreSalles'> Salles :</p>
+                <div className='salleListProfil'>
                     {sallesUser && sallesUser.map((salle) => (
-                        <li key={salle.id} className='salleList'>{salle.name}</li>
+                        <p key={salle.id} className='salleList'>{salle.name}</p>
                     ))}
-                </ul>
-                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
+                </div>
+                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
 
                 {isOpenModalAvatar && (
                     <div className="modal">
                         <div className="modal-content">
-                            <p className="retour_profil" onClick={retourProfil}>Retour au profil</p>
+                        <p className="retour_profil" onClick={retourProfil}>
+                            <img src="../../../../images/flecheGauche.png" alt="" />  
+                            Retour au profil
+                        </p>
                             <h2>Modifier mon avatar</h2>
-                            <input type="file" id="avatar" name="avatar" />
-                            <Bouton onClick={ajoutAvatar} text="Ajouter" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
+                            <input className='inputAvatar' type="file" id="avatar" name="avatar" />
+                            <Bouton onClick={ajoutAvatar} text="Ajouter" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
                         </div>
                     </div>
                 )
@@ -164,16 +167,19 @@ const Profil = () => {
                 {isOpenModalSalles && (
                     <div className="modal">
                         <div className="modal-content">
-                            <p className="retour_profil" onClick={retourProfil}>Retour au profil</p>
+                            <p className="retour_profil" onClick={retourProfil}>
+                                <img src="../../../../images/flecheGauche.png" alt="" />  
+                                Retour au profil
+                            </p>
                             <h2>Salles à ajouter</h2>
                             <ul>
                                 {listeSallesAjout && listeSallesAjout.map((salle) => (
-                                    <li key={salle.id} className='salleList'>
+                                    <li key={salle.id} className='salleListModal'>
                                         <input type="checkbox" id={salle.id} onChange={onCheckSalles} />{salle.name}
                                     </li>
                                 ))}
                             </ul>
-                            <Bouton onClick={ajoutSalles} text="Valider" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.7em' }} />
+                            <Bouton onClick={ajoutSalles} text="Valider" style={{ height: '3em', width: '10em', margin: '0.2em auto', fontSize: '0.8em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
                         </div>
                     </div>
                 )}

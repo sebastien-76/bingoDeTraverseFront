@@ -10,29 +10,28 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 50vw;
+    width: 70vw;
+    border-radius: 10px;
+    padding-inline: 2rem;
+    background-color: var(--blue-pastel);
+}
+
+.value {
+    font-size: 1rem;
 }
 
 .profil h1 {
     font-size: 1.6em;
 }
 
-.salleList {
-    list-style: none;
-    text-align: justify;
-    padding-left: 2.5em;
-    margin: 0.5em 0;
-}
-
 .labelModif {
-    font-weight: bold;
+    font-weight: 700;
     text-align: justify;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 .modification {
-    width:10%;
-    height: 15%;
+    width:5vw;
     cursor: pointer;
 }
 

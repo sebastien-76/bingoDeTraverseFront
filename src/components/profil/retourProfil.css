@@ -1,6 +1,21 @@
-.retour_profil {
+.retour_profils {
     text-decoration: none;
     color: var(--dark-grey);
     font-size: 0.8em;
     margin-left: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.retour_profils img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+}
+
+.retour {
+    text-decoration: none;
+    color: var(--dark-grey);
 }
