@@ -55,3 +55,23 @@
     margin-top: 1.5rem;
     font-size: 0.75em;
 }
+
+.h2_accueil {
+    color: var(--dark-grey);
+    font-size: 1.2em;
+}
+
+.table_accueil {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid var(--blue-flash);
+    border-radius: 10px;
+}
+
+.first-place > .tdFirst {
+    margin: 0;
+    font-weight: 600;
+    background-color: var(--blue-pastel);
+    border: 1px solid var(--blue-pastel);
+    border-radius: 10px ;
+}
