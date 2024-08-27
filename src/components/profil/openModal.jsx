@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import './openModal.css'
 import { baseUrl } from '../../services/serviceAppel';
 import Bouton from '../boutons/bouton';
+import { recuperationItem } from '../../services/localStorage';
 
 const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) => {
 
     const [profil, setProfil] = useState({});
+    const token = recuperationItem('jetonUtilisateur');
 
     const onSubmitModifProfile = async (event) => {
         event.preventDefault();
         await fetch(`${baseUrl}/users/${uid}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(profil)
         });
@@ -22,7 +25,6 @@ const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil
     const onChange = (event) => {
         setProfil({ ...profil, [event.target.name]: event.target.value })
     }
-
 
     return (
         <div className='modal'> 
