@@ -4,11 +4,12 @@ import { baseUrl } from '../../../services/serviceAppel';
 import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
-
+import { recuperationItem } from '../../../services/localStorage';
 
 const Profil = () => {
     const id = useParams();
     const uid = recuperationId();
+    const token = recuperationItem('jetonUtilisateur');
 
     const navigate = useNavigate();
 
@@ -22,7 +23,12 @@ const Profil = () => {
 
     //Récupération du user
     const fetchUser = async (id) => {
-        fetch(`${baseUrl}/users/${id}`)
+        fetch(`${baseUrl}/users/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => setProfil(data.data))
     }
@@ -68,6 +74,9 @@ const Profil = () => {
 
         fetch(`${baseUrl}/users/${id.id}`, {
             method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             body: formData
         })
         setIsOpenModalAvatar(false);
@@ -82,7 +91,8 @@ const Profil = () => {
         fetch(`${baseUrl}/users/${id.id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 Salles: [...sallesAAjouter]
@@ -143,8 +153,6 @@ const Profil = () => {
                     </div>
                 </div>
                 
-
-
                 <Bouton onClick={onClickModifProfil} text="Modifier mes infos" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} />
                 <p className='titreSalles'> Salles :</p>
                 <div className='salleListProfil'>
@@ -188,7 +196,6 @@ const Profil = () => {
                         </div>
                     </div>
                 )}
-
             </>
         )
     } else {

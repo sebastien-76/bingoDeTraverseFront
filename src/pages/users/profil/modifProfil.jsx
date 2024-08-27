@@ -7,6 +7,7 @@ import FormData from "../../../components/profil/formData";
 import RetourProfil from "../../../components/profil/retourProfil";
 import Bouton from "../../../components/boutons/bouton";
 import { recuperationId } from '../../../services/Auth';
+import { recuperationItem } from "../../../services/localStorage";
 
 const ModifProfil = () => {
     const id = useParams();
@@ -22,13 +23,18 @@ const ModifProfil = () => {
     const [errorPassword, setErrorPassword] = useState('');
 
     const uid = recuperationId();
+    const token = recuperationItem('jetonUtilisateur');
 
     useEffect(() => {
         setCredentials({ email: profil.email })
     }, [profil]);
 
     const fetchProfil = async (id) => {
-        const response = await fetch(`${baseUrl}/users/${id}`);
+        const response = await fetch(`${baseUrl}/users/${id}`, {
+             method: 'GET',
+             headers: {
+                 'Authorization': `Bearer ${token}`
+             }});
         const dataProfil = await response.json();
         setProfil(dataProfil.data);
     }
@@ -47,10 +53,12 @@ const ModifProfil = () => {
         console.log(credentials)
         if (credentials.password === credentials.confirmationPassword) {
             try {
+                
                 await fetch(`${baseUrl}/users/${uid}`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         email: credentials.email,
