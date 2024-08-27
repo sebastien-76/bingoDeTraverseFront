@@ -21,6 +21,14 @@ const Accueil = () => {
     const fetchPoints = async () => {
         try {
             const response = await fetch(`${baseUrl}/users`);
+            
+            // Exclure le user dont le mail est test@gmail.com
+            if (response.ok) {
+                const users = await response.json();
+                const filteredUsers = users.data.filter(user => user.email !== 'test@gmail.com');
+                setRang(filteredUsers);
+            }
+
             const dataUser = await response.json();
 
             if (dataUser && dataUser.data) {
