@@ -1,4 +1,4 @@
-import { useState, Children, useEffect, useContext } from 'react';
+import { useState, Children, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
@@ -17,8 +17,6 @@ import ModifProfil from './pages/users/profil/modifProfil';
 import Profil from './pages/users/profil/profil';
 
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
-
-import { recuperationItem } from './services/localStorage';
 
 import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';

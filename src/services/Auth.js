@@ -16,12 +16,25 @@ export const connexionUtilisateur = async (credentials) => {
     return getReponse;
 }
 
-export function inscriptionUtilisateur(credentials) {
-    return fetch(`${baseUrl}/utilisateurs`, credentials)
+
+export const inscriptionUtilisateur = async (credentials) => {
+    const getReponse = await fetch(`${baseUrl}/users`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: credentials.email,
+            pseudo: credentials.pseudo,
+            password: credentials.password
+        }),
+    })
+    return getReponse;
 }
 
+
 export async function recupUtilisateur(id) {
-    return await fetch(`${baseUrl}/utilisateurs/${id}`)
+    return await fetch(`${baseUrl}/users/${id}`)
 }
 
 export function deconnexion() {

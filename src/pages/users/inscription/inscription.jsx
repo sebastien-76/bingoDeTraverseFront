@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './inscription.css';
-import { baseUrl } from '../../../services/serviceAppel';
 import RetourAccueil from '../../../components/retourAccueil/retourAccueil';
 import Bouton from '../../../components/boutons/bouton';
+import { inscriptionUtilisateur, recuperationId } from '../../../services/Auth';
+import { sauvegardeItem } from '../../../services/localStorage';
+import authContext from '../../../hooks/useAuth';
 
 const SignUp = () => {
 
@@ -13,6 +15,8 @@ const SignUp = () => {
         password: '',
         confirmationPassword: '',
     })
+
+    const { setIsLogged } = useContext(authContext);
 
     const [errorPwd, setErrorPwd] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
@@ -29,25 +33,20 @@ const SignUp = () => {
         setErrorPwd('');
         if (credentials.password === credentials.confirmationPassword) {
             try {
-                await fetch(`${baseUrl}/users`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: credentials.email,
-                        pseudo: credentials.pseudo,
-                        password: credentials.password,
-                        }),
-                })
+                inscriptionUtilisateur(credentials)
                     .then(res => {
+
                         if (res.status === 403) {
                             res.json()
                                 .then(res => setErrorEmail(res.message))
                         } else {
                             res.json()
                                 .then(res => {
-                                    const uid = res.data.id
+                                    sauvegardeItem('jetonUtilisateur', res.token)
+                                    setIsLogged(true)
+                                })
+                                .then(res => {
+                                    const uid = recuperationId();
                                     navigate(`/profil/${uid}`)
                                 })
                         }

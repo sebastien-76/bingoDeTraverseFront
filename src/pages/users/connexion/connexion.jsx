@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import './connexion.css';
 import { connexionUtilisateur } from "../../../services/Auth";
-import { sauvegardeItem, suppressionItem } from "../../../services/localStorage";
+import { sauvegardeItem } from "../../../services/localStorage";
 import authContext from "../../../hooks/useAuth";
 import RetourAccueil from "../../../components/retourAccueil/retourAccueil";
 import Bouton from "../../../components/boutons/bouton";
@@ -18,7 +18,7 @@ const Connexion = () => {
 
     const navigate = useNavigate();
 
-    const { setIsLogged, setPersistence } = useContext(authContext);
+    const { setIsLogged } = useContext(authContext);
 
     /* Mise a jour de l'etat des infos de connexion en fonction des entrées utilisateur  */
     const onChange = (event) => {
