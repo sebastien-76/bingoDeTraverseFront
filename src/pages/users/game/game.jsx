@@ -106,6 +106,7 @@ export default function Game() {
 
                 if (data.data.finished) {
                     setFinPartie(true);
+                    window.scrollTo({ top: 0});
                 }
 
             } else {
