@@ -161,6 +161,7 @@
     border-radius: 5px;
     padding: 10px;
     animation: zoom-in-zoom-out 1.5s ease-in alternate infinite;
+    margin-bottom: 3rem;
 }
 
 @keyframes zoom-in-zoom-out {
@@ -181,12 +182,9 @@
     align-items: center;
 }
 
-.finPartieP {
-    text-align: center;
-}
-
 .rejouer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 2rem;
 }

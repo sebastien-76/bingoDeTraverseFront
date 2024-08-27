@@ -4,6 +4,7 @@ import Bouton from '../../../components/boutons/bouton';
 import { baseUrl } from '../../../services/serviceAppel';
 import { recuperationId } from '../../../services/Auth';
 import FlecheScroll from '../../../components/flecheScroll/flecheScroll';
+import FinPartie from '../../../components/FinPartie/FinPartie';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -219,14 +220,9 @@ export default function Game() {
                 </> :
                 <div className='finPartie'>
                     <h2 className='finPartieH2'> BINGO !!! </h2>
-                    <div className='finPartieP'>
-                        <p> <b>Bien joué bidule</b> </p>
-                        <p>Tu as devancé tout tes collègues et tu as gagné !</p>
-                        <p>HAHA tu as le droit de te la péter..</p>
-                        <p>Mais attention, n'abuse pas trop de ta victoire !</p>
-                    </div>
+                        <FinPartie />
                     <div className='rejouer'>
-                        <p><b>Si tu veux les défier à nouveau, c'est par ici :</b></p>
+                        <p><b>Si tu veux retenter ta chance :</b></p>
                         <Bouton style={{width: '150px',marginTop: '10px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Rejouer" onClick={confirmLancementPartie}/>
                     </div>
                 </div>
