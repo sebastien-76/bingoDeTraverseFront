@@ -110,11 +110,7 @@ const Profil = () => {
         setListeSallesAjout(ajoutSalleData);
     }, [sallesUser]);
 
-    //Navigation vers la page de modification du profil
-    const onClickModifProfil = () => {
-        navigate(`/modification-profil/${id.id}`);
-    }
-
+ 
     const onChangeAvatar = () => {
         setIsOpenModalAvatar(true);
     }
