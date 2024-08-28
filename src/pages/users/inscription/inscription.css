@@ -35,22 +35,6 @@ padding-left: 5px;
 border-radius: 5px;
 }
 
-
-.submitInscription {
-    margin-top: 2rem;
-    width: 50vw;
-    height: 6vh;
-    background-color: var(--dark-grey);
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid var(--dark-grey);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
 .errorPwd, .errorEmail {
-    color: --red;
+    color: var(--red);
 }

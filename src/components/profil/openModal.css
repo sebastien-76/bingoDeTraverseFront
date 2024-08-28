@@ -12,6 +12,10 @@
     text-transform: lowercase;
 }
 
+.modal-content {
+    background-color:var(--background-grey);
+}
+
 .modal-content input {
     width: 80%;
     height: 2.5vh;

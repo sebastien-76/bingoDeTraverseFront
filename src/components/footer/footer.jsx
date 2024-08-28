@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
             <div className='copyright'>
                 <p>© 2024 - Tous droits réservés</p>
-                <p>Réalisation par CREMEAUX Emma etMAILLET Sébastien</p>
+                <p>Réalisation par <b>CREMEAUX Emma</b> et <b>MAILLET Sébastien</b></p>
             </div>
         </div>
     )

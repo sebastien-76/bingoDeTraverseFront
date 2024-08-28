@@ -5,6 +5,7 @@ import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
 import { recuperationItem } from '../../../services/localStorage';
+import OpenModalProfil from "../../../components/profil/openModal";
 
 const Profil = () => {
     const id = useParams();
@@ -20,6 +21,13 @@ const Profil = () => {
     const [sallesAAjouter, setSallesAAjouter] = useState([]);
     const [isOpenModalAvatar, setIsOpenModalAvatar] = useState(false);
     const [isOpenModalSalles, setIsOpenModalSalles] = useState(false);
+    const [openModalPseudo, setOpenModalPseudo] = useState(false);
+    const [openModalPassword, setOpenModalPassword] = useState(false);
+    const [errorPassword, setErrorPassword] = useState('');
+
+    const [credentials, setCredentials] = useState({
+        password: '',
+    })
 
     //Récupération du user
     const fetchUser = async (id) => {
@@ -31,6 +39,51 @@ const Profil = () => {
         })
             .then(response => response.json())
             .then(data => setProfil(data.data))
+    }
+
+    const fetchProfil = async (id) => {
+        const response = await fetch(`${baseUrl}/users/${id}`, {
+             method: 'GET',
+             headers: {
+                 'Authorization': `Bearer ${token}`
+             }});
+        const dataProfil = await response.json();
+        setProfil(dataProfil.data);
+    }
+    useEffect(() => {
+        fetchProfil(id.id)
+    }, [id, openModalPseudo]);
+
+    const onChangePassword = (event) => {
+        setCredentials({ ...credentials, [event.target.name]: event.target.value })
+    }
+    const onSubmitNewPassword = async (event) => {
+        event.preventDefault();
+        console.log(credentials)
+        if (credentials.password === credentials.confirmationPassword) {
+            try {
+                
+                await fetch(`${baseUrl}/users/${uid}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        email: credentials.email,
+                        password: credentials.password
+                    })
+                });
+                setOpenModalPassword(false);
+                setErrorPassword('');
+            }
+            catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            setErrorPassword('Les mots de passe sont différents, veuillez recommencer');
+        }
     }
 
     //Récupération des salles
@@ -117,12 +170,14 @@ const Profil = () => {
         return (
             <>
                 <h1>Profil</h1>
-                <div className='imageProfil'>
-                {profil.imageProfilURL === null ? <p>Ajouter votre image de profil <span onClick={onChangeAvatar} className='spanImageProfil'>ici</span></p> :
-                    <div>
+                <div>
+                {profil.imageProfilURL === null ? 
+                <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil"/>
+                :
+                <div>
                     <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
-                    <p>Modifier votre image de profil <span onClick={onChangeAvatar} className='spanImageProfil'>ici</span></p>
-                    </div>
+                    <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil"/>
+                </div>
                 }
                 </div>
 
@@ -135,25 +190,53 @@ const Profil = () => {
                         <p className='infos'> Email :</p>
                         <p className='donnees'> {profil.email}</p>
                     </div>
-                    <div className='infosDiv nom'>
-                        <p className='infos'> Nom :</p>
-                        <p className='donnees nomDonnees'> {profil.lastname}</p>
-                    </div>
-                    <div className='infosDiv prenom'>
-                        <p className='infos'> Prénom :</p>
-                        <p className='donnees prenomDonnees'> {profil.firstname}</p>
-                    </div>
                     <div className='infosDiv pseudo'>
-                        <p className='infos'> Pseudo :</p>
-                        <p className='donnees pseudoDonnees'>  {profil.pseudo}</p>
+                        <div className='pseudoDiv'>
+                            <p className='infos'> Pseudo :</p>
+                            <img 
+                                src="/images/modification.png"
+                                alt="icone de modification"
+                                className="modification"
+                                onClick={setOpenModalPseudo}
+                            />
+                        </div>
+                        <p className='donnees pseudoDonnees'>{profil.pseudo}</p>
                     </div>
                     <div className='infosDiv date'>
                         <p className='infos'> Joue depuis le :</p>
                         <p className='donnees dateDonnees'> {dateDebut.toLocaleDateString('fr-FR')}</p>
                     </div>
                 </div>
+
+                {/* Modal de modification du pseudo */}
+                {openModalPseudo &&
+                    <OpenModalProfil id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} />
+                }
+
+        {/* Modal de modification du mot de passe */}
+        {openModalPassword &&
+                    (
+                        <div className='modal'>
+                            <form onSubmit={onSubmitNewPassword} className="modal-content">
+                                <h2>Modifier le mot de passe</h2>
+                                {errorPassword && <p className="errorPassword">{errorPassword}</p>}
+                                <div className="infosPassword">
+                                    <label>Nouveau mot de passe :</label>
+                                    <input type="password" id="password" name="password" onChange={onChangePassword} autoComplete="off" />
+                                    <label>Confirmer le nouveau mot de passe:</label>
+                                    <input type="password" id="confirmationPassword" name="confirmationPassword" onChange={onChangePassword} autoComplete="off" />
+                                </div>
+                                <div className="boutonModifPassword">
+                                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} />
+                                    <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={() => setOpenModalPassword(false)} />
+                                </div>
+                            </form>
+                        </div>
+                    )
+                }
+
                 
-                <Bouton onClick={onClickModifProfil} text="Modifier mes infos" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} />
+                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)", fontSize: '0.9em'}} />
                 <p className='titreSalles'> Salles :</p>
                 <div className='salleListProfil'>
                     {sallesUser && sallesUser.map((salle) => (
@@ -179,13 +262,13 @@ const Profil = () => {
 
                 {isOpenModalSalles && (
                     <div className="modal">
-                        <div className="modal-content">
+                        <div className="modal-contentSalle">
                             <p className="retour_profil" onClick={retourProfil}>
                                 <img src="../../../../images/flecheGauche.png" alt="" />  
                                 Retour au profil
                             </p>
                             <h2>Salles à ajouter</h2>
-                            <ul>
+                            <ul className='salleUl'>
                                 {listeSallesAjout && listeSallesAjout.map((salle) => (
                                     <li key={salle.id} className='salleListModal'>
                                         <input type="checkbox" id={salle.id} onChange={onCheckSalles} />{salle.name}

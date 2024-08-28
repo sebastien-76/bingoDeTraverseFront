@@ -81,8 +81,8 @@ const Accueil = () => {
                 {/* Affichage du classement */}
                 <h2 className="h2_accueil">Classement</h2>
                 <table className="table_accueil">
-                    <thead className="thead_accueil">
-                        <tr className="tr_accueil">
+                    <thead>
+                        <tr>
                             <th>Rang</th>
                             <th>Pseudo</th>
                             <th>Points</th>
@@ -92,8 +92,8 @@ const Accueil = () => {
                         {rang.map((user, index) => (
                             <tr key={index} className={index === 0 && user.points > 0 ? "first-place" : ""}>
                                 <td >{index + 1}</td>
-                                <td className="tdFirst">{user.pseudo}</td>
-                                <td className="tdFirst">{user.points}</td>
+                                <td>{user.pseudo}</td>
+                                <td>{user.points}</td>
                             </tr>
                         ))}
                     </tbody>

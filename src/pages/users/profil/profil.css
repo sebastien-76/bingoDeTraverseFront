@@ -20,8 +20,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 50px;
-    margin-bottom: 10px;
+    margin-top: 2em;
+    margin-bottom: 1em;
     background-color: var(--purple-pastel);
     margin-inline: 1rem;
     border: 1px solid var(--purple-pastel);
@@ -53,10 +53,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 70%;
+    width: 80%;
 }
 
-.email {
+.pseudo, .email {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,8 +64,35 @@
     width: 90%;
 }
 
+.pseudoDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
 
-.nomDonnees, .prenomDonnees, .pseudoDonnees, .dateDonnees {
+.pseudoDiv img {
+    margin-right: 0.5rem;
+}
+
+.modification {
+    width:5vw;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+
+.pseudoDonnees {
+    height: 50%;
+    margin : 0 auto;
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.dateDonnees {
     height: 50%;
     margin : 0 auto;
     display: flex;
@@ -73,7 +100,7 @@
     margin-left: 1.5rem;
 }
 
-.nom, .prenom, .pseudo, .date {
+.date {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,6 +133,7 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+    align-items: center;
 }
 
 .retour_profil img {
@@ -120,11 +148,23 @@
     margin: 0.5em 0 0.5em 0;
 }
 
+.modal-contentSalle {
+    background-color:var(--background-grey);
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    
+}
+
 .salleList {
     list-style: none;
     text-align: justify;
     padding-left: 2.5em;
     margin: 0.5em 0;
+}
+
+.salleUl {
+    padding-left: 1rem;
 }
 
 .inputAvatar {
@@ -140,4 +180,19 @@
 .spanImageProfil {
     font-weight: bold;
     font-style: italic;
+}
+
+.infosPassword {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    width: auto;
+}
+
+.boutonModifPassword {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 0 auto;
 }

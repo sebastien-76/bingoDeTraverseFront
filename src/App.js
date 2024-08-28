@@ -13,7 +13,6 @@ import Phrases from './pages/admin/phrases/phrases';
 import Gamemaster from './pages/admin/gamemasters/gamemasters';
 
 import Game from './pages/users/game/game';
-import ModifProfil from './pages/users/profil/modifProfil';
 import Profil from './pages/users/profil/profil';
 
 import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
@@ -76,7 +75,6 @@ function App() {
             <Route path='/gamemaster' element={<Gamemaster />} />
             <Route path='/game' element={<RouteSecurisee composant={<Game />} />} />
             <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
-            <Route path='/modification-profil/:id' element={<RouteSecurisee composant={<ModifProfil id={Children} />} />} />
             <Route path='/connexion' element={<Connexion />} />
             <Route path='/inscription' element={<Inscription />} />
           </Routes>

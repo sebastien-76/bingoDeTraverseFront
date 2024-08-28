@@ -4,7 +4,10 @@ import './retourAccueil.css'
 
 const RetourAccueil = () => {
   return (
-    <p><Link to="/" className="retour_accueil">Retour a l'accueil</Link></p>
+      <Link to="/" className="retour_accueil" >
+        <img src="../../../../images/flecheGauche.png" alt="" />
+        Retour a l'accueil
+      </Link>
   )
 }
 

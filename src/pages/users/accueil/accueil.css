@@ -67,12 +67,21 @@
     margin: 0 auto;
     border: 1px solid var(--blue-flash);
     border-radius: 10px;
+
 }
 
-.first-place > .tdFirst {
-    margin: 0;
+th {
     font-weight: 600;
+    font-family: 'Helvetica', sans-serif;
+    border-bottom: 1px solid var(--blue-flash);
+}
+
+tbody > tr:nth-of-type(even) {
     background-color: var(--blue-pastel);
-    border: 1px solid var(--blue-pastel);
-    border-radius: 10px ;
+  }
+
+.first-place{
+    margin: 0;
+    font-weight: 600 ;
+    color: var(--blue-flash);
 }

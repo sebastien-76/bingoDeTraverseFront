@@ -2,6 +2,12 @@
 
 body {
   margin: 0;
+  letter-spacing: 0.05em;
+  font-family: 'OpenDyslexic', sans-serif;
+}
+
+:root {
+  background-color:var(--background-grey);
 }
 
 .App {
@@ -9,11 +15,18 @@ body {
   display : flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color:var(--background-grey);
+  
 }
 
 main {
   flex: 1;
 }
+
+input {
+  background-color:var(--background-grey);
+}
+
 
 .mainApp {
   margin-top: 140px;
