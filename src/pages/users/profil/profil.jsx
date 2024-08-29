@@ -98,6 +98,7 @@ const Profil = () => {
         fetchUser(id.id);
     }, [id.id, sallesAAjouter, isOpenModalAvatar]);
 
+
     useEffect(() => {
         fetchSalles();
         setSallesUser(profil.Salles);
@@ -107,6 +108,7 @@ const Profil = () => {
 
     useEffect(() => {
         const ajoutSalleData = salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id))
+        
         setListeSallesAjout(ajoutSalleData);
     }, [sallesUser]);
 
@@ -233,9 +235,11 @@ const Profil = () => {
 
                 
                 <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)", fontSize: '0.9em'}} />
-                <p className='titreSalles'> Salles :</p>
+                <p className='titreSalles'> Salles apprises :</p>
                 <div className='salleListProfil'>
-                    {sallesUser && sallesUser.map((salle) => (
+                    {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
+                    {sallesUser && sallesUser.map((salle) =>( 
+                        salle.id !== 1 &&
                         <p key={salle.id} className='salleList'>{salle.name}</p>
                     ))}
                 </div>

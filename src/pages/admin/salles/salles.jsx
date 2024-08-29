@@ -16,7 +16,11 @@ export default function Salles() {
     const fetchData = async () => {
         const response = await fetch(baseUrl + '/salles');
         const dataSalle = await response.json();
-        setSalle(dataSalle.data);
+
+        //filtrer dans les salles pour ne pas avoir la salle 1
+        const filteredSalles = dataSalle.data.filter(salle => salle.id !== 1);
+
+        setSalle(filteredSalles);
     }
 
     const confirmDeleteSalle = async (salleId) => {
