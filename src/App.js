@@ -82,26 +82,32 @@ function App() {
         </Router>
         </main>
           {!isLogged && <Footer className="footerApp" />}
-          {openModal && (
-            <div className="modalMenu">
-              <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
-              <div className="navLinks">
-                <a className='navLink' href="/">Accueil</a>
-                <a className='navLink' href={lienProfil}>Profil</a>
-                <a className='navLink' href="/game">Bingo</a>
-                <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
-                {isAdmin && (
-                  <div className='linksAdmin'>
-                    <div className="separator"></div>
-                    <h2 className='adminH2'>Pages Admin :</h2>
-                    <a className='navLink' href="/phrases">Phrases</a>
-                    <a className='navLink' href="/salles">Salles</a>
-                    <a className='navLink' href="/gamemaster">Gamemasters</a>
-                  </div>
-                )}
+
+            {openModal && (
+              <>
+              <div className='modal-backdrop' onClick={() => toggleMenu()}>
               </div>
-            </div>
-          )}
+              <div className="modalMenu">
+                <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
+                <div className="navLinks">
+                  <a className='navLink' href="/">Accueil</a>
+                  <a className='navLink' href={lienProfil}>Profil</a>
+                  <a className='navLink' href="/game">Bingo</a>
+                  <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
+                  {isAdmin && (
+                    <div className='linksAdmin'>
+                      <div className="separator"></div>
+                      <h2 className='adminH2'>Pages Admin :</h2>
+                      <a className='navLink' href="/phrases">Phrases</a>
+                      <a className='navLink' href="/salles">Salles</a>
+                      <a className='navLink' href="/gamemaster">Gamemasters</a>
+                    </div>
+                  )}
+                </div>
+              </div>
+              </>
+            )}
+
       </authContext.Provider>
     </div>
   );
