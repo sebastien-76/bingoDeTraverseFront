@@ -1,4 +1,4 @@
-import { useState, Children, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
@@ -19,6 +19,7 @@ import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
+import { recuperationItem } from './services/localStorage';
 
 function App() {
 
@@ -30,7 +31,6 @@ function App() {
   const [pseudo, setPseudo] = useState(pseudoUtilisateur());
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
-
 
   useEffect(() => {
     setIsLogged(estIdentifie());
@@ -48,7 +48,6 @@ function App() {
     setIsAdmin,
   }
 
-
   const toggleMenu = () => {
     setMenuBurger(!menuBurger);
     setOpenModal(!openModal);
@@ -61,6 +60,8 @@ function App() {
     deconnexion();
   }
 
+  const imageProfil = recuperationItem('imageProfil');
+  const imageProfilNavBar = imageProfil? imageProfil : '../../images/cheminTraverse.png';
 
   return (
     <div className="App">
@@ -83,7 +84,7 @@ function App() {
           {!isLogged && <Footer className="footerApp" />}
           {openModal && (
             <div className="modalMenu">
-              <img className="logoCheminNav" src="../../images/cheminTraverse.png" alt="" />
+              <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
               <div className="navLinks">
                 <a className='navLink' href="/">Accueil</a>
                 <a className='navLink' href={lienProfil}>Profil</a>

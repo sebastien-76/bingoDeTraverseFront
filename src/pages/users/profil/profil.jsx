@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { baseUrl } from '../../../services/serviceAppel';
 import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
-import { recuperationItem } from '../../../services/localStorage';
+import { sauvegardeItem, recuperationItem } from '../../../services/localStorage';
 import OpenModalProfil from "../../../components/profil/openModal";
 
 const Profil = () => {
     const id = useParams();
     const uid = recuperationId();
     const token = recuperationItem('jetonUtilisateur');
-
-    const navigate = useNavigate();
 
     const [profil, setProfil] = useState([]);
     const [salles, setSalles] = useState([]);
@@ -50,8 +48,10 @@ const Profil = () => {
         const dataProfil = await response.json();
         setProfil(dataProfil.data);
     }
+
     useEffect(() => {
         fetchProfil(id.id)
+        profil.imageProfilURL && sauvegardeItem('imageProfil', profil.imageProfilURL)
     }, [id, openModalPseudo]);
 
     const onChangePassword = (event) => {
