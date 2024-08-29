@@ -168,8 +168,7 @@
 }
 
 .inputAvatar {
-    width: 80%;
-    height: 2.7vh;
+    width: 90%;
     margin-bottom: 1.2rem;
     border: 0.5px solid var(--dark-grey);
     padding: 2px;
@@ -190,7 +189,7 @@
     width: auto;
 }
 
-.boutonModifPassword {
+.boutonModifPassword, .boutonModifAvatar, .boutonModifSalle {
     display: flex;
     flex-direction: row;
     width: 70%;

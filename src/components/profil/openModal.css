@@ -1,7 +1,8 @@
 .modalModif {
     display: flex;
-    width: 60vw;
-    justify-content: space-evenly;
+    flex-direction: row;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .modal-title {
@@ -16,7 +17,7 @@
     background-color:var(--background-grey);
 }
 
-.modal-content input {
+.inputModifInfo {
     width: 80%;
     height: 2.5vh;
     margin-bottom: 1.2rem;
