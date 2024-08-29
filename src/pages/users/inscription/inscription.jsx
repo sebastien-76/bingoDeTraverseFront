@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './inscription.css';
 import RetourAccueil from '../../../components/retourAccueil/retourAccueil';
@@ -6,6 +6,7 @@ import Bouton from '../../../components/boutons/bouton';
 import { inscriptionUtilisateur, recuperationId } from '../../../services/Auth';
 import { sauvegardeItem } from '../../../services/localStorage';
 import authContext from '../../../hooks/useAuth';
+import { baseUrl } from '../../../services/serviceAppel';
 
 const SignUp = () => {
 
@@ -14,7 +15,10 @@ const SignUp = () => {
         pseudo: '',
         password: '',
         confirmationPassword: '',
+        Salles: []
     })
+    const [salles, setSalles] = useState([]);
+    const [sallesAAjouter, setSallesAAjouter] = useState([]);
 
     const { setIsLogged } = useContext(authContext);
 
@@ -22,6 +26,32 @@ const SignUp = () => {
     const [errorEmail, setErrorEmail] = useState('');
 
     const navigate = useNavigate();
+
+    const fetchSalles = () => {
+        fetch(`${baseUrl}/salles`)
+            .then(response => response.json())
+            .then(data => {
+                const listeSalles = data.data.filter(salle =>
+                    salle.id != 1
+                )
+                setSalles(listeSalles)
+            })
+    }
+
+    useEffect(() => {
+        fetchSalles();
+    }, [])
+
+
+    const onCheckSalles = (event) => {
+        const sallechecked = parseInt(event.target.id);
+        if (event.target.checked) {
+            setSallesAAjouter([...sallesAAjouter, sallechecked]);
+        }
+        else {
+            setSallesAAjouter(sallesAAjouter.filter(salle => salle !== sallechecked));
+        }
+    }
 
 
     const onChange = (event) => {
@@ -31,41 +61,44 @@ const SignUp = () => {
     const handleSubmitInscription = async (event) => {
         event.preventDefault();
         setErrorPwd('');
-        if (credentials.password === credentials.confirmationPassword) {
-            try {
-                inscriptionUtilisateur(credentials)
-                    .then(res => {
-
-                        if (res.status === 403) {
-                            res.json()
-                                .then(res => setErrorEmail(res.message))
-                        } else {
-                            res.json()
-                                .then(res => {
-                                    sauvegardeItem('jetonUtilisateur', res.token)
-                                    setIsLogged(true)
-                                })
-                                .then(res => {
-                                    const uid = recuperationId();
-                                    navigate(`/profil/${uid}`)
-                                })
-                        }
-                    })
-                    .catch(err => console.log(err));
-                setCredentials({
-                    email: '',
-                    password: '',
-                    pseudo: '',
-                    confirmationPassword: '',
-                })
-                document.getElementById("formInscription").reset()
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        else {
-            setErrorPwd(`Les mots de passe ne sont pas identiques`);
-        }
+        credentials.Salles = sallesAAjouter
+                if (credentials.password === credentials.confirmationPassword) {
+                    delete credentials.confirmationPassword;
+                    try {
+                        inscriptionUtilisateur(credentials)
+                            .then(res => {
+        
+                                if (res.status === 403) {
+                                    res.json()
+                                        .then(res => setErrorEmail(res.message))
+                                } else {
+                                    res.json()
+                                        .then(res => {
+                                            sauvegardeItem('jetonUtilisateur', res.token)
+                                            setIsLogged(true)
+                                        })
+                                        .then(res => {
+                                            const uid = recuperationId();
+                                            navigate(`/profil/${uid}`)
+                                        })
+                                }
+                            })
+                            .catch(err => console.log(err));
+                        setCredentials({
+                            email: '',
+                            password: '',
+                            pseudo: '',
+                            confirmationPassword: '',
+                            Salles: []
+                        })
+                        document.getElementById("formInscription").reset()
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+                else {
+                    setErrorPwd(`Les mots de passe ne sont pas identiques`);
+                }
     }
 
     return (
@@ -83,8 +116,18 @@ const SignUp = () => {
                 <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
                 <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" className='inputInscription' required />
+                <div>
+                    <label htmlFor="salle">Salles</label>
+                    <ul className='salleListInscription'>
+                        {salles.map((salle) => (
+                            <li key={salle.id} className='salleInscription'>
+                                <input type="checkbox" id={salle.id} name={salle.id} onChange={onCheckSalles} />{salle.name}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </form>
-                <Bouton style={{ width: '150px', marginTop: '20px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} text="S'inscrire" onClick={handleSubmitInscription} />
+            <Bouton style={{ width: '150px', marginTop: '20px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} text="S'inscrire" onClick={handleSubmitInscription} />
         </>
     )
 }

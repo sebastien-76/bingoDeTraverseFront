@@ -26,7 +26,8 @@ export const inscriptionUtilisateur = async (credentials) => {
         body: JSON.stringify({
             email: credentials.email,
             pseudo: credentials.pseudo,
-            password: credentials.password
+            password: credentials.password,
+            Salles: credentials.Salles
         }),
     })
     return getReponse;
