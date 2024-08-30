@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './salles.css';
-import { baseUrl } from "../../../services/serviceAppel";
+import { baseUrl, getSalles, deleteSalle, postSalle } from "../../../services/serviceAppel";
 import Bouton from "../../../components/boutons/bouton";
 
 export default function Salles() {
@@ -14,43 +14,36 @@ export default function Salles() {
     const [selectedSalle, setSelectedSalle] = useState(null);
 
     const fetchData = async () => {
-        const response = await fetch(baseUrl + '/salles');
-        const dataSalle = await response.json();
-
-        //filtrer dans les salles pour ne pas avoir la salle 1
-        const filteredSalles = dataSalle.data.filter(salle => salle.id !== 1);
-
-        setSalle(filteredSalles);
+        getSalles()
+            .then(res => res.json())
+            .then(dataSalle => {
+                //filtrer dans les salles pour ne pas avoir la salle 1
+                const filteredSalles = dataSalle.data.filter(salle => salle.id !== 1);
+                setSalle(filteredSalles);
+            });
     }
 
     const confirmDeleteSalle = async (salleId) => {
-        await fetch(baseUrl + `/salles/${salleId}`, {
-            method: 'DELETE',
-        });
-        setShowModal(false);
-        setSelectedSalle(null);
-        fetchData();
-    }
-
-    const addSalle = async () => {
-        if (newSalleName) {
-        
-        const response = await fetch(baseUrl + '/salles', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: newSalleName
-            }),
-        });
-        if (response.ok) {
+        try {
+            deleteSalle(salleId)
+            setShowModal(false);
+            setSelectedSalle(null);
             fetchData();
-            setNewSalleName("");
-        } else {
-            console.error('Erreur lors de l\'ajout de la salle');
+        }
+        catch (error) {
+            console.error(error);
         }
     }
+
+    const addSalle = () => {
+        try {
+            postSalle(newSalleName);
+            setNewSalleName("");
+
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
 
     const handleDeleteClick = (salle) => {
@@ -63,11 +56,10 @@ export default function Salles() {
         setShowModal(false);
     }
 
-    useEffect(() => { fetchData() }, []);
+    useEffect(() => {fetchData()}, [salles]);
 
     return (
         <>
-
             <div>
                 <h2>Ajouter une salle</h2>
                 <input
@@ -76,13 +68,13 @@ export default function Salles() {
                     type="text"
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
-                />
-                <Bouton text="Ajouter" style={{marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={addSalle} />
+                                    />
+                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
             </div>
 
             <h1>Liste des salles</h1>
 
-            <Bouton text="Actualiser" style={{marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={fetchData} />
+            <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchData} />
 
             <div className="sallesListeAS">
                 {salles && salles.map((salle) => (
@@ -90,7 +82,7 @@ export default function Salles() {
                         <p> {salle.name} </p>
 
                         <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(salle)} />
-                        
+
                     </div>
                 ))}
             </div>
@@ -100,8 +92,8 @@ export default function Salles() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer la salle {selectedSalle.name} ?</p>
-                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />
-                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)"}} text="non" onClick={handleCancelDelete} />
+                        <Bouton style={{ width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />
+                        <Bouton style={{ width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}

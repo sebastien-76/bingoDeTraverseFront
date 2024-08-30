@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './phrases.css';
-import { baseUrl } from '../../../services/serviceAppel';
+import { getPhrases, getSalles, deletePhrase, postPhrase } from '../../../services/serviceAppel';
 import Bouton from '../../../components/boutons/bouton';
 import FlecheScroll from '../../../components/flecheScroll/flecheScroll';
 
@@ -13,39 +13,27 @@ export default function Phrases() {
     const [SalleId, setSalleId] = useState(null);
     const [visibilite, setVisibilite] = useState("invisible");
 
+
     const fetchPhrases = async () => {
-        const response = await fetch(baseUrl + '/phrases');
-        const dataPhrase = await response.json();
-        setPhrase(dataPhrase.data);
+        getPhrases()
+        .then(res => res.json())
+        .then(dataPhrase => setPhrase(dataPhrase.data))
     }
 
-    const fetchSalles = async () => {
-        const response = await fetch(baseUrl + '/salles');
-        const dataSalles = await response.json();
-        setSalles(dataSalles.data);
+    const fetchSalles = () => {
+        getSalles()
+        .then(res => res.json())
+        .then(dataSalles => setSalles(dataSalles.data) )
     }
 
     const confirmDeletePhrase = async (phraseId) => {
-        await fetch(baseUrl + `/phrases/${phraseId}`, {
-            method: 'DELETE',
-        });
+        deletePhrase(phraseId)
         setShowModal(false);
         setSelectedPhrase(null);
-        fetchPhrases();
     }
 
     const addPhraseValidee = async () => {
-        await fetch(baseUrl + '/phrases', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text: newPhraseText,
-                SalleId: SalleId
-            }),
-        })
-        fetchPhrases();
+        postPhrase();
         setNewPhraseText("");
         setVisibilite("invisible");
     }
@@ -66,8 +54,11 @@ export default function Phrases() {
 
     useEffect(() => {
         fetchPhrases();
+    }, [phrases]);
+
+    useEffect(() => {
         fetchSalles();
-    }, []);
+    }, [salles])
 
     // Grouping phrases by salle
     const groupedPhrases = salles.map(salle => ({
@@ -121,7 +112,7 @@ export default function Phrases() {
                     <div key={salle.id}>
                         <h2 className="salleNom" id={salle.name}>{salle.name}</h2>
                             {phrases.map(phrase => (
-                                <div className="phraseContainer">
+                                <div key={phrase.id} className="phraseContainer">
                                     <div className="phraseSalle">
                                         <p>{phrase.text}</p>
                                     </div>

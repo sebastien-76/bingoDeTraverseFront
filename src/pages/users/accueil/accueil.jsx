@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import './accueil.css';
 import Bouton from "../../../components/boutons/bouton";
-import { baseUrl } from "../../../services/serviceAppel";
+import { getUsers } from "../../../services/serviceAppel";
 import authContext from "../../../hooks/useAuth";
 
 const Accueil = () => {
@@ -20,18 +20,14 @@ const Accueil = () => {
 
     const fetchPoints = async () => {
         try {
-            const response = await fetch(`${baseUrl}/users`);
-            
-            // Exclure le user dont le mail est test@gmail.com
-            if (response.ok) {
-                const users = await response.json();
-                const filteredUsers = users.data.filter(user => user.email !== 'test@gmail.com');
-                setRang(filteredUsers);
-            }
+            const dataUser = getUsers()
+                .then(res => res.json())
+                .then(data => {
+                    const filteredUsers = data.data.filter(user => user.email !== 'test@gmail.com');
+                    setRang(filteredUsers);
+                });
 
-            const dataUser = await response.json();
-
-            if (dataUser && dataUser.data) {
+            if (dataUser  && dataUser.data) {
                 const dataPoints = dataUser.data;
 
                 // Récupérer les pseudo et points des utilisateurs
@@ -56,51 +52,51 @@ const Accueil = () => {
                 </a>
                 :
                 <img src="../../../images/cheminTraverse.png" alt="logo chemin de traverse" className="logo_accueil" />
-            }    
+            }
             <h1 className="titre_accueil">Bienvenue sur le <br /><span className="span_accueil">Bingo de traverse!</span></h1>
 
             {(!isLogged) ?
-            <>
+                <>
+                    <div>
+                        <p className="explication_accueil">
+                            Seuls les <b>gamemasters</b> du
+                            <b> Chemin de traverse</b> à <b>Arras </b>
+                            sont autorisés à accéder au jeu. <br />
+                            Si vous cherchez le <b> site</b> de l'escape game,
+                            cliquez sur le <b> logo</b>.
+                        </p>
+                    </div>
+
+                    <div>
+                        <Bouton style={{ width: '160px', height: '6vh', backgroundColor: 'var(--blue-pastel)', marginTop: '40px', border: '2px solid var(--blue-pastel)' }} text="Connexion" onClick={toConnexion} />
+                        <p className="p_accueil">Pas encore inscrit ? C'est par <Link to="/inscription" className="lien_accueil">ici</Link></p>
+                    </div>
+                </>
+                :
                 <div>
-                    <p className="explication_accueil">
-                        Seuls les <b>gamemasters</b> du 
-                        <b> Chemin de traverse</b> à <b>Arras </b>
-                        sont autorisés à accéder au jeu. <br />
-                        Si vous cherchez le <b> site</b> de l'escape game,
-                        cliquez sur le <b> logo</b>.
-                    </p>
-                </div>
-            
-                <div>
-                    <Bouton style={{width: '160px', height: '6vh', backgroundColor: 'var(--blue-pastel)', marginTop: '40px', border: '2px solid var(--blue-pastel)'}} text="Connexion" onClick={toConnexion}/>
-                    <p className="p_accueil">Pas encore inscrit ? C'est par <Link to="/inscription" className="lien_accueil">ici</Link></p>
-                </div>
-            </>
-            :
-            <div>
-                {/* Affichage du classement */}
-                <h2 className="h2_accueil">Classement</h2>
-                <table className="table_accueil">
-                    <thead>
-                        <tr>
-                            <th>Rang</th>
-                            <th>Pseudo</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rang.map((user, index) => (
-                            <tr key={index} className={index === 0 && user.points > 0 ? "first-place" : ""}>
-                                <td >{index + 1}</td>
-                                <td>{user.pseudo}</td>
-                                <td>{user.points}</td>
+                    {/* Affichage du classement */}
+                    <h2 className="h2_accueil">Classement</h2>
+                    <table className="table_accueil">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Pseudo</th>
+                                <th>Points</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {rang.map((user, index) => (
+                                <tr key={index} className={index === 0 && user.points > 0 ? "first-place" : ""}>
+                                    <td >{index + 1}</td>
+                                    <td>{user.pseudo}</td>
+                                    <td>{user.points}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             }
-            
+
         </>
     )
 }

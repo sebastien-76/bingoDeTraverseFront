@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { baseUrl } from '../../../services/serviceAppel';
 import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
 import { sauvegardeItem, recuperationItem } from '../../../services/localStorage';
-import { getUser } from '../../../services/serviceAppel';
+import { getUser, getSalles, putUser } from '../../../services/serviceAppel';
 import OpenModalProfil from "../../../components/profil/openModal";
 
 const Profil = () => {
@@ -38,28 +37,33 @@ const Profil = () => {
     useEffect(() => {
         fetchUser(id.id)
         profil.imageProfilURL && sauvegardeItem('imageProfil', profil.imageProfilURL)
-    }, [id, openModalPseudo]);
+    }, [id, openModalPseudo, sallesAAjouter, isOpenModalAvatar]);
 
+
+    //Mise à jour de l'état de changement du password
     const onChangePassword = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
     }
-    const onSubmitNewPassword = async (event) => {
+
+    //Fonction de mise à jour du password dans le profil
+    const onSubmitNewPassword = (event) => {
         event.preventDefault();
         console.log(credentials)
         if (credentials.password === credentials.confirmationPassword) {
-            try {
+            const params = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    email: credentials.email,
+                    password: credentials.password
+                })
+            }
 
-                await fetch(`${baseUrl}/users/${uid}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        email: credentials.email,
-                        password: credentials.password
-                    })
-                });
+            try {
+                putUser(uid, params)
                 setOpenModalPassword(false);
                 setErrorPassword('');
             }
@@ -74,49 +78,51 @@ const Profil = () => {
 
     //Récupération des salles
     const fetchSalles = () => {
-        fetch(`${baseUrl}/salles`)
+        getSalles()
             .then(response => response.json())
             .then(data => setSalles(data.data))
     }
-
-    //Mise à jour du user en fonction de l'id
-    useEffect(() => {
-        fetchUser(id.id);
-    }, [id.id, sallesAAjouter, isOpenModalAvatar]);
-
 
     useEffect(() => {
         fetchSalles();
         setSallesUser(profil.Salles);
     }, [profil]);
 
+    //Mise en forme de la date de début pour l'affichage dans le profil
     const dateDebut = new Date(profil.createdAt);
 
+    //Liste des salles à ajouter
     useEffect(() => {
         const ajoutSalleData = salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id))
-
         setListeSallesAjout(ajoutSalleData);
     }, [sallesUser]);
 
-
+    //Ouverture de la modale de modification de la photo de profil
     const onChangeAvatar = () => {
         setIsOpenModalAvatar(true);
     }
 
+    //Fonction d'ajout de la photo de profil
     const ajoutAvatar = () => {
         const fileImput = document.getElementById('avatar');
         const avatar = fileImput.files[0];
         const formData = new FormData();
         formData.append('avatar', avatar);
-
-        fetch(`${baseUrl}/users/${id.id}`, {
+        const params = {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`
             },
             body: formData
-        })
-        setIsOpenModalAvatar(false);
+        }
+
+        try {
+            putUser(id.id, params)
+            setIsOpenModalAvatar(false);
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
 
     //Mise à jour des salles
@@ -124,8 +130,9 @@ const Profil = () => {
         setIsOpenModalSalles(true);
     }
 
+    //Fonction d'ajout des salles au profil
     const ajoutSalles = () => {
-        fetch(`${baseUrl}/users/${id.id}`, {
+        const params = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,16 +141,25 @@ const Profil = () => {
             body: JSON.stringify({
                 Salles: [...sallesAAjouter]
             }),
-        });
-        setIsOpenModalSalles(false);
-        setSallesAAjouter([]);
+        }
+
+        try {
+            putUser(id.id, params)
+            setIsOpenModalSalles(false);
+            setSallesAAjouter([]);
+        }
+        catch (error) {
+            console.error(error);
+        }
     }
 
+    //Fonction de retour au profil
     const retourProfil = () => {
         setIsOpenModalSalles(false);
         setIsOpenModalAvatar(false);
     }
 
+    //Fonction de mise à jour des salles à ajouter au profil
     const onCheckSalles = (event) => {
         if (event.target.checked) {
             setSallesAAjouter([...sallesAAjouter, ...event.target.id]);
