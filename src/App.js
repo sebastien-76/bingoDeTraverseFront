@@ -20,6 +20,7 @@ import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
 import { recuperationItem } from './services/localStorage';
+import { getUser } from './services/serviceAppel';
 
 function App() {
 
@@ -31,6 +32,9 @@ function App() {
   const [pseudo, setPseudo] = useState(pseudoUtilisateur());
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
+
+  const [imageProfil, setImageProfil] = useState("")
+
 
   useEffect(() => {
     setIsLogged(estIdentifie());
@@ -60,53 +64,61 @@ function App() {
     deconnexion();
   }
 
-  const imageProfil = recuperationItem('imageProfil');
-  const imageProfilNavBar = imageProfil? imageProfil : '../../images/cheminTraverse.png';
+  if (isLogged) {
+    getUser(id)
+      .then(res => res.json())
+      .then(data => {
+        data.data.imageProfilURL != null &&
+        setImageProfil(data.data.imageProfilURL)
+      })
+  }
+
+  const imageProfilNavBar = imageProfil ? imageProfil : '../../images/cheminTraverse.png';
 
   return (
     <div className="App">
       <authContext.Provider value={value}>
-      <main className={isLogged ? 'mainApp' : ''} >
-      {isLogged && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
-        <Router>
-          <Routes>
-            <Route path='/' element={<Accueil />} />
-            <Route path='/phrases' element={<Phrases />} />
-            <Route path='/salles' element={<Salles />} />
-            <Route path='/gamemaster' element={<Gamemaster />} />
-            <Route path='/game' element={<RouteSecurisee composant={<Game />} />} />
-            <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
-            <Route path='/connexion' element={<Connexion />} />
-            <Route path='/inscription' element={<Inscription />} />
-          </Routes>
-        </Router>
+        <main className={isLogged ? 'mainApp' : ''} >
+          {isLogged && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
+          <Router>
+            <Routes>
+              <Route path='/' element={<Accueil />} />
+              <Route path='/phrases' element={<Phrases />} />
+              <Route path='/salles' element={<Salles />} />
+              <Route path='/gamemaster' element={<Gamemaster />} />
+              <Route path='/game' element={<RouteSecurisee composant={<Game />} />} />
+              <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
+              <Route path='/connexion' element={<Connexion />} />
+              <Route path='/inscription' element={<Inscription />} />
+            </Routes>
+          </Router>
         </main>
-          {!isLogged && <Footer className="footerApp" />}
+        {!isLogged && <Footer className="footerApp" />}
 
-            {openModal && (
-              <>
-              <div className='modal-backdrop' onClick={() => toggleMenu()}>
+        {openModal && (
+          <>
+            <div className='modal-backdrop' onClick={() => toggleMenu()}>
+            </div>
+            <div className="modalMenu">
+              <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
+              <div className="navLinks">
+                <a className='navLink' href="/">Accueil</a>
+                <a className='navLink' href={lienProfil}>Profil</a>
+                <a className='navLink' href="/game">Bingo</a>
+                <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
+                {isAdmin && (
+                  <div className='linksAdmin'>
+                    <div className="separator"></div>
+                    <h2 className='adminH2'>Pages Admin :</h2>
+                    <a className='navLink' href="/phrases">Phrases</a>
+                    <a className='navLink' href="/salles">Salles</a>
+                    <a className='navLink' href="/gamemaster">Gamemasters</a>
+                  </div>
+                )}
               </div>
-              <div className="modalMenu">
-                <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
-                <div className="navLinks">
-                  <a className='navLink' href="/">Accueil</a>
-                  <a className='navLink' href={lienProfil}>Profil</a>
-                  <a className='navLink' href="/game">Bingo</a>
-                  <p className='navLink deconnexion' onClick={handleDeconnexion}>Deconnexion</p>
-                  {isAdmin && (
-                    <div className='linksAdmin'>
-                      <div className="separator"></div>
-                      <h2 className='adminH2'>Pages Admin :</h2>
-                      <a className='navLink' href="/phrases">Phrases</a>
-                      <a className='navLink' href="/salles">Salles</a>
-                      <a className='navLink' href="/gamemaster">Gamemasters</a>
-                    </div>
-                  )}
-                </div>
-              </div>
-              </>
-            )}
+            </div>
+          </>
+        )}
 
       </authContext.Provider>
     </div>

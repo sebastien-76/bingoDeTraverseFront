@@ -36,7 +36,6 @@ const Profil = () => {
 
     useEffect(() => {
         fetchUser(id.id)
-        profil.imageProfilURL && sauvegardeItem('imageProfil', profil.imageProfilURL)
     }, [id, openModalPseudo, sallesAAjouter, isOpenModalAvatar]);
 
 

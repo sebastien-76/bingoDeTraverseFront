@@ -2,9 +2,6 @@ import { recuperationItem } from "./localStorage";
 
 export const baseUrl = "http://localhost:3002/api";
 
-//Recupération du token jwt s'il existe
-const token = recuperationItem('jetonUtilisateur')
-
 //Récupération de tous les users
 export const getUsers = async () => {
     return await fetch(`${baseUrl}/users`)
@@ -12,6 +9,7 @@ export const getUsers = async () => {
 
 //Récupération d'un seul user
 export const getUser = async (id) => {
+    const token = recuperationItem('jetonUtilisateur')
     return await fetch(`${baseUrl}/users/${id}`, {
         method: 'GET',
         headers: {
