@@ -49,6 +49,11 @@ input {
   position: absolute;
   top: 30px;
   height: 20vh;
+  width: 20vh;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  border: 2px solid #ffffff;
 }
 
 .navLink {
