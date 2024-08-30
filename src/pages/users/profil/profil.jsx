@@ -5,6 +5,7 @@ import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
 import { sauvegardeItem, recuperationItem } from '../../../services/localStorage';
+import { getUser } from '../../../services/serviceAppel';
 import OpenModalProfil from "../../../components/profil/openModal";
 
 const Profil = () => {
@@ -27,30 +28,15 @@ const Profil = () => {
         password: '',
     })
 
-    //Récupération du user
-    const fetchUser = async (id) => {
-        fetch(`${baseUrl}/users/${id}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+
+    const fetchUser = (id) => {
+        getUser(id)
             .then(response => response.json())
             .then(data => setProfil(data.data))
     }
 
-    const fetchProfil = async (id) => {
-        const response = await fetch(`${baseUrl}/users/${id}`, {
-             method: 'GET',
-             headers: {
-                 'Authorization': `Bearer ${token}`
-             }});
-        const dataProfil = await response.json();
-        setProfil(dataProfil.data);
-    }
-
     useEffect(() => {
-        fetchProfil(id.id)
+        fetchUser(id.id)
         profil.imageProfilURL && sauvegardeItem('imageProfil', profil.imageProfilURL)
     }, [id, openModalPseudo]);
 
@@ -62,7 +48,7 @@ const Profil = () => {
         console.log(credentials)
         if (credentials.password === credentials.confirmationPassword) {
             try {
-                
+
                 await fetch(`${baseUrl}/users/${uid}`, {
                     method: 'PUT',
                     headers: {
@@ -108,11 +94,11 @@ const Profil = () => {
 
     useEffect(() => {
         const ajoutSalleData = salles.filter(salle => sallesUser.every(salleUser => salleUser.id !== salle.id))
-        
+
         setListeSallesAjout(ajoutSalleData);
     }, [sallesUser]);
 
- 
+
     const onChangeAvatar = () => {
         setIsOpenModalAvatar(true);
     }
@@ -169,14 +155,14 @@ const Profil = () => {
             <>
                 <h1>Profil</h1>
                 <div>
-                {profil.imageProfilURL === null ? 
-                <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil"/>
-                :
-                <div>
-                    <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
-                    <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil"/>
-                </div>
-                }
+                    {profil.imageProfilURL === null ?
+                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
+                        :
+                        <div>
+                            <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
+                            <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
+                        </div>
+                    }
                 </div>
 
                 <div className='infosProfil'>
@@ -191,7 +177,7 @@ const Profil = () => {
                     <div className='infosDiv pseudo'>
                         <div className='pseudoDiv'>
                             <p className='infos'> Pseudo :</p>
-                            <img 
+                            <img
                                 src="/images/modification.png"
                                 alt="icone de modification"
                                 className="modification"
@@ -208,11 +194,11 @@ const Profil = () => {
 
                 {/* Modal de modification du pseudo */}
                 {openModalPseudo &&
-                    <OpenModalProfil id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchProfil} />
+                    <OpenModalProfil id="pseudo" name="Pseudo" type="text" uid={id.id} defaultValue={profil.pseudo} setEtat={setOpenModalPseudo} majProfil={fetchUser} />
                 }
 
-        {/* Modal de modification du mot de passe */}
-        {openModalPassword &&
+                {/* Modal de modification du mot de passe */}
+                {openModalPassword &&
                     (
                         <div className='modal'>
                             <form onSubmit={onSubmitNewPassword} className="modal-content">
@@ -225,25 +211,25 @@ const Profil = () => {
                                     <input type="password" id="confirmationPassword" name="confirmationPassword" onChange={onChangePassword} autoComplete="off" />
                                 </div>
                                 <div className="boutonModifPassword">
-                                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold' ,margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} />
-                                    <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={() => setOpenModalPassword(false)} />
+                                    <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} />
+                                    <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} onClick={() => setOpenModalPassword(false)} />
                                 </div>
                             </form>
                         </div>
                     )
                 }
 
-                
-                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)", fontSize: '0.9em'}} />
+
+                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em' }} />
                 <p className='titreSalles'> Salles apprises :</p>
                 <div className='salleListProfil'>
                     {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
-                    {sallesUser && sallesUser.map((salle) =>( 
+                    {sallesUser && sallesUser.map((salle) => (
                         salle.id !== 1 &&
                         <p key={salle.id} className='salleList'>{salle.name}</p>
                     ))}
                 </div>
-                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)" }} />
+                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
 
                 {isOpenModalAvatar && (
                     <div className="modal">
@@ -252,8 +238,8 @@ const Profil = () => {
                             <input className='inputAvatar' type="file" id="avatar" name="avatar" />
 
                             <div className="boutonModifAvatar">
-                                <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold' ,margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={ajoutAvatar} />
-                                <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={retourProfil} />
+                                <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} onClick={ajoutAvatar} />
+                                <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} onClick={retourProfil} />
                             </div>
                         </div>
                     </div>
@@ -273,8 +259,8 @@ const Profil = () => {
                             </ul>
 
                             <div className="boutonModifSalle">
-                                <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold' ,margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={ajoutSalles} />
-                                <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} onClick={retourProfil} />
+                                <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} onClick={ajoutSalles} />
+                                <Bouton type="submit" text="Annuler" style={{ height: '3em', width: "6em", fontSize: '0.8em', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} onClick={retourProfil} />
                             </div>
                         </div>
                     </div>
