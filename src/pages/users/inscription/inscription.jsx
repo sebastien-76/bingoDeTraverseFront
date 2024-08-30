@@ -6,7 +6,7 @@ import Bouton from '../../../components/boutons/bouton';
 import { inscriptionUtilisateur, recuperationId } from '../../../services/Auth';
 import { sauvegardeItem } from '../../../services/localStorage';
 import authContext from '../../../hooks/useAuth';
-import { baseUrl } from '../../../services/serviceAppel';
+import { getSalles } from '../../../services/serviceAppel';
 
 const SignUp = () => {
 
@@ -28,7 +28,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const fetchSalles = () => {
-        fetch(`${baseUrl}/salles`)
+        getSalles()
             .then(response => response.json())
             .then(data => {
                 const listeSalles = data.data.filter(salle =>
