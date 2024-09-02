@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Bouton from '../../../components/boutons/bouton';
 import { recuperationId } from '../../../services/Auth';
 import './profil.css';
-import { sauvegardeItem, recuperationItem } from '../../../services/localStorage';
+import { recuperationItem } from '../../../services/localStorage';
 import { getUser, getSalles, putUser } from '../../../services/serviceAppel';
 import OpenModalProfil from "../../../components/profil/openModal";
 
