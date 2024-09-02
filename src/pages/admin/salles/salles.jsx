@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './salles.css';
-import { baseUrl, getSalles, deleteSalle, postSalle } from "../../../services/serviceAppel";
+import { getSalles, deleteSalle, postSalle } from "../../../services/serviceAppel";
 import Bouton from "../../../components/boutons/bouton";
 
 export default function Salles() {
