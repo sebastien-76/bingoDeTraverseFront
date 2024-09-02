@@ -5,6 +5,7 @@ import { baseUrl } from '../../../services/serviceAppel';
 import { recuperationId } from '../../../services/Auth';
 import FlecheScroll from '../../../components/flecheScroll/flecheScroll';
 import FinPartie from '../../../components/FinPartie/FinPartie';
+import { recuperationItem } from '../../../services/localStorage';
 
 export default function Game() {
     const [selectedPhrases, setSelectedPhrases] = useState([]);
@@ -22,17 +23,26 @@ export default function Game() {
     // ID de l'utilisateur
     const userId = recuperationId();
 
+    //Récupération du token jwt
+    const token = recuperationItem('jetonUtilisateur');
+
     useEffect(() => {
         fetchGrille();
+
+
     }, []);
 
-    // Récupération de la grille dans la BDD
+    // Récupération de la grille dans la BDD
     const fetchGrille = async () => {
         try {
-            const response = await fetch(baseUrl + `/grilles/user/${userId}`);
+            const response = await fetch(baseUrl + `/grilles/user/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
             if (response.ok) {
                 setLancementPartie(true);
-                const dataGrille = await response.json();                
+                const dataGrille = await response.json();
                 const grille = dataGrille.data;
                 setGrilleId(grille.id);
                 const selectedPhraseIds = grille.case.map(c => c.phraseId);
@@ -60,11 +70,13 @@ export default function Game() {
                 }, {});
 
                 setGroupedPhrases(grouped);
+                
             }
         } catch (error) {
             console.error("Erreur lors de la récupération ou de la création de la grille :", error);
         }
     };
+
 
     const openModal = (index) => {
         if (!valideCases[index]) {
@@ -78,6 +90,32 @@ export default function Game() {
         setSelectedCaseIndex(null);
     };
 
+    // verification de fin de partie
+    const checkBingo = async () => {
+        try {
+        const response = await fetch(baseUrl + `/grilles/${grilleId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            // Envoie du tableau des cases validées
+            body: JSON.stringify({ phraseId: null, validatedCases: valideCases })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.data.finished) {
+                setFinPartie(true);
+                window.scrollTo({ top: 0 });
+            }
+        }
+
+        } catch (error) {
+            console.error("Erreur lors de la verification du bingo :", error);
+        }
+    };
+    
+
     // Validation de la case
     const confirmValidation = async () => {
         const updatedCaseId = caseGrille[selectedCaseIndex];
@@ -88,16 +126,17 @@ export default function Game() {
 
         // Mise à jour de tableau des cases validées
         const updatedValidatedCases = [...valideCases];
-        updatedValidatedCases[selectedCaseIndex] = true; 
+        updatedValidatedCases[selectedCaseIndex] = true;
 
         try {
             const response = await fetch(baseUrl + `/grilles/${grilleId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 // Envoie du tableau des cases validées
-                body: JSON.stringify({phraseId: updatedCaseId, validatedCases: updatedValidatedCases }) 
+                body: JSON.stringify({ phraseId: updatedCaseId, validatedCases: updatedValidatedCases })
             });
 
             if (response.ok) {
@@ -106,7 +145,7 @@ export default function Game() {
 
                 if (data.data.finished) {
                     setFinPartie(true);
-                    window.scrollTo({ top: 0});
+                    window.scrollTo({ top: 0 });
                 }
 
             } else {
@@ -123,7 +162,10 @@ export default function Game() {
     const confirmLancementPartie = async () => {
         window.location.reload();
         try {
-            const response = await fetch(baseUrl + `/grilles/user/${userId}`, { method: 'POST' });
+            const response = await fetch(baseUrl + `/grilles/user/${userId}`, {
+                method: 'POST',
+                'Authorization': `Bearer ${token}`
+            });
             if (response.ok) {
                 const dataGrille = await response.json();
                 const { grille, selectedPhrases } = dataGrille.data;
@@ -150,6 +192,7 @@ export default function Game() {
 
     return (
         <>
+
             {!lancementPartie ? 
             <div className='lancementPartie'>
                 <h2 className="h2_regles">Explication du jeu :</h2>
@@ -172,6 +215,14 @@ export default function Game() {
                 <>
                 {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
                 <FlecheScroll />
+
+                <div className="checkBingoContainer">
+                    <Bouton 
+                        style={{width: '150px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} 
+                        text="Vérifier Bingo" 
+                        onClick={checkBingo} 
+                    />
+                </div>
 
                 <div className='listeSalles'>
                     {nomSallesUser.map((salle) => (
