@@ -22,7 +22,7 @@ main {
   flex: 1;
 }
 
-input {
+input, select {
   background-color:var(--background-grey);
 }
 

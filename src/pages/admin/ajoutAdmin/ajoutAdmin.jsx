@@ -73,8 +73,8 @@ const AjoutAdmin = () => {
 
     return (
         <>
-            <h2>Liste et role(s) des joueurs :</h2>
-            <ul>
+            <h2 className="titreh2">Liste et role(s) des joueurs :</h2>
+            <ul className="usersListContainer">
                 {users.map(user => {
                     const roles = user.Roles;
                     return (
@@ -93,9 +93,9 @@ const AjoutAdmin = () => {
                 }
                 )}
             </ul>
-            <h4>Ajouter le role d'admin</h4>
+            <h4 className="titreh4">Ajouter le role d'admin</h4>
             <div>
-                <select name="ajoutAdmin" id="userSelect" onChange={selectAdmin}>
+                <select className="userSelect" name="ajoutAdmin" id="userSelect" onChange={selectAdmin}>
                     <option value="">Choisissez un joueur</option>
                     {users.map(user =>
                         <option key={user.id} value={user.email} >
@@ -104,9 +104,9 @@ const AjoutAdmin = () => {
                 </select>
             </div>
             <Bouton onClick={ajoutAdmin} text="Ajouter" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
-            <h4>Enlever le role d'admin</h4>
+            <h4 className="titreh4">Enlever le role d'admin</h4>
             <div>
-                <select name="deleteAdmin" id="userDeletedSelect" onChange={selectAdmin}>
+                <select className="userSelect" name="deleteAdmin" id="userDeletedSelect" onChange={selectAdmin}>
                     <option value="">Choisissez un joueur</option>
                     {users.map(user =>
                         <option key={user.id} value={user.email} >
