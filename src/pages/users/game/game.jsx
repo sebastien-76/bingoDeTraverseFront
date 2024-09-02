@@ -28,9 +28,11 @@ export default function Game() {
 
     useEffect(() => {
         fetchGrille();
+
+
     }, []);
 
-    // Récupération de la grille dans la BDD
+    // Récupération de la grille dans la BDD
     const fetchGrille = async () => {
         try {
             const response = await fetch(baseUrl + `/grilles/user/${userId}`, {
@@ -68,11 +70,13 @@ export default function Game() {
                 }, {});
 
                 setGroupedPhrases(grouped);
+                
             }
         } catch (error) {
             console.error("Erreur lors de la récupération ou de la création de la grille :", error);
         }
     };
+
 
     const openModal = (index) => {
         if (!valideCases[index]) {
@@ -85,6 +89,32 @@ export default function Game() {
         setIsModalOpen(false);
         setSelectedCaseIndex(null);
     };
+
+    // verification de fin de partie
+    const checkBingo = async () => {
+        try {
+        const response = await fetch(baseUrl + `/grilles/${grilleId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            // Envoie du tableau des cases validées
+            body: JSON.stringify({ phraseId: null, validatedCases: valideCases })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.data.finished) {
+                setFinPartie(true);
+                window.scrollTo({ top: 0 });
+            }
+        }
+
+        } catch (error) {
+            console.error("Erreur lors de la verification du bingo :", error);
+        }
+    };
+    
 
     // Validation de la case
     const confirmValidation = async () => {
@@ -162,28 +192,36 @@ export default function Game() {
 
     return (
         <>
-            {!lancementPartie ?
-                <div className='lancementPartie'>
-                    <h2 className="h2_regles">Explication du jeu :</h2>
-                    <p className="explication_regles">
-                        <ul>
-                            <li className="li_accueil">Les phrases utilisées dans la grille sont en fonction des salles apprises.</li>
-                            <li className="li_accueil">Chaque grille est générée aléatoirement.</li>
-                            <li className="li_accueil">Quand quelqu'un gagne, toutes les grilles en cours se terminent.</li>
-                            <li className="li_accueil">Lors d'un Bingo, vous gagnez un point.</li>
-                            <li className="li_accueil">Le classement sera affiché dans l'accueil.</li>
-                        </ul>
-                    </p>
-                    <div className="choixLancementPartie">
-                        <Bouton style={{ width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)' }} text="Lancer la partie" onClick={confirmLancementPartie} />
-                    </div>
-                </div> :
+            {!lancementPartie ? 
+            <div className='lancementPartie'>
+                <h2 className="h2_regles">Explication du jeu :</h2>
+                <p className="explication_regles">
+                    <ul>
+                        <li className="li_accueil">Les phrases utilisées dans la grille sont en fonction des salles apprises.</li>
+                        <li className="li_accueil">Chaque grille est générée aléatoirement.</li>
+                        <li className="li_accueil">Quand quelqu'un gagne, toutes les grilles en cours se terminent.</li>
+                        <li className="li_accueil">Lors d'un Bingo, vous gagnez un point.</li>
+                        <li className="li_accueil">Le classement sera affiché dans l'accueil.</li>
+                    </ul>
+                </p>
+                <div className="choixLancementPartie">
+                    <Bouton style={{width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
+                </div>
+            </div> :
+            
+            <div>
+            {!finPartie ? 
+                <>
+                {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
+                <FlecheScroll />
 
-                <div>
-                    {!finPartie ?
-                        <>
-                            {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
-                            <FlecheScroll />
+                <div className="checkBingoContainer">
+                    <Bouton 
+                        style={{width: '150px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} 
+                        text="Vérifier Bingo" 
+                        onClick={checkBingo} 
+                    />
+                </div>
 
                             <div className='listeSalles'>
                                 {nomSallesUser.map((salle) => (
