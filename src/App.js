@@ -11,6 +11,7 @@ import Accueil from './pages/users/accueil/accueil'
 import Salles from './pages/admin/salles/salles';
 import Phrases from './pages/admin/phrases/phrases';
 import Gamemaster from './pages/admin/gamemasters/gamemasters';
+import AjoutAdmin from './pages/admin/ajoutAdmin/ajoutAdmin'
 
 import Game from './pages/users/game/game';
 import Profil from './pages/users/profil/profil';
@@ -19,7 +20,7 @@ import RouteSecurisee from './components/routeSecurisee/routeSecurisee';
 
 import authContext from './hooks/useAuth';
 import { estIdentifie, pseudoUtilisateur, roleAdmin, recuperationId, deconnexion } from './services/Auth';
-import { recuperationItem } from './services/localStorage';
+
 import { getUser } from './services/serviceAppel';
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
               <Route path='/phrases' element={<Phrases />} />
               <Route path='/salles' element={<Salles />} />
               <Route path='/gamemaster' element={<Gamemaster />} />
+              <Route path='ajout-admin' element={<AjoutAdmin />} />
               <Route path='/game' element={<RouteSecurisee composant={<Game />} />} />
               <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
               <Route path='/connexion' element={<Connexion />} />
@@ -100,7 +102,7 @@ function App() {
             <div className='modal-backdrop' onClick={() => toggleMenu()}>
             </div>
             <div className="modalMenu">
-              <img className="imageProfilNavBar" src={imageProfilNavBar} alt="image de profil" />
+              <img className="imageProfilNavBar" src={imageProfilNavBar} alt="profil" />
               <div className="navLinks">
                 <a className='navLink' href="/">Accueil</a>
                 <a className='navLink' href={lienProfil}>Profil</a>
@@ -113,6 +115,8 @@ function App() {
                     <a className='navLink' href="/phrases">Phrases</a>
                     <a className='navLink' href="/salles">Salles</a>
                     <a className='navLink' href="/gamemaster">Gamemasters</a>
+                    <a className='navLink' href="/ajout-admin">Ajouter un admin</a>
+
                   </div>
                 )}
               </div>
