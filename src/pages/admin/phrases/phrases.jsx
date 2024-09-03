@@ -14,32 +14,33 @@ export default function Phrases() {
     const [visibilite, setVisibilite] = useState("invisible");
 
 
-    const fetchPhrases = async () => {
+    const fetchPhrases = () => {
         getPhrases()
-        .then(res => res.json())
-        .then(dataPhrase => setPhrase(dataPhrase.data))
+            .then(res => res.json())
+            .then(dataPhrase => setPhrase(dataPhrase.data))
     }
 
     const fetchSalles = () => {
         getSalles()
-        .then(res => res.json())
-        .then(dataSalles => setSalles(dataSalles.data) )
+            .then(res => res.json())
+            .then(dataSalles => setSalles(dataSalles.data))
     }
 
-    const confirmDeletePhrase = async (phraseId) => {
+    const confirmDeletePhrase = (phraseId) => {
         deletePhrase(phraseId)
         setShowModal(false);
         setSelectedPhrase(null);
     }
 
-    const addPhraseValidee = async () => {
-        postPhrase();
+    const addPhraseValidee = (newPhraseText, SalleId) => {
+        postPhrase(newPhraseText, SalleId);
         setNewPhraseText("");
         setVisibilite("invisible");
+        document.getElementById("inputSalle").checked = false;
     }
 
     const addPhrase = () => {
-       (newPhraseText && SalleId) ? addPhraseValidee() : setVisibilite("visible");
+        (newPhraseText && SalleId) ? addPhraseValidee(newPhraseText, SalleId) : setVisibilite("visible");
     }
 
     const handleDeleteClick = (phrase) => {
@@ -54,11 +55,11 @@ export default function Phrases() {
 
     useEffect(() => {
         fetchPhrases();
-    }, [phrases]);
+    }, [newPhraseText]);
 
     useEffect(() => {
         fetchSalles();
-    }, [salles])
+    }, [])
 
     // Grouping phrases by salle
     const groupedPhrases = salles.map(salle => ({
@@ -69,7 +70,7 @@ export default function Phrases() {
     return (
         <>
             <FlecheScroll />
-            
+
             <div className="addPhrase">
                 <h2>Ajouter une phrase</h2>
                 <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
@@ -87,17 +88,18 @@ export default function Phrases() {
                             <input
                                 type="radio"
                                 name="salle"
+                                id="inputSalle"
                                 value={salle.id}
                                 onChange={(e) => setSalleId(e.target.value)}
                             />
                         </div>
                     ))}
                 </div>
-                <Bouton style={{marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} text="Ajouter" onClick={addPhrase} />
+                <Bouton style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
             </div>
             <h1>Liste des phrases</h1>
 
-            <Bouton text="Actualiser" style={{marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border :"1px solid var(--blue-pastel)"}} onClick={fetchPhrases}/>
+            <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchPhrases} />
 
             {/* ancre avec le nom des salles */}
             <div className="sallesListeAP">
@@ -111,14 +113,14 @@ export default function Phrases() {
                 {groupedPhrases.map(({ salle, phrases }) => (
                     <div key={salle.id}>
                         <h2 className="salleNom" id={salle.name}>{salle.name}</h2>
-                            {phrases.map(phrase => (
-                                <div key={phrase.id} className="phraseContainer">
-                                    <div className="phraseSalle">
-                                        <p>{phrase.text}</p>
-                                    </div>
-                                    <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(phrase)} />
+                        {phrases.map(phrase => (
+                            <div key={phrase.id} className="phraseContainer">
+                                <div className="phraseSalle">
+                                    <p>{phrase.text}</p>
                                 </div>
-                            ))}
+                                <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(phrase)} />
+                            </div>
+                        ))}
                     </div>
                 ))}
             </div>
@@ -128,8 +130,8 @@ export default function Phrases() {
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
                         <p>Êtes-vous sûr de vouloir supprimer la phrase {selectedPhrase.text} ?</p>
-                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeletePhrase(selectedPhrase.id)} />
-                        <Bouton style={{width: "70px", backgroundColor: "var(--purple-pastel)", border :"1px solid var(--purple-pastel)"}} text="non" onClick={handleCancelDelete} />
+                        <Bouton style={{ width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeletePhrase(selectedPhrase.id)} />
+                        <Bouton style={{ width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="non" onClick={handleCancelDelete} />
                     </div>
                 </div>
             )}
