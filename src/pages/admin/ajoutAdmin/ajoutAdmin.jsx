@@ -9,6 +9,7 @@ const AjoutAdmin = () => {
     //Définition de l'état stockant les users
     const [users, setUsers] = useState([])
     const [userSelected, setUserSelected] = useState("")
+    const [visibilite, setVisibilite] = useState("invisible");
 
     const token = recuperationItem('jetonUtilisateur')
 
@@ -28,7 +29,7 @@ const AjoutAdmin = () => {
         setUserSelected(e.target.options[idx].value)
     }
 
-    const ajoutAdmin = () => {
+    const ajoutAdminValide = () => {
         const user = users.find(user => user.email === userSelected)
         const uid = user.id
         const role = "ADMIN"
@@ -42,14 +43,28 @@ const AjoutAdmin = () => {
                 Roles: role
             })
         }
+
         const fetchPutUser = () => {
             putUser(uid, params)
+                .then(() => fetchUsers());
         }
-        fetchPutUser()
-        document.getElementById("userSelect").selectedIndex = 0
+
+        try {
+            fetchPutUser()
+            document.getElementById("userSelect").selectedIndex = 0
+            setVisibilite("invisible")
+            setUserSelected("")
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
-    const deleteAdmin = () => {
+    const ajoutAdmin = () => {
+        userSelected ? ajoutAdminValide() : setVisibilite("visible");
+    }
+
+    const deleteAdminValide = () => {
         const user = users.find(user => user.email === userSelected)
         const uid = user.id
         const role = "ADMIN"
@@ -63,16 +78,31 @@ const AjoutAdmin = () => {
                 deletedRoles: role
             })
         }
+
         const fetchDelUser = () => {
             putUser(uid, params)
+                .then(() => fetchUsers());
         }
-        fetchDelUser()
-        document.getElementById("userDeletedSelect").selectedIndex= 0
+
+        try {
+            fetchDelUser()
+            document.getElementById("userDeletedSelect").selectedIndex = 0
+            setVisibilite("invisible")
+            setUserSelected("")
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
+
+    const deleteAdmin = () => {
+        userSelected ? deleteAdminValide() : setVisibilite("visible");
     }
 
     return (
         <>
             <h2 className="titreh2">Liste et role(s) des joueurs :</h2>
+            <p className={visibilite}>Veuillez choisir un joueur!</p>
             <ul className="usersListContainer">
                 {users.map(user => {
                     const roles = user.Roles;

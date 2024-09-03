@@ -28,8 +28,6 @@ export default function Game() {
 
     useEffect(() => {
         fetchGrille();
-
-
     }, []);
 
     // Récupération de la grille dans la BDD

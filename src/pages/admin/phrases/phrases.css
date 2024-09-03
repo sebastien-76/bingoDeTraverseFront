@@ -30,7 +30,7 @@
 }
 
 .visible {
-    color : red;
+    color : var(--red);
     font-weight: bold;
 }
 

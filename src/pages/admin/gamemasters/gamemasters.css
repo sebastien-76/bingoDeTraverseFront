@@ -29,3 +29,12 @@
     margin: 0 auto;
     margin-top: 10px;
 }
+
+.visible {
+    color : red;
+    font-weight: bold;
+}
+
+.invisible {
+    display: none;
+}

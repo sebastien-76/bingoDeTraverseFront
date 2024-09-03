@@ -13,23 +13,38 @@ export default function Gamemasters() {
     // state pour la selection de la salle à supprimer
     const [selectedGamemaster, setSelectedGamemaster] = useState(null);
 
+    const [visibilite, setVisibilite] = useState("invisible");
+
     const fetchGamemasters = async () => {
         getGamemasters()
             .then(res => res.json())
             .then(dataGamemasters => setGamemasters(dataGamemasters.data))
     }
 
-    const confirmDeleteGamemaster = async (GamemasterId) => {
-        deleteGamemaster(GamemasterId)
-        setShowModal(false);
-        setSelectedGamemaster(null);
-        fetchGamemasters();
+    const confirmDeleteGamemaster = (GamemasterId) => {
+        try {
+            deleteGamemaster(GamemasterId)
+                .then(() => fetchGamemasters());
+            setShowModal(false);
+            setSelectedGamemaster(null);
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
-    const addGamemaster = async () => {
+    const addGamemasterValide = () => {
+        try {
             postGamemaster(newGamemaster)
-            fetchGamemasters();
+                .then(() => fetchGamemasters());
             setNewGamemaster("");
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
+    const addGamemaster = () => {
+        newGamemaster ? addGamemasterValide() : setVisibilite("visible");
     }
 
     const handleDeleteClick = (gamemaster) => {
@@ -42,13 +57,16 @@ export default function Gamemasters() {
         setShowModal(false);
     }
 
-    useEffect(() => { fetchGamemasters() }, []);
+    useEffect(() => {
+        fetchGamemasters()
+    }, []);
 
     return (
         <>
 
             <div>
                 <h2>Ajouter un gamemaster</h2>
+                <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
                 <input
                     className="gamemasterInput"
                     placeholder="Email du gamemaster"

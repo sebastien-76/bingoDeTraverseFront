@@ -27,16 +27,29 @@ export default function Phrases() {
     }
 
     const confirmDeletePhrase = (phraseId) => {
-        deletePhrase(phraseId)
-        setShowModal(false);
-        setSelectedPhrase(null);
+        try {
+            deletePhrase(phraseId)
+                .then(() => fetchPhrases());
+            setShowModal(false);
+            setSelectedPhrase(null);
+        }
+        catch (error) {
+            console.error(error)
+        }
+
     }
 
     const addPhraseValidee = (newPhraseText, SalleId) => {
-        postPhrase(newPhraseText, SalleId);
-        setNewPhraseText("");
-        setVisibilite("invisible");
-        document.getElementById("inputSalle").checked = false;
+        try {
+            postPhrase(newPhraseText, SalleId)
+                .then(() => fetchPhrases());
+            setNewPhraseText("");
+            setVisibilite("invisible");
+            document.getElementById("inputSalle").checked = false;
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
     const addPhrase = () => {
@@ -55,7 +68,7 @@ export default function Phrases() {
 
     useEffect(() => {
         fetchPhrases();
-    }, [newPhraseText]);
+    }, []);
 
     useEffect(() => {
         fetchSalles();

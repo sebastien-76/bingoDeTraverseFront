@@ -5,7 +5,7 @@ import Bouton from "../../../components/boutons/bouton";
 
 export default function Salles() {
     // state pour la liste des salles
-    const [salles, setSalle] = useState([]);
+    const [salles, setSalles] = useState([]);
     // state pour l'ajout d'une nouvelle salle
     const [newSalleName, setNewSalleName] = useState("");
     // state pour le modal
@@ -13,19 +13,22 @@ export default function Salles() {
     // state pour la selection de la salle à supprimer
     const [selectedSalle, setSelectedSalle] = useState(null);
 
+    const [visibilite, setVisibilite] = useState("invisible");
+
     const fetchData = async () => {
         getSalles()
             .then(res => res.json())
             .then(dataSalle => {
                 //filtrer dans les salles pour ne pas avoir la salle 1
                 const filteredSalles = dataSalle.data.filter(salle => salle.id !== 1);
-                setSalle(filteredSalles);
+                setSalles(filteredSalles);
             });
     }
 
     const confirmDeleteSalle = async (salleId) => {
         try {
             deleteSalle(salleId)
+                .then(() => fetchData())
             setShowModal(false);
             setSelectedSalle(null);
             fetchData();
@@ -35,15 +38,19 @@ export default function Salles() {
         }
     }
 
-    const addSalle = () => {
+    const addSalleValidee = () => {
         try {
-            postSalle(newSalleName);
+            postSalle(newSalleName)
+                .then(() => fetchData());
             setNewSalleName("");
-
         }
         catch (error) {
             console.error(error);
         }
+    }
+
+    const addSalle = () => {
+        newSalleName ? addSalleValidee() : setVisibilite("visible");
     }
 
     const handleDeleteClick = (salle) => {
@@ -56,19 +63,22 @@ export default function Salles() {
         setShowModal(false);
     }
 
-    useEffect(() => {fetchData()}, [salles]);
+    useEffect(() => {
+        fetchData()
+    }, []);
 
     return (
         <>
             <div>
                 <h2>Ajouter une salle</h2>
+                <p className={visibilite}>Veuillez entrer un nom de salle!</p>
                 <input
                     className="salleInput"
                     placeholder="Nom de la salle"
                     type="text"
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
-                                    />
+                />
                 <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
             </div>
 
