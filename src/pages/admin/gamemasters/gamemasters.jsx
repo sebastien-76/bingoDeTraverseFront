@@ -42,7 +42,7 @@ export default function Gamemasters() {
         setShowModal(false);
     }
 
-    useEffect(() => { fetchGamemasters() }, [gamemasters]);
+    useEffect(() => { fetchGamemasters() }, []);
 
     return (
         <>

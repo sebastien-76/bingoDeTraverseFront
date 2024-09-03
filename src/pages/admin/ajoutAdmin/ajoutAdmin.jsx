@@ -21,16 +21,15 @@ const AjoutAdmin = () => {
 
     useEffect(() => {
         fetchUsers()
-    }, [users])
+    }, [])
 
     const selectAdmin = (e) => {
         const idx = e.target.selectedIndex
         setUserSelected(e.target.options[idx].value)
     }
 
-
     const ajoutAdmin = () => {
-        const user = users.find(user => user.email == userSelected)
+        const user = users.find(user => user.email === userSelected)
         const uid = user.id
         const role = "ADMIN"
         const params = {
@@ -43,15 +42,15 @@ const AjoutAdmin = () => {
                 Roles: role
             })
         }
-        const fetchUser = () => {
+        const fetchPutUser = () => {
             putUser(uid, params)
         }
-        fetchUser()
-        document.getElementById("userSelect").selectedIndex= 0
+        fetchPutUser()
+        document.getElementById("userSelect").selectedIndex = 0
     }
 
     const deleteAdmin = () => {
-        const user = users.find(user => user.email == userSelected)
+        const user = users.find(user => user.email === userSelected)
         const uid = user.id
         const role = "ADMIN"
         const params = {
@@ -64,10 +63,10 @@ const AjoutAdmin = () => {
                 deletedRoles: role
             })
         }
-        const fetchUser = () => {
+        const fetchDelUser = () => {
             putUser(uid, params)
         }
-        fetchUser()
+        fetchDelUser()
         document.getElementById("userDeletedSelect").selectedIndex= 0
     }
 
