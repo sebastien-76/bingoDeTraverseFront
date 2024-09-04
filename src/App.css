@@ -6,24 +6,25 @@ body {
 }
 
 :root {
-  background-color:var(--background-grey);
+  background-color: var(--background-grey);
 }
 
 .App {
   text-align: center;
-  display : flex;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color:var(--background-grey);
-  
+  background-color: var(--background-grey);
+
 }
 
 main {
   flex: 1;
 }
 
-input, select {
-  background-color:var(--background-grey);
+input,
+select {
+  background-color: var(--background-grey);
 }
 
 
@@ -112,6 +113,38 @@ input, select {
   width: 100vw;
 }
 
+/* CSS commun aux pages admin */
+.pageAdminH2 {
+  font-size: 1.5rem;
+}
+
+.pageAdminH1 {
+  font-size: 2rem;
+}
+
+.pageAdminInput {
+  width: 80%;
+  height: 2.5vh;
+  margin-bottom: 1.2rem;
+  border: 0.5px solid var(--dark-grey);
+  padding: 2px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.listeAG {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80vw;
+  background-color: var(--purple-pastel);
+  border-radius: 10px;
+  border: 1px solid var(--purple-pastel);
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
 @media (min-width: 1080px) {
   .modalMenu {
     width: 35%;
@@ -119,5 +152,25 @@ input, select {
 
   .navLink {
     font-size: 2rem;
+  }
+
+  /* CSS commun aux pages admin */
+  .pageAdminH2 {
+    font-size: 2rem;
+  }
+  
+  .pageAdminH1 {
+    font-size: 2.5rem;
+  }
+
+  .pageAdminInput {
+    width: 60%;
+    height: 5vh;
+  }
+
+  .listeAG {
+    width: 60%;
+    font-size: 1.3rem;
+    height: 5vh;
   }
 }

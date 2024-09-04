@@ -64,26 +64,26 @@ export default function Gamemasters() {
     return (
         <>
 
-            <div>
-                <h2>Ajouter un gamemaster</h2>
+            <div className="addGamemasters">
+                <h2 className="pageAdminH2">Ajouter un gamemaster</h2>
                 <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
                 <input
-                    className="gamemasterInput"
+                    className="pageAdminInput"
                     placeholder="Email du gamemaster"
                     type="text"
                     value={newGamemaster}
                     onChange={(e) => setNewGamemaster(e.target.value)}
                 />
-                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addGamemaster} />
+                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addGamemaster} />
             </div>
 
-            <h1>Liste des gamemasters</h1>
+            <h1 className="pageAdminH1">Liste des gamemasters</h1>
 
             <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchGamemasters} />
 
             <div className="gamemastersListe">
                 {gamemasters && gamemasters.map((gamemaster) => (
-                    <div className="gamemasterAG" key={gamemaster.id}>
+                    <div className="listeAG" key={gamemaster.id}>
                         {gamemaster.email}
                         <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(gamemaster)} />
                     </div>
