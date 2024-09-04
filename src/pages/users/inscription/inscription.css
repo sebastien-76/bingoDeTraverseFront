@@ -22,7 +22,7 @@
 }
 
 .inscriptionForm label {
-    font-size: 20px;
+    font-size:  1.2rem;
 }
 
 .inputInscription {
@@ -50,5 +50,14 @@
     font-size: 0.9rem;
     list-style: none;
     text-align: start;
+}
 
+@media (min-width: 1080px) {
+    .inscriptionForm label {
+        font-size:  1.4rem;
+    }
+
+    .salleInscription {
+        font-size: 1.3rem;
+    }
 }
