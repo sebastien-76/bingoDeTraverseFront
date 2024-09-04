@@ -199,3 +199,34 @@
     width: 70%;
     margin: 0 auto;
 }
+
+@media (min-width: 1080px) {
+    .titreProfil {
+        font-size: 4rem;
+    }
+
+    .infosProfil {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 1.5rem;
+        height: 50vh
+    }
+
+    .infosDiv {
+        height: 15vh;
+    }
+
+    .modification {
+        width: 2vw;
+    }
+
+    .titreSalles {
+        font-size: 1.4rem;
+    }
+
+    .salles {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 1.3rem;
+    }
+}

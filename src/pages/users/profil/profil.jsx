@@ -168,7 +168,7 @@ const Profil = () => {
     if (id.id == uid) {
         return (
             <>
-                <h1>Profil</h1>
+                <h1 className='titreProfil'>Profil</h1>
                 <div>
                     {profil.imageProfilURL === null ?
                         <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
@@ -233,16 +233,17 @@ const Profil = () => {
                         </div>
                     )
                 }
-
-
                 <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em' }} />
-                <p className='titreSalles'> Salles apprises :</p>
-                <div className='salleListProfil'>
-                    {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
-                    {sallesUser && sallesUser.map((salle) => (
-                        salle.id !== 1 &&
-                        <p key={salle.id} className='salleList'>{salle.name}</p>
-                    ))}
+
+                <div className='salles'>
+                    <p className='titreSalles'> Salles apprises :</p>
+                    <div className='salleListProfil'>
+                        {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
+                        {sallesUser && sallesUser.map((salle) => (
+                            salle.id !== 1 &&
+                            <p key={salle.id} className='salleList'>{salle.name}</p>
+                        ))}
+                    </div>
                 </div>
                 <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
 
