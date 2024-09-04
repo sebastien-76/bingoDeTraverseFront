@@ -53,12 +53,12 @@ input, select {
   border-radius: 50%;
   object-fit: cover;
   overflow: hidden;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--white)var(--white);
 }
 
 .navLink {
   text-decoration: none;
-  color: white;
+  color: var(--white);
   font-size: 1.2em;
   margin-bottom: 10px;
 }
@@ -87,7 +87,7 @@ input, select {
   margin-bottom: 20px;
   width: 90%;
   height: 2px;
-  background-color: white;
+  background-color: var(--white);
 }
 
 .linksAdmin {
@@ -98,7 +98,7 @@ input, select {
 }
 
 .adminH2 {
-  color: white;
+  color: var(--white);
   font-size: 25px;
   font-weight: 500;
   text-decoration: underline;
@@ -110,4 +110,14 @@ input, select {
   left: 0;
   height: 100%;
   width: 100vw;
+}
+
+@media (min-width: 1080px) {
+  .modalMenu {
+    width: 35%;
+  }
+
+  .navLink {
+    font-size: 2rem;
+  }
 }
