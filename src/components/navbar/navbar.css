@@ -55,3 +55,9 @@
     background-color: var(--white);
     margin: 6px 0;
 }
+
+@media (min-width: 1080px) {
+    .navBarH1 {
+        font-size: 2.5rem;
+    }
+}
