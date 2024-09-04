@@ -76,13 +76,13 @@ th {
     border-bottom: 1px solid var(--blue-flash);
 }
 
-tbody > tr:nth-of-type(even) {
+tbody>tr:nth-of-type(even) {
     background-color: var(--blue-pastel);
-  }
+}
 
-.first-place{
+.first-place {
     margin: 0;
-    font-weight: 600 ;
+    font-weight: 600;
     color: var(--blue-flash);
 }
 
@@ -95,6 +95,15 @@ tbody > tr:nth-of-type(even) {
 
     .explication_accueil {
         text-align: center;
+        font-size: 1.3rem;
+    }
+
+    .titre_accueil {
+        font-size: 1.7rem;
+    }
+
+    .p_accueil {
+        font-size: 1.1rem;
     }
 
     .table_accueil {
