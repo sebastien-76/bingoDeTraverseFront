@@ -47,36 +47,12 @@
     text-align: left;
 }
 
-.phraseContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 1rem;
-    width: 80vw;
-    margin-left: 0.2rem;
-    margin-bottom: 0.5rem;
-    background-color: var(--purple-pastel);
-    border-radius: 10px;
-    border: 1px solid var(--purple-pastel);
-}
-
 .addPhrase {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-}
-
-.inputPhrase {
-    width: 80%;
-    height: 2.5vh;
-    margin-bottom: 1.2rem;
-    border: 0.5px solid var(--dark-grey);
-    padding: 2px;
-    padding-left: 5px;
-    border-radius: 5px;
 }
 
 .sallesListeAP {
@@ -109,25 +85,31 @@
     width: 100vw;
 }
 
+.phraseContainer p {
+    margin-left: 0.5rem;
+}
+
 @media (min-width:1080px) {
     .salle {
         width: 50%;
         font-size: 1.3rem;
     }
-    
-    .inputPhrase {
-        width: 60%;
+
+    .salleNom {
+        font-size: 1.4rem;
     }
-    
+   
     .sallesListeAP {
         margin-top: 3rem;
     }
 
     .salleAncre {
         width: 15vw;
+        font-size: 1rem;
     }
 
-    .phrasesListe {
-        width: 80%;
+    .phraseContainer {
+        margin: 2rem auto;
     }
+
 }

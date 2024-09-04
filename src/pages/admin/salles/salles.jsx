@@ -70,10 +70,10 @@ export default function Salles() {
     return (
         <>
             <div className="addSalle">
-                <h2>Ajouter une salle</h2>
+                <h2 className="pageAdminH2">Ajouter une salle</h2>
                 <p className={visibilite}>Veuillez entrer un nom de salle!</p>
                 <input
-                    className="salleInput"
+                    className="pageAdminInput"
                     placeholder="Nom de la salle"
                     type="text"
                     value={newSalleName}
@@ -82,13 +82,13 @@ export default function Salles() {
                 <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
             </div>
 
-            <h1>Liste des salles</h1>
+            <h1 className="pageAdminH1">Liste des salles</h1>
 
             <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchData} />
 
             <div className="sallesListeAS">
                 {salles && salles.map((salle) => (
-                    <div className="sallesAS" key={salle.id}>
+                    <div className="listeAG" key={salle.id}>
                         <p> {salle.name} </p>
 
                         <img src="../../../../images/supprimer.png" className="poubelle" alt="supprimer" onClick={() => handleDeleteClick(salle)} />

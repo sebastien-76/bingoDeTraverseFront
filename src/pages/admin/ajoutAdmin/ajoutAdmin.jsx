@@ -101,7 +101,29 @@ const AjoutAdmin = () => {
 
     return (
         <>
-            <h2 className="titreh2">Liste et role(s) des joueurs :</h2>
+            <h2 className="pageAdminH2">Ajouter le role d'admin</h2>
+            <div>
+                <select className="userSelect" name="ajoutAdmin" id="userSelect" onChange={selectAdmin}>
+                    <option value="">Choisissez un joueur</option>
+                    {users.map(user =>
+                        <option key={user.id} value={user.email} >
+                            {user.email}
+                        </option>)}
+                </select>
+            </div>
+            <Bouton onClick={ajoutAdmin} text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+            <h2 className="pageAdminH2">Enlever le role d'admin</h2>
+            <div>
+                <select className="userSelect" name="deleteAdmin" id="userDeletedSelect" onChange={selectAdmin}>
+                    <option value="">Choisissez un joueur</option>
+                    {users.map(user =>
+                        <option key={user.id} value={user.email} >
+                            {user.email}
+                        </option>)}
+                </select>
+            </div>
+            <Bouton onClick={deleteAdmin} text="Supprimer le role" style={{ marginBottom: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+            <h1 className="pageAdminH1">Liste et role(s) des joueurs :</h1>
             <p className={visibilite}>Veuillez choisir un joueur!</p>
             <ul className="usersListContainer">
                 {users.map(user => {
@@ -122,28 +144,7 @@ const AjoutAdmin = () => {
                 }
                 )}
             </ul>
-            <h4 className="titreh4">Ajouter le role d'admin</h4>
-            <div>
-                <select className="userSelect" name="ajoutAdmin" id="userSelect" onChange={selectAdmin}>
-                    <option value="">Choisissez un joueur</option>
-                    {users.map(user =>
-                        <option key={user.id} value={user.email} >
-                            {user.email}
-                        </option>)}
-                </select>
-            </div>
-            <Bouton onClick={ajoutAdmin} text="Ajouter" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
-            <h4 className="titreh4">Enlever le role d'admin</h4>
-            <div>
-                <select className="userSelect" name="deleteAdmin" id="userDeletedSelect" onChange={selectAdmin}>
-                    <option value="">Choisissez un joueur</option>
-                    {users.map(user =>
-                        <option key={user.id} value={user.email} >
-                            {user.email}
-                        </option>)}
-                </select>
-            </div>
-            <Bouton onClick={deleteAdmin} text="Supprimer le role" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+
         </>
     )
 

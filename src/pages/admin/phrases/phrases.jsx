@@ -85,10 +85,10 @@ export default function Phrases() {
             <FlecheScroll />
 
             <div className="addPhrase">
-                <h2>Ajouter une phrase</h2>
+                <h2 className="pageAdminH2">Ajouter une phrase</h2>
                 <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
                 <input
-                    className="inputPhrase"
+                    className="pageAdminInput"
                     placeholder="Texte de la phrase"
                     type="text"
                     value={newPhraseText}
@@ -110,7 +110,7 @@ export default function Phrases() {
                 </div>
                 <Bouton style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
             </div>
-            <h1>Liste des phrases</h1>
+            <h1 className="pageAdminH1">Liste des phrases</h1>
 
             <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchPhrases} />
 
@@ -127,7 +127,7 @@ export default function Phrases() {
                     <div key={salle.id}>
                         <h2 className="salleNom" id={salle.name}>{salle.name}</h2>
                         {phrases.map(phrase => (
-                            <div key={phrase.id} className="phraseContainer">
+                            <div key={phrase.id} className="listeAG phraseContainer">
                                 <div className="phraseSalle">
                                     <p>{phrase.text}</p>
                                 </div>

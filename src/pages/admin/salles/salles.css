@@ -29,19 +29,6 @@ body {
     margin-top: 30px;
 }
 
-.sallesAS{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 1rem;
-    width: 90vw;
-    background-color: var(--purple-pastel);
-    border-radius: 10px;
-    border: 1px solid var(--purple-pastel);
-    margin-bottom: 20px;
-}
-
 .deleteSalle{
     background-color: var(--white);
     color: var(--dark-grey);
@@ -65,16 +52,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.salleInput {
-    width: 80%;
-    height: 2.5vh;
-    margin-bottom: 1.2rem;
-    border: 0.5px solid var(--dark-grey);
-    padding: 2px;
-    padding-left: 5px;
-    border-radius: 5px;
 }
 
 .salleButton {
@@ -142,14 +119,4 @@ body {
 
 .invisible {
     display: none;
-}
-
-@media (min-width: 1080px) {
-    .salleInput {
-        width: 60%;
-    }
-
-    .sallesAS {
-        width: 60%;
-    }
 }
