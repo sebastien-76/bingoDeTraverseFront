@@ -14,7 +14,7 @@
 }
 
 .form_connexion label {
-    font-size: 20px;
+    font-size: 1.2rem;
 }
 
 .form_connexion input {
@@ -29,4 +29,13 @@
 
 .error_connexion {
     color: var(--red);
+}
+
+@media (min-width: 1080px) {
+    .form_connexion {
+        width: 40%;
+    }
+    .form_connexion label {
+        font-size: 1.5rem;
+    }
 }
