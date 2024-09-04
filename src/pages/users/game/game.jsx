@@ -193,15 +193,13 @@ export default function Game() {
             {!lancementPartie ? 
             <div className='lancementPartie'>
                 <h2 className="h2_regles">Explication du jeu :</h2>
-                <p className="explication_regles">
-                    <ul>
+                <ul className="explication_regles">
                         <li className="li_accueil">Les phrases utilisées dans la grille sont en fonction des salles apprises.</li>
                         <li className="li_accueil">Chaque grille est générée aléatoirement.</li>
                         <li className="li_accueil">Quand quelqu'un gagne, toutes les grilles en cours se terminent.</li>
                         <li className="li_accueil">Lors d'un Bingo, vous gagnez un point.</li>
                         <li className="li_accueil">Le classement sera affiché dans l'accueil.</li>
-                    </ul>
-                </p>
+                </ul>
                 <div className="choixLancementPartie">
                     <Bouton style={{width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
                 </div>
