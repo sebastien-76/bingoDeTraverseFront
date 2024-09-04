@@ -69,7 +69,7 @@ export default function Salles() {
 
     return (
         <>
-            <div>
+            <div className="addSalle">
                 <h2>Ajouter une salle</h2>
                 <p className={visibilite}>Veuillez entrer un nom de salle!</p>
                 <input
@@ -79,7 +79,7 @@ export default function Salles() {
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
                 />
-                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
+                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
             </div>
 
             <h1>Liste des salles</h1>

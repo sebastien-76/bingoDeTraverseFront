@@ -60,6 +60,13 @@ body {
     border: 1px solid var(--dark-grey);
 }
 
+.addSalle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .salleInput {
     width: 80%;
     height: 2.5vh;
@@ -135,4 +142,14 @@ body {
 
 .invisible {
     display: none;
+}
+
+@media (min-width: 1080px) {
+    .salleInput {
+        width: 60%;
+    }
+
+    .sallesAS {
+        width: 60%;
+    }
 }
