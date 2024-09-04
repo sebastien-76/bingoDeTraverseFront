@@ -85,3 +85,19 @@ tbody > tr:nth-of-type(even) {
     font-weight: 600 ;
     color: var(--blue-flash);
 }
+
+/* Mediaqueries pc */
+@media (min-width: 1080px) {
+    .logo_accueil {
+        width: 10vw;
+        margin: 3rem auto;
+    }
+
+    .explication_accueil {
+        text-align: center;
+    }
+
+    .table_accueil {
+        width: 40%;
+    }
+}
