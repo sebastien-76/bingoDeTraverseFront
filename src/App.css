@@ -44,6 +44,7 @@ select {
   justify-content: center;
   align-items: center;
   z-index: 101;
+  overflow: scroll;
 }
 
 .imageProfilNavBar {
@@ -106,38 +107,53 @@ select {
 }
 
 .modal-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  position: fixed;
   width: 100vw;
+  height: 100vh;
+  z-index: 100;
+}
+
+.noScroll {
+  overflow: hidden;
+  position: fixed;
+}
+
+.salleAncre {
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-size: 0.8rem;
+  height: 4vh;
+  background-color: var(--blue-pastel);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5em;
 }
 
 /* CSS commun aux pages admin */
-.pageAdminH2 {
+.pageAdminH2, .pageAdminH1 {
   font-size: 1.5rem;
   color: var(--dark-grey);
   background-color: var(--orange-pastel);
   border: 2px solid var(--orange-pastel);
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 1rem auto;
   width: 80%;
+  margin-bottom: 2rem;
+  font-weight: 500;
 }
 
-.pageAdminH1 {
-  font-size: 2rem;
-}
-
-.pageAdminInput {
+.pageInput {
   width: 80%;
-  height: 5vh;
+  height: 3vh;
   margin-bottom: 1.2rem;
   border: 0.5px solid var(--dark-grey);
   padding: 2px;
   padding-left: 5px;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .listeAG {
@@ -151,6 +167,7 @@ select {
   border: 1px solid var(--purple-pastel);
   margin-bottom: 20px;
   padding: 5px;
+  margin-left: 0.5rem;
 }
 
 @media (min-width: 1080px) {

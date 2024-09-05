@@ -79,7 +79,6 @@ export default function Gamemasters() {
 
             <h1 className="pageAdminH1">Liste des gamemasters</h1>
 
-            <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchGamemasters} />
 
             <div className="gamemastersListe">
                 {gamemasters && gamemasters.map((gamemaster) => (

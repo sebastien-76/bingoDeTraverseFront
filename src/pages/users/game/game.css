@@ -97,7 +97,7 @@
     z-index: 10;
     background-color:var(--background-grey);
     position: absolute;
-    width: 90%;
+    width: 92%;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -110,9 +110,8 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    height: 50px;
+    height: 60px;
     transition: 0.3s;
-    
 }
 
 .valide {

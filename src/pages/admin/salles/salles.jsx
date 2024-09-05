@@ -84,8 +84,6 @@ export default function Salles() {
 
             <h1 className="pageAdminH1">Liste des salles</h1>
 
-            <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchData} />
-
             <div className="sallesListeAS">
                 {salles && salles.map((salle) => (
                     <div className="listeAG" key={salle.id}>

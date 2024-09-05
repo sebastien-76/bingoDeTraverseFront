@@ -108,11 +108,9 @@ export default function Phrases() {
                         </div>
                     ))}
                 </div>
-                <Bouton style={{ marginBottom: "20px", width: "100px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
+                <Bouton style={{ marginBottom: "20px", width: "150px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
             </div>
             <h1 className="pageAdminH1">Liste des phrases</h1>
-
-            <Bouton text="Actualiser" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={fetchPhrases} />
 
             {/* ancre avec le nom des salles */}
             <div className="sallesListeAP">

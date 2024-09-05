@@ -79,7 +79,8 @@ function App() {
   return (
     <div className="App">
       <authContext.Provider value={value}>
-        <main className={isLogged ? 'mainApp' : ''} >
+        {/* ajout de 2 classname conditionnel */}
+        <main className={`${isLogged ? 'mainApp' : ''} ${openModal ? 'noScroll' : ''}`}>
           {isLogged && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
           <Router>
             <Routes>

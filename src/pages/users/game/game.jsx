@@ -213,7 +213,7 @@ export default function Game() {
 
                 <div className="checkBingoContainer">
                     <Bouton 
-                        style={{width: '150px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} 
+                        style={{width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)', marginBottom: '2rem'}} 
                         text="Vérifier Bingo" 
                         onClick={checkBingo} 
                     />
@@ -221,7 +221,7 @@ export default function Game() {
 
                             <div className='listeSalles'>
                                 {nomSallesUser.map((salle) => (
-                                    <a key={salle.name} href={`#${salle.name}`}><p key={salle.id}>{salle.name}</p>
+                                    <a className='salleAncre' key={salle.name} href={`#${salle.name}`}><p key={salle.id}>{salle.name}</p>
                                     </a>
                                 ))}
                             </div>
@@ -253,6 +253,7 @@ export default function Game() {
                                         {caseNumber}
                                     </div>
                                 )}
+
                                 {isModalOpen && (
                                     <div className="modal">
                                         <div className="modal-content">
