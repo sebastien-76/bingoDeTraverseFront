@@ -204,6 +204,15 @@ select {
 
 @media (orientation: landscape) {
   .pageInput {
-    height: 2rem;
+    height: 1.5rem;
   }
+
+  .modal-content {
+    position: absolute;
+    bottom: 5%;
+    width: 50%;
+    height: 50%;
+    overflow: scroll;
+  }
+
 }

@@ -278,7 +278,7 @@ const Profil = () => {
 
                 {isOpenModalSalles && (
                     <div className="modal">
-                        <div className="modal-contentSalle">
+                        <div className="modal-content">
                             <h2>Salles à ajouter</h2>
                             <ul className='salleUl'>
                                 {listeSallesAjout && listeSallesAjout.map((salle) => (
