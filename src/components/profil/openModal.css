@@ -12,7 +12,3 @@
 .modal-content h2 span {
     text-transform: lowercase;
 }
-
-.modal-content {
-    background-color:var(--background-grey);
-}
