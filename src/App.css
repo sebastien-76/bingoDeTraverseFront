@@ -131,6 +131,25 @@ select {
   padding: 0 0.5em;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-dark-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color:var(--white);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px var(--background-dark-grey);
+}
+
 /* CSS commun aux pages admin */
 .pageAdminH2, .pageAdminH1 {
   font-size: 1.5rem;
@@ -205,5 +224,9 @@ select {
 @media (orientation: landscape) {
   .pageInput {
     height: 2rem;
+  }
+
+  .modal {
+    top: 3rem
   }
 }
