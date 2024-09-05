@@ -73,7 +73,7 @@ export default function Salles() {
                 <h2 className="pageAdminH2">Ajouter une salle</h2>
                 <p className={visibilite}>Veuillez entrer un nom de salle!</p>
                 <input
-                    className="pageAdminInput"
+                    className="pageInput"
                     placeholder="Nom de la salle"
                     type="text"
                     value={newSalleName}

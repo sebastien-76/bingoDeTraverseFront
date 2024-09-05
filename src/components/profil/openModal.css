@@ -16,13 +16,3 @@
 .modal-content {
     background-color:var(--background-grey);
 }
-
-.inputModifInfo {
-    width: 80%;
-    height: 2.5vh;
-    margin-bottom: 1.2rem;
-    border: 0.5px solid var(--dark-grey);
-    padding: 2px;
-    padding-left: 5px;
-    border-radius: 5px;
-}
