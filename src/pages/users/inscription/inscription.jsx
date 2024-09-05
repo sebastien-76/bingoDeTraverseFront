@@ -42,7 +42,6 @@ const SignUp = () => {
         fetchSalles();
     }, [])
 
-
     const onCheckSalles = (event) => {
         const sallechecked = parseInt(event.target.id);
         if (event.target.checked) {
@@ -53,52 +52,64 @@ const SignUp = () => {
         }
     }
 
-
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
+    }
+
+    const validatePassword = (password) => {
+        const reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+        return reg.test(password)
     }
 
     const handleSubmitInscription = async (event) => {
         event.preventDefault();
         setErrorPwd('');
         credentials.Salles = sallesAAjouter
-                if (credentials.password === credentials.confirmationPassword) {
-                    delete credentials.confirmationPassword;
-                    try {
-                        inscriptionUtilisateur(credentials)
-                            .then(res => {
-        
-                                if (res.status === 403) {
-                                    res.json()
-                                        .then(res => setErrorEmail(res.message))
-                                } else {
-                                    res.json()
-                                        .then(res => {
-                                            sauvegardeItem('jetonUtilisateur', res.token)
-                                            setIsLogged(true)
-                                        })
-                                        .then(res => {
-                                            const uid = recuperationId();
-                                            navigate(`/profil/${uid}`)
-                                        })
-                                }
-                            })
-                            .catch(err => console.log(err));
-                        setCredentials({
-                            email: '',
-                            password: '',
-                            pseudo: '',
-                            confirmationPassword: '',
-                            Salles: []
+        if (!validatePassword(credentials.password)) {
+            setErrorPwd("Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, une minuscule, un chiffre et un caractère spécial")
+        }
+        if (credentials.password === credentials.confirmationPassword) {
+            if (!validatePassword(credentials.password)) {
+                setErrorPwd("Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, une minuscule, un chiffre et un caractère spécial")
+            }
+            else {
+                delete credentials.confirmationPassword;
+                try {
+                    inscriptionUtilisateur(credentials)
+                        .then(res => {
+
+                            if (res.status === 403) {
+                                res.json()
+                                    .then(res => setErrorEmail(res.message))
+                            } else {
+                                res.json()
+                                    .then(res => {
+                                        sauvegardeItem('jetonUtilisateur', res.token)
+                                        setIsLogged(true)
+                                    })
+                                    .then(res => {
+                                        const uid = recuperationId();
+                                        navigate(`/profil/${uid}`)
+                                    })
+                            }
                         })
-                        document.getElementById("formInscription").reset()
-                    } catch (error) {
-                        console.log(error);
-                    }
+                        .catch(err => console.log(err));
+                    setCredentials({
+                        email: '',
+                        password: '',
+                        pseudo: '',
+                        confirmationPassword: '',
+                        Salles: []
+                    })
+                    document.getElementById("formInscription").reset()
+                } catch (error) {
+                    console.log(error);
                 }
-                else {
-                    setErrorPwd(`Les mots de passe ne sont pas identiques`);
-                }
+            }
+        }
+        else {
+            setErrorPwd(`Les mots de passe ne sont pas identiques`);
+        }
     }
 
     return (
