@@ -73,9 +73,9 @@ const Accueil = () => {
                     </div>
                 </>
                 :
-                <div>
+                <div className="classementContainer">
                     {/* Affichage du classement */}
-                    <h2 className="h2_accueil">Classement</h2>
+                    <h2 className="h2_accueil">Classement :</h2>
                     <table className="table_accueil">
                         <thead>
                             <tr>

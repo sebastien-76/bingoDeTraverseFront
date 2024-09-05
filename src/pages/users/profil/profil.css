@@ -5,6 +5,7 @@
     object-fit: cover;
     overflow: hidden;
     border: 1px solid var(--dark-grey);
+    margin-bottom: 1rem;
 }
 
 .infos {
@@ -201,6 +202,11 @@
 }
 
 @media (orientation: landscape) {
+
+    .avatar {
+        width: 10rem;
+        height: 10rem;
+    }
 
     .boutonsProfil {
         display: flex;

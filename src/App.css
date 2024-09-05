@@ -215,4 +215,15 @@ select {
     overflow: scroll;
   }
 
+  .modalMenu {
+    width: 50%;
+    padding-top: 6rem;
+  }
+
+  .imageProfilNavBar {
+    width: 10rem;
+    height: 10rem;
+    
+  }
+
 }

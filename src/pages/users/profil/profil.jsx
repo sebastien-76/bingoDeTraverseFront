@@ -168,16 +168,17 @@ const Profil = () => {
     if (id.id == uid) {
         return (
             <>
-                <h1 className='titreProfil'>Profil</h1>
+                {profil.imageProfilURL &&
+                <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
+                }
 
                 <div className='boutonsProfil'>
                     {profil.imageProfilURL === null ?
                         <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
                         :
-                        <div>
-                            <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
-                            <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
-                        </div>
+                        
+                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
+                    
                     }
 
                     <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ height: '3em', marginBottom: "20px", marginTop: "20px", width: "17em", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em', margin: '1em auto' }} />

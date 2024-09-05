@@ -110,3 +110,19 @@ tbody>tr:nth-of-type(even) {
         width: 40%;
     }
 }
+
+@media (orientation: landscape) {
+    .logo_accueil {
+        width: 20vw;
+        margin: 1rem auto;
+    }
+
+    .classementContainer {
+        margin-bottom: 1rem;
+    }
+
+    .titre_accueil {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+}
