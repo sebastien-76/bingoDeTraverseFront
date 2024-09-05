@@ -138,7 +138,7 @@ const SignUp = () => {
                     </ul>
                 </div>
             </form>
-            <Bouton style={{ width: '150px', marginTop: '20px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} text="S'inscrire" onClick={handleSubmitInscription} />
+            <Bouton style={{ height: '3em', width: '150px', marginTop: '20px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} text="S'inscrire" onClick={handleSubmitInscription} />
         </>
     )
 }

@@ -108,7 +108,7 @@ export default function Phrases() {
                         </div>
                     ))}
                 </div>
-                <Bouton style={{ marginBottom: "20px", width: "150px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
+                <Bouton style={{ height: '3em', marginBottom: "20px", width: "150px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} text="Ajouter" onClick={addPhrase} />
             </div>
             <h1 className="pageAdminH1">Liste des phrases</h1>
 

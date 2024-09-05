@@ -74,7 +74,7 @@ export default function Gamemasters() {
                     value={newGamemaster}
                     onChange={(e) => setNewGamemaster(e.target.value)}
                 />
-                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addGamemaster} />
+                <Bouton text="Ajouter" style={{ height: '3em', marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addGamemaster} />
             </div>
 
             <h1 className="pageAdminH1">Liste des gamemasters</h1>

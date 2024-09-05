@@ -60,7 +60,7 @@ const Connexion = () => {
                 <label htmlFor="password">Mot de passe</label>
                 <input type="password" id="password" name="password" value={credentials.password} placeholder="Entrez votre mot de passe" autoComplete="off" onChange={onChange} required />
             </form>
-                <Bouton text="Se connecter" style={{ marginTop: '2rem', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} onClick={handleSubmitConnexion} />
+                <Bouton text="Se connecter" style={{ height: '3em', marginTop: '2rem', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} onClick={handleSubmitConnexion} />
         </>
     )
 }

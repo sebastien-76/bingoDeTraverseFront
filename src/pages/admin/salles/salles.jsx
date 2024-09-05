@@ -79,7 +79,7 @@ export default function Salles() {
                     value={newSalleName}
                     onChange={(e) => setNewSalleName(e.target.value)}
                 />
-                <Bouton text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
+                <Bouton text="Ajouter" style={{ height: '3em', marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={addSalle} />
             </div>
 
             <h1 className="pageAdminH1">Liste des salles</h1>

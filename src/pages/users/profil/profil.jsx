@@ -233,7 +233,7 @@ const Profil = () => {
                         </div>
                     )
                 }
-                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em' }} />
+                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ height: '3em', marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em' }} />
 
                 <div className='salles'>
                     <p className='titreSalles'> Salles apprises :</p>

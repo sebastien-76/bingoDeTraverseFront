@@ -213,7 +213,7 @@ export default function Game() {
 
                 <div className="checkBingoContainer">
                     <Bouton 
-                        style={{width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)', marginBottom: '2rem'}} 
+                        style={{ height: '3em', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)', marginBottom: '2rem'}} 
                         text="Vérifier Bingo" 
                         onClick={checkBingo} 
                     />

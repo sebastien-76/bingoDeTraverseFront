@@ -68,7 +68,7 @@ const Accueil = () => {
                     </div>
 
                     <div>
-                        <Bouton style={{ width: '160px', height: '6vh', backgroundColor: 'var(--blue-pastel)', marginTop: '40px', border: '2px solid var(--blue-pastel)' }} text="Connexion" onClick={toConnexion} />
+                        <Bouton style={{ width: '160px', height: '3em', backgroundColor: 'var(--blue-pastel)', marginTop: '40px', border: '2px solid var(--blue-pastel)' }} text="Connexion" onClick={toConnexion} />
                         <p className="p_accueil">Pas encore inscrit ? C'est par <Link to="/inscription" className="lien_accueil">ici</Link></p>
                     </div>
                 </>
