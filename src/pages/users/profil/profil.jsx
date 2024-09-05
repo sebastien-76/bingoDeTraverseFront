@@ -169,7 +169,8 @@ const Profil = () => {
         return (
             <>
                 <h1 className='titreProfil'>Profil</h1>
-                <div>
+
+                <div className='boutonsProfil'>
                     {profil.imageProfilURL === null ?
                         <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
                         :
@@ -178,34 +179,60 @@ const Profil = () => {
                             <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
                         </div>
                     }
+
+                    <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ height: '3em', marginBottom: "20px", marginTop: "20px", width: "17em", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em', margin: '1em auto' }} />
                 </div>
 
-                <div className='infosProfil'>
-                    <div className='infosDiv win'>
-                        <p className='infos'> Bingo(s) gagné(s) :</p>
-                        <p className='donnees point'> {profil.points}</p>
-                    </div>
-                    <div className='infosDiv email'>
-                        <p className='infos'> Email :</p>
-                        <p className='donnees'> {profil.email}</p>
-                    </div>
-                    <div className='infosDiv pseudo'>
-                        <div className='pseudoDiv'>
-                            <p className='infos'> Pseudo :</p>
-                            <img
-                                src="/images/modification.png"
-                                alt="icone de modification"
-                                className="modification"
-                                onClick={setOpenModalPseudo}
-                            />
+                <div className='profil'>
+                    <div className='infosProfil'>
+                        <div className='infosDiv win'>
+                            <p className='infos'> Bingo(s) gagné(s) :</p>
+                            <p className='donnees point'> {profil.points}</p>
                         </div>
-                        <p className='donnees pseudoDonnees'>{profil.pseudo}</p>
+                        <div className='infosDiv email'>
+                            <p className='infos'> Email :</p>
+                            <p className='donnees'> {profil.email}</p>
+                        </div>
+                        <div className='infosDiv pseudo'>
+                            <div className='pseudoDiv'>
+                                <p className='infos'> Pseudo :</p>
+                                <img
+                                    src="/images/modification.png"
+                                    alt="icone de modification"
+                                    className="modification"
+                                    onClick={setOpenModalPseudo}
+                                />
+                            </div>
+                            <p className='donnees pseudoDonnees'>{profil.pseudo}</p>
+                        </div>
+                        <div className='infosDiv date'>
+                            <p className='infos'> Joue depuis le :</p>
+                            <p className='donnees dateDonnees'> {dateDebut.toLocaleDateString('fr-FR')}</p>
+                        </div>
                     </div>
-                    <div className='infosDiv date'>
-                        <p className='infos'> Joue depuis le :</p>
-                        <p className='donnees dateDonnees'> {dateDebut.toLocaleDateString('fr-FR')}</p>
+
+                    <div className='salleProfil'>
+                        <div className='salles'>
+                            <p className='titreSalles'> Salles apprises :</p>
+                            <div className='salleListProfil'>
+                                {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
+                                {sallesUser && sallesUser.map((salle) => (
+                                    salle.id !== 1 &&
+                                    <p key={salle.id} className='salleList'>{salle.name}</p>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className='ajoutSalle'>
+                            <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+                        </div>
                     </div>
+                    
+
                 </div>
+                
+
+
 
                 {/* Modal de modification du pseudo */}
                 {openModalPseudo &&
@@ -233,19 +260,6 @@ const Profil = () => {
                         </div>
                     )
                 }
-                <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ height: '3em', marginBottom: "20px", marginTop: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em' }} />
-
-                <div className='salles'>
-                    <p className='titreSalles'> Salles apprises :</p>
-                    <div className='salleListProfil'>
-                        {/* Afficher les salles de l'utilisateur sauf la salle 1 */}
-                        {sallesUser && sallesUser.map((salle) => (
-                            salle.id !== 1 &&
-                            <p key={salle.id} className='salleList'>{salle.name}</p>
-                        ))}
-                    </div>
-                </div>
-                <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
 
                 {isOpenModalAvatar && (
                     <div className="modal">
@@ -281,6 +295,8 @@ const Profil = () => {
                         </div>
                     </div>
                 )}
+
+
             </>
         )
     } else {
