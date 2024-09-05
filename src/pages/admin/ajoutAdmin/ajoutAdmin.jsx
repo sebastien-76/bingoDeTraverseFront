@@ -111,7 +111,7 @@ const AjoutAdmin = () => {
                         </option>)}
                 </select>
             </div>
-            <Bouton onClick={ajoutAdmin} text="Ajouter" style={{ marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+            <Bouton onClick={ajoutAdmin} text="Ajouter" style={{ height: '3em', marginBottom: "20px", width: "130px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
             <h2 className="pageAdminH2">Enlever le role d'admin</h2>
             <div>
                 <select className="userSelect" name="deleteAdmin" id="userDeletedSelect" onChange={selectAdmin}>
@@ -122,7 +122,7 @@ const AjoutAdmin = () => {
                         </option>)}
                 </select>
             </div>
-            <Bouton onClick={deleteAdmin} text="Supprimer le role" style={{ marginBottom: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
+            <Bouton onClick={deleteAdmin} text="Supprimer le role" style={{ height: '3em', marginBottom: "20px", width: "200px", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
             <h1 className="pageAdminH1">Liste et role(s) des joueurs :</h1>
             <p className={visibilite}>Veuillez choisir un joueur!</p>
             <ul className="usersListContainer">
