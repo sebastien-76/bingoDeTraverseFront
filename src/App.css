@@ -201,3 +201,9 @@ select {
     height: 5vh;
   }
 }
+
+@media (orientation: landscape) {
+  .pageInput {
+    height: 2rem;
+  }
+}
