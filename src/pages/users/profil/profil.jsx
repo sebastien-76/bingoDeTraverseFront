@@ -36,7 +36,7 @@ const Profil = () => {
 
     useEffect(() => {
         fetchUser(id.id)
-    }, [id, openModalPseudo, sallesAAjouter, isOpenModalAvatar]);
+    }, [id]);
 
 
     //Mise à jour de l'état de changement du password
@@ -63,6 +63,7 @@ const Profil = () => {
 
             try {
                 putUser(uid, params)
+                    .then(() => fetchUser(id.id));
                 setOpenModalPassword(false);
                 setErrorPassword('');
             }
@@ -117,6 +118,7 @@ const Profil = () => {
 
         try {
             putUser(id.id, params)
+                .then(() => fetchUser(id.id));
             setIsOpenModalAvatar(false);
         }
         catch (error) {
@@ -144,6 +146,7 @@ const Profil = () => {
 
         try {
             putUser(id.id, params)
+                .then(() => fetchUser(id.id));
             setIsOpenModalSalles(false);
             setSallesAAjouter([]);
         }
@@ -169,16 +172,16 @@ const Profil = () => {
         return (
             <>
                 {profil.imageProfilURL &&
-                <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
+                    <img src={profil.imageProfilURL} alt="Avatar" className='avatar' onClick={onChangeAvatar} />
                 }
 
                 <div className='boutonsProfil'>
                     {profil.imageProfilURL === null ?
                         <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
                         :
-                        
+
                         <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
-                    
+
                     }
 
                     <Bouton onClick={() => setOpenModalPassword(true)} text="Modifier mon mot de passe" style={{ height: '3em', marginBottom: "20px", marginTop: "20px", width: "17em", backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)", fontSize: '0.9em', margin: '1em auto' }} />
@@ -228,10 +231,10 @@ const Profil = () => {
                             <Bouton onClick={onChangeSalle} text="Ajouter une salle" style={{ height: '3em', width: '10em', margin: '0.5em auto', fontSize: '0.9em', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} />
                         </div>
                     </div>
-                    
+
 
                 </div>
-                
+
 
 
 
@@ -251,7 +254,7 @@ const Profil = () => {
                                     <label>Nouveau mot de passe :</label>
                                     <input type="password" id="password" name="password" className="pageInput" onChange={onChangePassword} autoComplete="off" />
                                     <label>Confirmer le nouveau mot de passe:</label>
-                                    <input type="password" id="confirmationPassword" name="confirmationPassword" className="pageInput"   onChange={onChangePassword} autoComplete="off" />
+                                    <input type="password" id="confirmationPassword" name="confirmationPassword" className="pageInput" onChange={onChangePassword} autoComplete="off" />
                                 </div>
                                 <div className="boutonModifPassword">
                                     <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} />
