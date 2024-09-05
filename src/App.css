@@ -189,9 +189,10 @@ select {
     font-size: 2.5rem;
   }
 
-  .pageAdminInput {
-    width: 60%;
+  .pageInput {
+    width: 80%;
     height: 5vh;
+    font-size: 1.2rem
   }
 
   .listeAG {

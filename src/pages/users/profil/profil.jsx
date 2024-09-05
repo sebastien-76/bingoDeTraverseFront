@@ -221,9 +221,9 @@ const Profil = () => {
                                 {errorPassword && <p className="errorPassword">{errorPassword}</p>}
                                 <div className="infosPassword">
                                     <label>Nouveau mot de passe :</label>
-                                    <input type="password" id="password" name="password" onChange={onChangePassword} autoComplete="off" />
+                                    <input type="password" id="password" name="password" className="pageInput" onChange={onChangePassword} autoComplete="off" />
                                     <label>Confirmer le nouveau mot de passe:</label>
-                                    <input type="password" id="confirmationPassword" name="confirmationPassword" onChange={onChangePassword} autoComplete="off" />
+                                    <input type="password" id="confirmationPassword" name="confirmationPassword" className="pageInput"   onChange={onChangePassword} autoComplete="off" />
                                 </div>
                                 <div className="boutonModifPassword">
                                     <Bouton type="submit" text="Modifier" style={{ height: '3em', width: "6em", fontSize: '0.8em', fontWeight: 'bold', margin: '1em auto', backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} />

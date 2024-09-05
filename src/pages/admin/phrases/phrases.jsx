@@ -88,7 +88,7 @@ export default function Phrases() {
                 <h2 className="pageAdminH2">Ajouter une phrase</h2>
                 <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
                 <input
-                    className="pageAdminInput"
+                    className="pageInput"
                     placeholder="Texte de la phrase"
                     type="text"
                     value={newPhraseText}
