@@ -9,3 +9,10 @@
     padding-inline: 0.5rem;
     margin-inline: 0.5rem;
 }
+
+@media (orientation: landscape) {
+    .finPartieP {
+        width: 90vw;
+        
+    }
+}

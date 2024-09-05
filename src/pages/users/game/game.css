@@ -187,3 +187,34 @@
     align-items: center;
     margin-top: 2rem;
 }
+
+@media (orientation: landscape) {
+    .lancementPartie {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .grille {
+        width:40vw;
+        position: fixed;
+        height: 60vh;
+        bottom: 0;
+    }
+
+    .caseGrille {
+       height: auto;
+       width: auto;
+    }
+
+    .gameContainer {
+        width: 55vw;
+        position: absolute;
+        right: 0;
+    }
+
+    .finPartie {
+        width: 100vw;
+    }
+}

@@ -201,7 +201,7 @@ export default function Game() {
                         <li className="li_accueil">Le classement sera affiché dans l'accueil.</li>
                 </ul>
                 <div className="choixLancementPartie">
-                    <Bouton style={{width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
+                    <Bouton style={{height: '3em', width: '200px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)'}} text="Lancer la partie" onClick={confirmLancementPartie}/>
                 </div>
             </div> :
             
@@ -209,15 +209,18 @@ export default function Game() {
             {!finPartie ? 
                 <>
                 {/* ajout d'une fleche en bas a droite de l'ecran pour aller vers le haut */}
+                
+                    <div className='gameContainer'>
                 <FlecheScroll />
 
-                <div className="checkBingoContainer">
-                    <Bouton 
-                        style={{ height: '3em', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)', marginBottom: '2rem'}} 
-                        text="Vérifier Bingo" 
-                        onClick={checkBingo} 
-                    />
-                </div>
+                
+                        <div className="checkBingoContainer">
+                            <Bouton 
+                                style={{ height: '3em', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)', marginBottom: '2rem'}} 
+                                text="Vérifier Bingo" 
+                                onClick={checkBingo} 
+                            />
+                        </div>
 
                             <div className='listeSalles'>
                                 {nomSallesUser.map((salle) => (
@@ -244,6 +247,7 @@ export default function Game() {
                                 ))}
                             </div>
 
+                        </div>
                             <div className='grille'>
                                 {caseGrille.map((caseNumber, index) =>
                                     <div
@@ -259,8 +263,8 @@ export default function Game() {
                                         <div className="modal-content">
                                             <p>Voulez-vous vraiment valider la phrase :</p>
                                             <p style={{ fontWeight: 'bold' }}>"{selectedPhrases.find(p => p.id === caseGrille[selectedCaseIndex]).text}"</p>
-                                            <Bouton style={{ width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Oui" onClick={confirmValidation} />
-                                            <Bouton style={{ width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Non" onClick={closeModal} />
+                                            <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Oui" onClick={confirmValidation} />
+                                            <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Non" onClick={closeModal} />
                                         </div>
                                     </div>
                                 )}
@@ -271,7 +275,7 @@ export default function Game() {
                             <FinPartie />
                             <div className='rejouer'>
                                 <p><b>Si tu veux retenter ta chance :</b></p>
-                                <Bouton style={{ width: '150px', marginTop: '10px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)' }} text="Rejouer" onClick={confirmLancementPartie} />
+                                <Bouton style={{height: '3em', width: '150px', marginTop: '10px', backgroundColor: 'var(--blue-pastel)', border: '2px solid var(--blue-pastel)' }} text="Rejouer" onClick={confirmLancementPartie} />
                             </div>
                         </div>
                     }
