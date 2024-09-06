@@ -120,13 +120,13 @@ const SignUp = () => {
             {errorEmail && <p className='errorEmail'>{errorEmail}</p>}
             <form onSubmit={handleSubmitInscription} id="formInscription" className='inscriptionForm'>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" className='inputInscription' required />
+                <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" className='pageInput' required />
                 <label htmlFor="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" value={credentials.pseudo} onChange={onChange} placeholder="Entrez votre pseudo" className='inputInscription' required />
+                <input type="text" name="pseudo" id="pseudo" value={credentials.pseudo} onChange={onChange} placeholder="Entrez votre pseudo" className='pageInput' required />
                 <label htmlFor="password">Mot de passe</label>
-                <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='inputInscription' required />
+                <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='pageInput' required />
                 <label htmlFor="password">Vérification du mot de passe</label>
-                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" className='inputInscription' required />
+                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" className='pageInput' required />
                 <div>
                     <label htmlFor="salle">Salles</label>
                     <ul className='salleListInscription'>

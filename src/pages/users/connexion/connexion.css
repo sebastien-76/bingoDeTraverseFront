@@ -17,16 +17,6 @@
     font-size: 1.2rem;
 }
 
-.form_connexion input {
-    width: 80%;
-    height: 2.5vh;
-    margin-bottom: 1.2rem;
-    border: 0.5px solid var(--dark-grey);
-    padding: 2px;
-    padding-left: 5px;
-    border-radius: 5px;
-}
-
 .error_connexion {
     color: var(--red);
 }
