@@ -45,6 +45,7 @@ select {
   align-items: center;
   z-index: 101;
   overflow: scroll;
+  scrollbar-width: none;
 }
 
 .imageProfilNavBar {
@@ -113,10 +114,7 @@ select {
   z-index: 100;
 }
 
-.noScroll {
-  overflow: hidden;
-  position: fixed;
-}
+
 
 .salleAncre {
   text-decoration: none;
@@ -219,6 +217,17 @@ select {
     font-size: 1.3rem;
     height: 5vh;
   }
+
+  .modal-content {
+    position: fixed;
+    top: 30%;
+    width: 25% !important;
+    overflow: scroll;
+    scrollbar-width: none;
+    height: 15rem !important;
+    font-size: 1.2rem;
+  }
+  
 }
 
 @media (orientation: landscape) {
@@ -227,15 +236,16 @@ select {
   }
 
   .modal-content {
-    position: absolute;
+    position: fixed;
     bottom: 5%;
-    width: 50%;
     height: 50%;
+    width: 50%;
     overflow: scroll;
+    scrollbar-width: none;
   }
 
   .modalMenu {
-    width: 50%;
+    width: 40%;
   }
 
   .imageProfilNavBar {

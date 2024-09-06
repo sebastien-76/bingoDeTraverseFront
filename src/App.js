@@ -80,7 +80,7 @@ function App() {
     <div className="App">
       <authContext.Provider value={value}>
         {/* ajout de 2 classname conditionnel */}
-        <main className={`${isLogged ? 'mainApp' : ''} ${openModal ? 'noScroll' : ''}`}>
+        <main className={isLogged ? 'mainApp' : ''}>
           {isLogged && <Navbar menuBurger={menuBurger} toggleMenu={toggleMenu} />}
           <Router>
             <Routes>

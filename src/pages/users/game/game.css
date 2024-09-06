@@ -31,7 +31,6 @@
 .explication_regles {
     font-size: 1em;
     color: var(--dark-grey);
-    width: 80%;
     margin: 0 auto;
     text-align: left;
     margin-bottom: 30px;
@@ -112,6 +111,7 @@
     font-size: 1.5rem;
     height: 60px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .valide {
@@ -173,13 +173,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
     }
 
     .grille {
         width:40vw;
         position: fixed;
         height: 60vh;
+        top: 30%;
     }
 
     .caseGrille {
@@ -196,4 +196,22 @@
     .finPartie {
         width: 100vw;
     }
+}
+
+@media (min-width: 1080px) {
+    .grille {
+        position: fixed;
+        top: 25%;
+        margin-left: 1rem;
+    }
+
+    .li_lancementPartie {
+        width: auto;
+        font-size: 1.2em;
+    }
+
+    .finPartieP {
+        font-size: 1.3em;
+    }
+    
 }
