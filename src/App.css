@@ -240,6 +240,11 @@ select {
   .pageInput {
     width: 50%;
   }
+
+  .imageProfilNavBar {
+    width: 15rem;
+    height: 15rem;
+  }
   
 }
 

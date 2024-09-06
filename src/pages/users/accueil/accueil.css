@@ -1,5 +1,5 @@
 .logo_accueil {
-    width: 30vw;
+    width: 20vw;
     margin: 3rem auto;
 }
 
@@ -90,7 +90,7 @@ tbody>tr:nth-of-type(even) {
 @media (min-width: 1080px) {
     .logo_accueil {
         width: 10vw;
-        margin: 3rem auto;
+        margin: 5rem auto !important;
     }
 
     .explication_accueil {
@@ -113,7 +113,6 @@ tbody>tr:nth-of-type(even) {
 
 @media (orientation: landscape) {
     .logo_accueil {
-        width: 20vw;
         margin: 1rem auto;
     }
 

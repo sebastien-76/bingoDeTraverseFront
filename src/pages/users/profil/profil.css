@@ -1,6 +1,6 @@
 .avatar {
-    height: 30vh;
-    width: 30vh;
+    height: 25vh;
+    width: 25vh;
     border-radius: 50%;
     object-fit: cover;
     overflow: hidden;
@@ -300,4 +300,8 @@
         font-size: 1.3rem;
     }
 
+    .avatar {
+        width: 15rem;
+        height: 15rem;
+    }
 }
