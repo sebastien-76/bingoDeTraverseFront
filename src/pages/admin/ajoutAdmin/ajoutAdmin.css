@@ -16,7 +16,7 @@
 }
 
 .usersListContainer {
-    margin: 1rem     auto;
+    margin: 1rem auto;
     width: 90%;
     background-color: var(--purple-pastel);
     border: 1px solid var(--purple-pastel);
@@ -26,9 +26,9 @@
 }
 
 .userSelect {
-    width: 60%;
-    height: 5vh;
-    font-size: 1rem ;
+    width: 75%;
+    height: 2.5rem;
+    font-size: 1rem;
     margin-bottom: 1.2rem;
     border: 0.5px solid var(--dark-grey);
     padding: 2px;
@@ -37,7 +37,7 @@
 }
 
 .visible {
-    color : var(--red);
+    color: var(--red);
     font-weight: bold;
 }
 
@@ -47,7 +47,7 @@
 
 @media (min-width: 1080px) {
     .userSelect {
-        height: 5vh;
+        width: 50%;
     }
 
     .userSelect option {
@@ -62,5 +62,11 @@
     .usersList {
         font-size: 1.3rem;
         text-align: center;
+    }
+}
+
+@media (orientation: landscape) {
+    .userSelect {
+        height: 3rem
     }
 }
