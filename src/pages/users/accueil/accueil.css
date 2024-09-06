@@ -1,5 +1,5 @@
 .logo_accueil {
-    width: 20vw;
+    width: 30vw;
     margin: 3rem auto;
 }
 
@@ -89,7 +89,7 @@ tbody>tr:nth-of-type(even) {
 /* Mediaqueries pc */
 @media (min-width: 1080px) {
     .logo_accueil {
-        width: 10vw;
+        width: 10vw !important;
         margin: 5rem auto !important;
     }
 
@@ -114,6 +114,7 @@ tbody>tr:nth-of-type(even) {
 @media (orientation: landscape) {
     .logo_accueil {
         margin: 1rem auto;
+        width: 20vw;
     }
 
     .classementContainer {
