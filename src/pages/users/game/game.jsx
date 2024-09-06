@@ -263,8 +263,10 @@ export default function Game() {
                                         <div className="modal-content">
                                             <p>Voulez-vous vraiment valider la phrase :</p>
                                             <p style={{ fontWeight: 'bold' }}>"{selectedPhrases.find(p => p.id === caseGrille[selectedCaseIndex]).text}"</p>
-                                            <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Oui" onClick={confirmValidation} />
-                                            <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Non" onClick={closeModal} />
+                                            <div className="modal-buttons">
+                                                <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Oui" onClick={confirmValidation} />
+                                                <Bouton style={{height: '3em', width: '80px', backgroundColor: 'var(--purple-pastel)', border: '1px solid var(--purple-pastel)' }} text="Non" onClick={closeModal} />
+                                            </div>
                                         </div>
                                     </div>
                                 )}
