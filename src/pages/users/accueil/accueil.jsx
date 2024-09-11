@@ -11,8 +11,8 @@ const Accueil = () => {
     const { isLogged } = useContext(authContext);
 
     useEffect(() => {
-        fetchPoints();
-    }, []);
+        if (isLogged) { fetchPoints()};
+    }, [isLogged]);
 
     const toConnexion = () => {
         window.location.href = "/connexion";

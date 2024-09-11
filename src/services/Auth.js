@@ -1,6 +1,8 @@
 import { jwtDecode } from 'jwt-decode';
-import {  recuperationItem, suppressionItem } from './localStorage';
+import { recuperationItem, suppressionItem } from './localStorage';
 import { baseUrl } from './serviceAppel';
+
+const token = recuperationItem('jetonUtilisateur')
 
 export const connexionUtilisateur = async (credentials) => {
     const getReponse = await fetch(`${baseUrl}/connexion`, {
@@ -16,12 +18,11 @@ export const connexionUtilisateur = async (credentials) => {
     return getReponse;
 }
 
-
 export const inscriptionUtilisateur = async (credentials) => {
     const getReponse = await fetch(`${baseUrl}/users`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             email: credentials.email,
@@ -31,11 +32,6 @@ export const inscriptionUtilisateur = async (credentials) => {
         }),
     })
     return getReponse;
-}
-
-
-export async function recupUtilisateur(id) {
-    return await fetch(`${baseUrl}/users/${id}`)
 }
 
 export function deconnexion() {

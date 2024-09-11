@@ -47,7 +47,11 @@ export default function Game() {
                 setCaseGrille(selectedPhraseIds);
                 setValideCases(grille.validatedCases);
 
-                const responsePhrases = await fetch(baseUrl + '/phrases');
+                const responsePhrases = await fetch(baseUrl + '/phrases', {
+                    headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                });
                 const dataPhrases = await responsePhrases.json();
                 const selectedPhrases = dataPhrases.data.filter(p => selectedPhraseIds.includes(p.id)).sort((a, b) => a.id - b.id);
                 setSelectedPhrases(selectedPhrases);
@@ -56,7 +60,11 @@ export default function Game() {
                 const sallesIds = selectedPhrases.map((phrase) => phrase.SalleId);
                 const sallesUser = sallesIds.filter((salleId, index) => sallesIds.indexOf(salleId) === index);
 
-                const sallesResponse = await fetch(baseUrl + '/salles');
+                const sallesResponse = await fetch(baseUrl + '/salles', {
+                    headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                });
                 const dataSalles = await sallesResponse.json();
                 const sallesNom = dataSalles.data.filter(salle => sallesUser.includes(salle.id));
                 setNomSallesUser(sallesNom);

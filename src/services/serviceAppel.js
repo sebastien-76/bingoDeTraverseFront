@@ -2,14 +2,19 @@ import { recuperationItem } from "./localStorage";
 
 export const baseUrl = "http://localhost:3002/api";
 
+const token = recuperationItem('jetonUtilisateur')
+
 //Récupération de tous les users
 export const getUsers = async () => {
-    return await fetch(`${baseUrl}/users`)
+    return await fetch(`${baseUrl}/users`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
 }
 
 //Récupération d'un seul user
 export const getUser = async (id) => {
-    const token = recuperationItem('jetonUtilisateur')
     return await fetch(`${baseUrl}/users/${id}`, {
         method: 'GET',
         headers: {
@@ -25,7 +30,11 @@ export const putUser = async (id, params) => {
 
 //Récurépartion des salles
 export const getSalles = async (id) => {
-    return await fetch(`${baseUrl}/salles`)
+    return await fetch(`${baseUrl}/salles`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
 }
 
 //Création d'une salle
@@ -33,7 +42,8 @@ export const postSalle = async (newSalleName) => {
     return await fetch(`${baseUrl}/salles`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             name: newSalleName
@@ -45,20 +55,29 @@ export const postSalle = async (newSalleName) => {
 //Suppression d'une salle
 export const deleteSalle = async (salleId) => {
     return await fetch(`${baseUrl}/salles/${salleId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     })
 }
 
-
 //Récupération des phrases
 export const getPhrases = async () => {
-    return await fetch(`${baseUrl}/phrases`)
+    return await fetch(`${baseUrl}/phrases`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
 }
 
 //Suppression d'une phrase
 export const deletePhrase = async (phraseId) => {
     return await fetch(`${baseUrl}/phrases/${phraseId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     })
 }
 
@@ -67,24 +86,33 @@ export const postPhrase = async (newPhraseText, salleId) => {
     return await fetch(`${baseUrl}/phrases`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             text: newPhraseText,
             SalleId: salleId
         }),
     })
-}   
+}
 
 //Récupération des gamemasters
 export const getGamemasters = async () => {
-    return await fetch(`${baseUrl}/gamemasters`)
+    return await fetch(`${baseUrl}/gamemasters`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
 }
 
 //Delete d'un gamemaster
 export const deleteGamemaster = async (gamemasterId) => {
     return await fetch(`${baseUrl}/gamemasters/${gamemasterId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+
     })
 }
 
@@ -92,7 +120,8 @@ export const postGamemaster = async (newGamemaster) => {
     return await fetch(`${baseUrl}/gamemasters`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             email: newGamemaster
