@@ -256,14 +256,20 @@ select {
   .modal-content {
     position: fixed;
     bottom: 5%;
-    height: 50%;
+    height: 55%;
     width: 50%;
     overflow: scroll;
     scrollbar-width: none;
   }
 
+  .modal-content h2 {
+    margin-top: 0.5rem !important;
+    font-size: 1.3rem;
+  }
+
   .modalMenu {
     width: 40%;
+    height: 120vh;
   }
 
   .imageProfilNavBar {

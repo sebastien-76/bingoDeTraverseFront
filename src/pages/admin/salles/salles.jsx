@@ -99,7 +99,7 @@ export default function Salles() {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
-                        <p>Êtes-vous sûr de vouloir supprimer la salle {selectedSalle.name} ?</p>
+                        <p>Êtes-vous sûr de vouloir supprimer la salle <b>{selectedSalle.name}</b> ?</p>
                         <div className="modal-buttons">
 
                             <Bouton style={{height: "3em", width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteSalle(selectedSalle.id)} />

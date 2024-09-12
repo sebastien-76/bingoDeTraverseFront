@@ -20,25 +20,22 @@ const Accueil = () => {
 
     const fetchPoints = async () => {
         try {
-            const dataUser = getUsers()
+            getUsers()
                 .then(res => res.json())
                 .then(data => {
-                    const filteredUsers = data.data.filter(user => user.email !== 'test@gmail.com');
-                    setRang(filteredUsers);
-                });
-
-            if (dataUser  && dataUser.data) {
-                const dataPoints = dataUser.data;
+                const filteredUsers = data.data.filter(user => user.email !== 'test@gmail.com');
 
                 // Récupérer les pseudo et points des utilisateurs
-                const pseudoPoints = dataPoints.map(user => ({ pseudo: user.pseudo, points: user.points }));
+                const pseudoPoints = filteredUsers.map(user => ({ pseudo: user.pseudo, points: user.points }));
 
                 // Trier par ordre décroissant
                 const sortedPseudoPoints = pseudoPoints.sort((a, b) => b.points - a.points);
 
                 // Mettre à jour le state du rang avec la liste triée
                 setRang(sortedPseudoPoints);
-            }
+                    
+                });
+            
         } catch (error) {
             console.error("Erreur lors de la récupération des points:", error);
         }

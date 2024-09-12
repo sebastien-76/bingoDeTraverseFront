@@ -93,7 +93,7 @@ export default function Gamemasters() {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Confirmation de suppression</h2>
-                        <p>Êtes-vous sûr de vouloir supprimer le gamemaster {selectedGamemaster.email} ?</p>
+                        <p>Êtes-vous sûr de vouloir supprimer le gamemaster <b>{selectedGamemaster.email}</b> ?</p>
                         <div className="modal-buttons">
 
                         <Bouton style={{height: "3em", width: "70px", backgroundColor: "var(--purple-pastel)", border: "1px solid var(--purple-pastel)" }} text="oui" onClick={() => confirmDeleteGamemaster(selectedGamemaster.id)} />
