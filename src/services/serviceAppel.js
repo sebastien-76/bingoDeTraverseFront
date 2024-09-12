@@ -1,6 +1,6 @@
 import { recuperationItem } from "./localStorage";
 
-export const baseUrl = "http://localhost:3002/api";
+export const baseUrl = process.env.REACT_APP_BASEURL
 
 const token = recuperationItem('jetonUtilisateur')
 

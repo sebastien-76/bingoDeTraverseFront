@@ -177,10 +177,10 @@ const Profil = () => {
 
                 <div className='boutonsProfil'>
                     {profil.imageProfilURL === null ?
-                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter votre image de profil" />
+                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Ajouter mon image de profil" />
                         :
 
-                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier votre image de profil" />
+                        <Bouton style={{ height: '3em', width: "17em", fontSize: '0.9em', margin: '1em auto', backgroundColor: "var(--blue-pastel)", border: "1px solid var(--blue-pastel)" }} onClick={onChangeAvatar} text="Modifier mon image de profil" />
 
                     }
 

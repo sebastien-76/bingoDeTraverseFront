@@ -37,7 +37,7 @@ select {
   top: 0;
   left: 0;
   width: 60%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--dark-grey);
   display: flex;
   flex-direction: column;
@@ -178,7 +178,7 @@ select {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 80vw;
+  width: 90vw;
   background-color: var(--purple-pastel);
   border-radius: 10px;
   border: 1px solid var(--purple-pastel);

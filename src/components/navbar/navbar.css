@@ -75,4 +75,9 @@
         width: 30px;
         height: 3px;
     }
+
+    .closeMenu {
+        font-size: 40px;
+        font-weight: 400;
+    }
 }
