@@ -61,3 +61,13 @@
         font-size: 2.5rem;
     }
 }
+
+@media (orientation: landscape) {
+    .navBar {
+        height: 90px;
+    }
+
+    .navBarH1 {
+        font-size: 20px;
+    }
+}
