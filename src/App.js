@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Footer from './components/footer/footer';
-import Connexion from './pages//users/connexion/connexion';
+import Connexion from './pages/users/connexion/connexion';
 import Inscription from './pages/users/inscription/inscription';
 import Accueil from './pages/users/accueil/accueil'
 
