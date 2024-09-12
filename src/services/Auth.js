@@ -2,8 +2,6 @@ import { jwtDecode } from 'jwt-decode';
 import { recuperationItem, suppressionItem } from './localStorage';
 import { baseUrl } from './serviceAppel';
 
-const token = recuperationItem('jetonUtilisateur')
-
 export const connexionUtilisateur = async (credentials) => {
     const getReponse = await fetch(`${baseUrl}/connexion`, {
         method: 'POST',
