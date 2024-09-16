@@ -1,10 +1,10 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import authContext from "../../hooks/useAuth";
 import './finPartie.css';
 
 export default function FinPartie() {
     const userPseudo = useContext(authContext).pseudo;
+    const [messageAfficher, setMessageAfficher] = useState();
 
     const messages = [
         [
@@ -70,9 +70,13 @@ export default function FinPartie() {
         return message;
     }
 
+    useEffect(() => {
+        setMessageAfficher(tirerMessage());
+    }, []);
+
     return (
             <div className='finPartieP'>
-                {tirerMessage()}
+                {messageAfficher}
             </div>
     );
 }
