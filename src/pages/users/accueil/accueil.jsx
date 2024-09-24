@@ -23,7 +23,7 @@ const Accueil = () => {
             getUsers()
                 .then(res => res.json())
                 .then(data => {
-                const filteredUsers = data.data.filter(user => user.email !== 'test@gmail.com');
+                const filteredUsers = data.data.filter(user => user.email !== 'testBingodetraverse@gmail.com');
 
                 // Récupérer les pseudo et points des utilisateurs
                 const pseudoPoints = filteredUsers.map(user => ({ pseudo: user.pseudo, points: user.points }));

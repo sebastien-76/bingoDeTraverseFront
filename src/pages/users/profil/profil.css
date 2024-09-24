@@ -8,6 +8,16 @@
     margin-bottom: 1rem;
 }
 
+.boutonsProfil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
 .infos {
     width: 100%;
     padding-left: 0.5em;
