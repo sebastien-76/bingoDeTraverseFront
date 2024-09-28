@@ -66,7 +66,7 @@ export default function Gamemasters() {
 
             <div className="addGamemasters">
                 <h2 className="pageAdminH2">Ajouter un gamemaster</h2>
-                <p className={visibilite}>Veuillez entrer une phrase et une salle!</p>
+                <p className={visibilite}>Veuillez entrer l'adresse email d'un gamemaster</p>
                 <input
                     className="pageInput"
                     placeholder="Email du gamemaster"
