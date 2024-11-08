@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './connexion.css';
 import { connexionUtilisateur } from "../../../services/Auth";
 import { sauvegardeItem } from "../../../services/localStorage";
@@ -15,6 +15,8 @@ const Connexion = () => {
     })
 
     const [errorConnexion, setErrorConnexion] = useState('');
+    const [inputPass, setInputPass] = useState('password');
+    const [visibilitePass, setVisibilitePass] = useState('/images/icons8-visible-24.png');
 
     const navigate = useNavigate();
 
@@ -24,7 +26,6 @@ const Connexion = () => {
     const onChange = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
     }
-
 
     const handleSubmitConnexion = async (event) => {
         event.preventDefault();
@@ -49,6 +50,11 @@ const Connexion = () => {
         }
     }
 
+    const onClickOeil = () => {
+        visibilitePass === "/images/icons8-visible-24.png" ? setVisibilitePass("/images/pngegg.png") : setVisibilitePass("/images/icons8-visible-24.png");
+        inputPass === 'password' ? setInputPass('text') : setInputPass('password');    
+    }
+
     return (
         <>
             <RetourAccueil />
@@ -56,12 +62,23 @@ const Connexion = () => {
             {errorConnexion && <p className="error_connexion">{errorConnexion}</p>}
             <form id="form_connexion" onSubmit={handleSubmitConnexion} className="form_connexion">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" className="pageInput" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" required />
+                <div className="input">
+                    <input type="email" id="email" name="email" value={credentials.email} placeholder="Entrez votre email" onChange={onChange} required />
+                </div>
                 <label htmlFor="password">Mot de passe</label>
-                <input type="password" id="password" name="password" className="pageInput" value={credentials.password} placeholder="Entrez votre mot de passe" autoComplete="off" onChange={onChange} required />
+                <div className="input">
+                    <input type={inputPass} id="password" name="password" value={credentials.password} placeholder="Entrez votre mot de passe" autoComplete="off" onChange={onChange} required />
+                    <img src={visibilitePass} alt="icone d'oeil" onClick={onClickOeil}/>
+                </div>
+                {/* Lien vers la page de réinitialisation de mot de passe */}
+                <div style={{ marginTop: '1rem' }}>
+                    <Link to="/forgot-password" style={{ color: 'black', textDecoration: 'none' }}>
+                        Mot de passe oublié ?
+                    </Link>
+                </div>
                 <Bouton text="Se connecter" style={{ height: '3em', marginTop: '2rem', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} onClick={handleSubmitConnexion} />
             </form>
-                
+
         </>
     )
 }
