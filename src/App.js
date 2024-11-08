@@ -30,7 +30,7 @@ function App() {
 
   const [isLogged, setIsLogged] = useState(estIdentifie());
 
-  const [pseudo, setPseudo] = useState("");
+  const [pseudo, setPseudo] = useState(pseudoUtilisateur());
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
 
@@ -45,14 +45,18 @@ function App() {
   const id = recuperationId();
   const lienProfil = `/profil/${id}`;
 
-  if (isLogged) {
-    getUser(id)
+  useEffect(() => {
+    isLogged && getUser(id)
       .then(res => res.json())
       .then(data => {
         data.data.imageProfilURL != null &&
-        setImageProfil(data.data.imageProfilURL);
+          setImageProfil(data.data.imageProfilURL);
+        data.data.pseudo != pseudoUtilisateur() &&
+          setPseudo(data.data.pseudo);
       })
-  }
+  }, [id])
+
+  const imageProfilNavBar = imageProfil ? imageProfil : '../../images/cheminTraverse.png';
 
   const value = {
     isLogged,
@@ -72,9 +76,6 @@ function App() {
     setIsLogged(false);
     deconnexion();
   }
-
-
-  const imageProfilNavBar = imageProfil ? imageProfil : '../../images/cheminTraverse.png';
 
   return (
     <div className="App">
