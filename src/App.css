@@ -173,6 +173,34 @@ select {
   font-size: 1rem;
 }
 
+.input {
+  width: 95%;
+  height: 2.5rem;
+  background: var(--background-grey);
+  border: 0.5px solid var(--dark-grey);
+  border-radius: 5px;
+}
+
+.input input {
+  width: 85%;
+  height: 2.5rem;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 1.1rem;
+}
+
+.input input::placeholder {
+ vertical-align: middle;
+ font-size: 1.1rem;
+}
+
+.input img {
+  width: 1,5rem;
+  height: 1.5rem;
+  vertical-align: middle;
+}
+
 .listeAG {
   display: flex;
   flex-direction: row;

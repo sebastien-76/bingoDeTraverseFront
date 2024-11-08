@@ -25,6 +25,11 @@ const SignUp = () => {
     const [errorPwd, setErrorPwd] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
 
+    const [inputPass, setInputPass] = useState('password');
+    const [visibilitePass, setVisibilitePass] = useState('/images/icons8-visible-24.png');
+    const [inputVerifPass, setInputVerifPass] = useState('password');
+    const [visibiliteVerifPass, setVisibiliteVerifPass] = useState('/images/icons8-visible-24.png');
+
     const navigate = useNavigate();
 
     const fetchSalles = () => {
@@ -112,6 +117,16 @@ const SignUp = () => {
         }
     }
 
+    const onClickOeil = () => {
+        visibilitePass === "/images/icons8-visible-24.png" ? setVisibilitePass("/images/pngegg.png") : setVisibilitePass("/images/icons8-visible-24.png");
+        inputPass === 'password' ? setInputPass('text') : setInputPass('password');    
+    }
+
+    const onClickVerifOeil = () => {
+        visibiliteVerifPass === "/images/icons8-visible-24.png" ? setVisibiliteVerifPass("/images/pngegg.png") : setVisibiliteVerifPass("/images/icons8-visible-24.png");
+        inputVerifPass === 'password' ? setInputVerifPass('text') : setInputVerifPass('password');    
+    }
+
     return (
         <>
             <RetourAccueil />
@@ -120,13 +135,23 @@ const SignUp = () => {
             {errorEmail && <p className='errorEmail'>{errorEmail}</p>}
             <form onSubmit={handleSubmitInscription} id="formInscription" className='inscriptionForm'>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" className='pageInput' required />
+                <div className='input'>
+                    <input type="email" name="email" id="email" value={credentials.email} onChange={onChange} placeholder="Entrez votre email" required />
+                </div>
                 <label htmlFor="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" value={credentials.pseudo} onChange={onChange} placeholder="Entrez votre pseudo" className='pageInput' required />
+                <div className='input'>
+                    <input type="text" name="pseudo" id="pseudo" value={credentials.pseudo} onChange={onChange} placeholder="Entrez votre pseudo" required />
+                </div>
                 <label htmlFor="password">Mot de passe</label>
-                <input type="password" name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" className='pageInput' required />
+                <div className='input'>
+                    <input type={inputPass} name="password" id="password" value={credentials.password} onChange={onChange} placeholder="Entrez votre mot de passe" autoComplete="off" required />
+                    <img src={visibilitePass} alt="icone d'oeil" onClick={onClickOeil}/>
+                </div>
                 <label htmlFor="password">Vérification du mot de passe</label>
-                <input type="password" name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" className='pageInput' required />
+                <div className='input'>
+                    <input type={inputVerifPass} name="confirmationPassword" id="confirmationPassword" value={credentials.confirmationPassword} onChange={onChange} autoComplete="off" placeholder="Repetez votre mot de passe" required />
+                    <img src={visibiliteVerifPass} alt="icone d'oeil" onClick={onClickVerifOeil}/>
+                </div>
                 <div>
                     <label htmlFor="salle">Salles</label>
                     <ul className='salleListInscription'>
