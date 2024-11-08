@@ -27,7 +27,6 @@ const Profil = () => {
         password: '',
     })
 
-
     const fetchUser = (id) => {
         getUser(id)
             .then(response => response.json())

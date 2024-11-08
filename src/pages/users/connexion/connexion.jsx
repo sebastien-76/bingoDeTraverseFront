@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './connexion.css';
 import { connexionUtilisateur } from "../../../services/Auth";
 import { sauvegardeItem } from "../../../services/localStorage";
@@ -69,6 +69,12 @@ const Connexion = () => {
                 <div className="input">
                     <input type={inputPass} id="password" name="password" value={credentials.password} placeholder="Entrez votre mot de passe" autoComplete="off" onChange={onChange} required />
                     <img src={visibilitePass} alt="icone d'oeil" onClick={onClickOeil}/>
+                </div>
+                {/* Lien vers la page de réinitialisation de mot de passe */}
+                <div style={{ marginTop: '1rem' }}>
+                    <Link to="/forgot-password" style={{ color: 'black', textDecoration: 'none' }}>
+                        Mot de passe oublié ?
+                    </Link>
                 </div>
                 <Bouton text="Se connecter" style={{ height: '3em', marginTop: '2rem', width: '150px', backgroundColor: 'var(--purple-pastel)', border: '2px solid var(--purple-pastel)' }} onClick={handleSubmitConnexion} />
             </form>

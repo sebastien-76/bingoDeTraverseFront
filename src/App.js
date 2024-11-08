@@ -13,6 +13,9 @@ import Phrases from './pages/admin/phrases/phrases';
 import Gamemaster from './pages/admin/gamemasters/gamemasters';
 import AjoutAdmin from './pages/admin/ajoutAdmin/ajoutAdmin'
 
+import ForgotPassword from "./components/PbMotDePasse/ForgotPassword";
+import ResetPassword from "./components/PbMotDePasse/ResetPassword";
+
 import Game from './pages/users/game/game';
 import Profil from './pages/users/profil/profil';
 
@@ -94,6 +97,8 @@ function App() {
               <Route path='/profil/:id' element={<RouteSecurisee composant={<Profil />} />} />
               <Route path='/connexion' element={<Connexion />} />
               <Route path='/inscription' element={<Inscription />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
             </Routes>
           </Router>
         </main>

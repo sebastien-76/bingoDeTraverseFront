@@ -72,4 +72,27 @@ export function roleAdmin() {
     return roleAdmin;
 }
 
+export const sendForgotPasswordRequest = async (email) => {
+    const response = await fetch(`${baseUrl}/auth/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+    });
+    return response.json();
+};
+
+export const resetPassword = async (token, newPassword) => {
+    const response = await fetch(`${baseUrl}/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            token: token,  // Envoie le token ici
+            newPassword: newPassword,  // Envoie le nouveau mot de passe
+        }),
+    });
+
+    // Gérer la réponse JSON du serveur
+    return response.json();
+};
+
 
