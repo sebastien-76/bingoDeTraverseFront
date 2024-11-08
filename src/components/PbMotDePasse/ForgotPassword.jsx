@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { sendForgotPasswordRequest } from "../../services/Auth";
 import Bouton from '../boutons/bouton';
 import './forgotPassword.css';
+import RetourAccueil from '../retourAccueil/retourAccueil';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -19,6 +20,7 @@ const ForgotPassword = () => {
 
     return (
         <div>
+            <RetourAccueil />
             <h1>Mot de passe oublié</h1>
 
                 <form className="form-container" onSubmit={handleSubmit}>
