@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './openModal.css'
 import { putUser } from '../../services/serviceAppel';
 import Bouton from '../boutons/bouton';
 import { recuperationItem } from '../../services/localStorage';
+import authContext from '../../hooks/useAuth';
 
 const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil }) => {
 
     const [profil, setProfil] = useState({});
     const token = recuperationItem('jetonUtilisateur');
+    const { setPseudo } = useContext(authContext);
 
     const onSubmitModifProfile = (event) => {
         event.preventDefault();
@@ -21,10 +23,14 @@ const OpenModalProfil = ({ id, name, type, uid, defaultValue, setEtat, majProfil
         }
         putUser(uid, params)
         setEtat(false);
+        majProfil(uid);
     }
 
     const onChange = (event) => {
         setProfil({ ...profil, [event.target.name]: event.target.value })
+        if (event.target.name === 'pseudo') {
+            setPseudo(event.target.value);
+        }
     }
 
     return (

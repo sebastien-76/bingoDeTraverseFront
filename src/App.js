@@ -30,7 +30,7 @@ function App() {
 
   const [isLogged, setIsLogged] = useState(estIdentifie());
 
-  const [pseudo, setPseudo] = useState(pseudoUtilisateur());
+  const [pseudo, setPseudo] = useState("");
 
   const [isAdmin, setIsAdmin] = useState(roleAdmin());
 
@@ -39,10 +39,20 @@ function App() {
 
   useEffect(() => {
     setIsLogged(estIdentifie());
-    setPseudo(pseudoUtilisateur());
     setIsAdmin(roleAdmin());
-  }, [isLogged, pseudo, isAdmin])
+  }, [isLogged, isAdmin])
 
+  const id = recuperationId();
+  const lienProfil = `/profil/${id}`;
+
+  if (isLogged) {
+    getUser(id)
+      .then(res => res.json())
+      .then(data => {
+        data.data.imageProfilURL != null &&
+        setImageProfil(data.data.imageProfilURL);
+      })
+  }
 
   const value = {
     isLogged,
@@ -57,22 +67,12 @@ function App() {
     setMenuBurger(!menuBurger);
     setOpenModal(!openModal);
   }
-  const id = recuperationId();
-  const lienProfil = `/profil/${id}`;
 
   const handleDeconnexion = () => {
     setIsLogged(false);
     deconnexion();
   }
 
-  if (isLogged) {
-    getUser(id)
-      .then(res => res.json())
-      .then(data => {
-        data.data.imageProfilURL != null &&
-        setImageProfil(data.data.imageProfilURL)
-      })
-  }
 
   const imageProfilNavBar = imageProfil ? imageProfil : '../../images/cheminTraverse.png';
 
